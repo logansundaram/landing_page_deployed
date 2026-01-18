@@ -25,7 +25,7 @@ export default function Home() {
             </p>
           </div>
           <p>
-            Saturday.ai is built to operate locally by default. Models, workflows, and knowledge stay on your machine—giving you direct control over privacy, performance, and persistence. There is no forced cloud dependency, no hidden data movement, and no unnecessary latency. When connectivity is optional, reliability becomes a feature rather than a risk.
+            Saturday.ai is built to operate locally by default. Models, workflows, and knowledge stay on your machine, giving you direct control over privacy, performance, and persistence. There is no forced cloud dependency, no hidden data movement, and no unnecessary latency. When connectivity is optional, reliability becomes a feature rather than a risk.
           </p>
         </div>
         <div className="rounded-md justify-center p-4">
@@ -38,7 +38,7 @@ export default function Home() {
             </p>
           </div>
           <p>
-            Instead of relying on a single opaque agent, Saturday.ai is structured around agentic workflows composed of clear, traceable steps. Each decision, tool invocation, and state transition is explicit—making behavior understandable, debuggable, and reproducible. This architecture favors correctness and trust over unpredictability, especially as systems grow in complexity.
+            Instead of relying on a single opaque agent, Saturday.ai is structured around agentic workflows composed of clear, traceable steps. Each decision, tool invocation, and state transition is explicit, making behavior understandable, debuggable, and reproducible. This architecture favors correctness and trust over unpredictability, especially as systems grow in complexity.
           </p>
         </div>
         <div className="rounded-md justify-center p-4">
@@ -51,7 +51,7 @@ export default function Home() {
             </p>
           </div>
           <p>
-            Saturday.ai treats tools and workflows as first-class components. Agents can compose, evaluate, and iterate on agentic workflows built from reusable, policy-constrained building blocks. Instead of hard-coded pipelines or opaque behavior, tasks compile into explicit LangGraph workflows with defined state, tool policies, and verification steps—allowing systems to adapt and improve while remaining inspectable, reproducible, and under control.
+            Saturday.ai treats tools and workflows as first-class components. Agents can compose, evaluate, and iterate on agentic workflows built from reusable, policy-constrained building blocks. Instead of hard-coded pipelines or opaque behavior, tasks compile into explicit LangGraph workflows with defined state, tool policies, and verification steps, allowing systems to adapt and improve while remaining inspectable, reproducible, and under control.
           </p>
         </div>
       </div>
