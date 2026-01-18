@@ -24,7 +24,7 @@ export default function Home() {
                 </div>
 
                 <h1 className="pl-8">
-                     saturday_ai@gmail.com
+                    saturday.ai.team@gmail.com
                 </h1>
 
             </main>

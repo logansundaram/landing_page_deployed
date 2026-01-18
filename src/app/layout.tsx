@@ -54,7 +54,7 @@ export default function RootLayout({
                 Contact
             </Link>
             <p>
-              Email: saturday_ai@gmail.com
+              Email: saturday.ai.team@gmail.com
             </p>
           </div>
 
