@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import Footer from "./components/footer";
+import Navbar from "./components/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,56 +28,11 @@ export default function RootLayout({
     <html lang="en" className="bg-zinc-50">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-full`}>
 
-        <header className="flex w-full h-20 place-content-between fixed z-50">
-          <div>
-            <Link href="/" className="flex p-8 link">
-                Saturday.ai
-            </Link>
-          </div>
-            <div className="gap-5 flex p-8">
-              <Link href="/about" className="link">
-                About
-              </Link>
-              <h1>
-              <Link href="/contact" className="link">
-                Contact
-              </Link>
-              </h1>
-            </div>
-        </header>
+        <Navbar/>
 
         {children}
 
-
-        <footer className="flex text-xs justify-center w-full p-8 gap-16 bg-zinc-50">
-          <div>
-            <Link href="/contact">
-                Contact
-            </Link>
-            <p>
-              Email: saturday.ai.team@gmail.com
-            </p>
-          </div>
-
-          <div>
-            <Link href="/about">
-                About
-            </Link>
-            <p>
-              Saturday.ai
-            </p>
-          </div>
-
-           <div>
-            <h1>
-              © 2026 Saturday AI
-            </h1>
-            <p>
-              All rights reserved
-            </p>
-          </div>
-
-        </footer>
+        <Footer/>
       </body>
     </html>
   );
