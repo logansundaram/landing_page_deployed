@@ -25,7 +25,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="p-24 grid grid-cols-1 sm:grid-cols-2 gap-x-12">
+      <div className="p-24 grid grid-cols-1 lg:grid-cols-2 gap-x-12">
         <div className="flex items-center h-full">
           <div>
             <h1 className="w-full text-6xl text-blue-900">
