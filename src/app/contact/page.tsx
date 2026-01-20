@@ -3,7 +3,7 @@ import Threads from '../components/threads'
 
 export default function Home() {
     return (
-        <div className="min-h-screen font-sans dark:bg-black bg-zinc-50">
+        <div className="min-h-screen font-sans bg-zinc-50">
             <main>
 
                 <div className="w-full h-200 flex items-center absolute bg-transparent">

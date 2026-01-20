@@ -6,7 +6,7 @@ import { workflow } from "./content/workflow";
 
 export default function Home() {
   return (
-    <div className = "bg-zinc-50 font-sans dark:bg-black">
+    <div className = "bg-zinc-50 font-sans">
 
       <div className="flex w-full p-12 pt-40 pb-20">      
         <div>
