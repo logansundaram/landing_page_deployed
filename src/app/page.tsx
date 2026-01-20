@@ -10,7 +10,7 @@ export default function Home() {
 
       <div className="flex w-full p-12 pt-40 pb-20">      
         <div>
-          <h1 className="text-6xl lg:text-9xl opacity-0 text-blue-900 animate-[fadeUp_0.5s_ease-out_forwards]">
+          <h1 className="text-4xl md:text-6xl lg:text-9xl opacity-0 text-blue-900 animate-[fadeUp_0.5s_ease-out_forwards]">
             Transparent AI Democratized.
           </h1>
           <p className="opacity-0 animate-[fadeUp_0.7s_ease-out_forwards] [animation-delay:500ms]">
@@ -19,16 +19,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 p-8 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-3">
         {features.map((feature) => (
           <Paragraph key={feature.id} header={feature.title} framer={feature.subtitle} body={feature.description}/>
         ))}
       </div>
 
-      <div className="p-24 grid grid-cols-1 lg:grid-cols-2 gap-x-12">
+      <div className="p-20 grid grid-cols-1 md:grid-cols-2 gap-x-12">
         <div className="flex items-center h-full">
-          <div>
-            <h1 className="w-full text-6xl text-blue-900">
+          <div className="pb-4">
+            <h1 className="w-full text-4xl md:text-6xl text-blue-900">
               How Saturday.ai works
             </h1>
             <p>
