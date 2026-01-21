@@ -1,14 +1,16 @@
+import About from "../components/about";
+import { about } from "../content/about";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans">
-      <main>
 
-        <div className="grid h-150 w-full justify-center items-center grid-cols-2">
-          <div className="p-8">
-            <h1 className="text-9xl text-blue-900">
+        <div className="grid h-100 md:h-150 w-full justify-center items-center grid-cols-1 md:grid-cols-2">
+          <div className="p-8 md:p-12">
+            <h1 className="text-4xl md:text-6xl lg:text-9xl text-blue-900">
               About 
             </h1>
-            <h1 className="text-9xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
+            <h1 className="text-4xl md:text-6xl lg:text-9xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
               Saturday.ai
             </h1>
           </div>      
@@ -31,49 +33,24 @@ export default function Home() {
         </div>
 
 
-        <div className="pb-40">
-          <div className="p-8">
+        <div className="pb-40 p-8 md:p-12">
             <h1 className="text-6xl">
               The Team
             </h1>
-            <p className="">
+            <p className="pb-4">
               Built by engineers at Michigan and Berkeley
             </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {about.map((section) => (
+                <About
+                  key={section.id}
+                  header={section.title}
+                  body={section.body}
+                />
+              ))}
           </div>
-          <div className="grid grid-cols-3 p-8 gap-x-8">
-              <div>
-                <h1 className="text-blue-900 font-bold">
-                  Founding Engineers
-                </h1>
-                <p>
-                  A small team from Berkeley and Michigan focused on building transparent, local-first AI systems. Founded by Logan Sundaram, Saturday.ai grew from a desire to apply AI in domains where privacy, robustness, and accountability are critical.
-                </p>
-              </div>
-
-              <div>
-                <h1 className="text-blue-900 font-bold">
-                  Research & Systems Design
-                </h1>
-                <p>
-                  Experience across systems design, agentic workflows, and applied machine learning, informed by academic research and real-world constraints.
-                </p>
-
-              </div>
-
-              <div>
-                <h1 className="text-blue-900 font-bold">
-                  Early-Stage Exploration 
-                </h1>
-                <p>
-                  Actively exploring how explicit structure and evaluation can make AI systems more reliable, understandable, and versatile over time.
-                </p>
-
-              </div>
-          </div>
-
         </div>
-      
-      </main>
-    </div>
+      </div>
   );
 }

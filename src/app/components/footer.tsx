@@ -17,9 +17,14 @@ export default function Footer(){
 
            <div>
             <h1>
-              © 2026 Saturday AI All rights reserved
+              ©2026 Saturday AI
             </h1>
+            
           </div>
+
+          <h1>
+              All rights reserved
+          </h1>
         </footer>
     )
 }
