@@ -14,8 +14,8 @@ export default function Home() {
                     />
                 </div>
 
-                <div className="h-94 pt-20 p-8 pt w-full">      
-                    <h1 className="text-9xl text-blue-900 text-left">
+                <div className="md:h-94 pt-20 md:p-12 p-8 w-full">      
+                    <h1 className="text-4xl md:text-6xl lg:text-9xl text-blue-900 text-left">
                         Contact
                     </h1>
                     <p>
