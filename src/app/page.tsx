@@ -1,5 +1,6 @@
 import Paragraph from "./components/paragraph";
 import Step from "./components/step";
+import Reveal from "./components/reveal";
 import { features } from "./content/features";
 import { workflow } from "./content/workflow";
 
@@ -47,19 +48,7 @@ export default function Home() {
       
 
       <div className="w-full h-100 md:h-125 justify-center flex items-center">
-        <div>
-          <div className="md:flex md:gap-2">
-            <p className="text-5xl">
-              Coming Soon.    
-            </p>
-            <p className="text-5xl text-blue-900 animate-[revealLeft_1.2s_ease-out_forwards] [animation-delay:2s] opacity-0">
-              Summer 2026.
-            </p>
-          </div>
-          <p>
-            Sign up for updates.
-          </p>
-        </div>
+        <Reveal/>
       </div>
 
         
