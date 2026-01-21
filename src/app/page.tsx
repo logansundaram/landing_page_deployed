@@ -47,8 +47,13 @@ export default function Home() {
 
       
 
-      <div className="w-full h-100 md:h-125 justify-center flex items-center">
-        <Reveal/>
+      <div className="flex w-full h-100 md:h-125 justify-center items-center">
+        <div>
+          <Reveal/>
+          <p>
+            Sign up for updates.
+          </p>
+        </div>
       </div>
 
         
