@@ -12,7 +12,7 @@ export default function Step({step, header, body} : StepProps){
               {step}
             </p>
             <div>
-              <p className="">
+              <p className="text-blue-900">
                 {header}
               </p>
               <p>
