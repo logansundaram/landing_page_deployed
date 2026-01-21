@@ -34,7 +34,7 @@ export default function Home() {
 
 
         <div className="pb-40 p-8 md:p-12">
-            <h1 className="text-6xl">
+            <h1 className="text-4xl md:text-6xl">
               The Team
             </h1>
             <p className="pb-4">
