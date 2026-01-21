@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function Footer(){
     return (
-        <footer className="flex text-xs justify-center w-full p-4 md:p-8 gap-4 md:gap-16 bg-zinc-50 ">
+        <footer className="flex text-xs justify-center w-full p-4 gap-4 md:gap-16 bg-zinc-50 ">
           <div>
             <Link href="/contact">
                 Contact

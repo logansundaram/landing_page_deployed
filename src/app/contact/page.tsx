@@ -4,7 +4,6 @@ import Threads from '../components/threads'
 export default function Home() {
     return (
         <div className="min-h-screen font-sans bg-zinc-50">
-            <main>
 
                 <div className="w-full h-200 flex items-center absolute bg-transparent">
                     <Threads
@@ -15,7 +14,7 @@ export default function Home() {
                 </div>
 
                 <div className="md:h-94 pt-20 md:p-12 p-8 w-full">      
-                    <h1 className="text-4xl md:text-6xl lg:text-9xl text-blue-900 text-left">
+                    <h1 className="text-4xl md:pt-10 md:text-6xl lg:text-9xl text-blue-900 text-left">
                         Contact
                     </h1>
                     <p>
@@ -23,11 +22,9 @@ export default function Home() {
                     </p>
                 </div>
 
-                <h1 className="pl-8">
+                <h1 className="pl-8 md:pl-12">
                     saturday.ai.team@gmail.com
                 </h1>
-
-            </main>
         </div>
     )
 }
