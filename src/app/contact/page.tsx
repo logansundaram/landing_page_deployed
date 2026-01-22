@@ -14,7 +14,7 @@ export default function Home() {
                     />
                 </div>
 
-                <div className="md:h-94 pt-20 md:p-12 p-8 w-full">      
+                <div className="md:pl-12 md:pt-12 p-8 w-full">      
                     <h1 className="text-4xl md:pt-10 md:text-6xl lg:text-9xl text-blue-900 text-left">
                         Contact
                     </h1>
@@ -23,9 +23,8 @@ export default function Home() {
                     </p>
                 </div>
 
-                <h1 className="pl-8 md:pl-12">
-                    saturday.ai.team@gmail.com
-                </h1>
+
+                <Form placeholder="Send us a message"/>
         </div>
     )
 }

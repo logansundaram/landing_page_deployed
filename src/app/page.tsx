@@ -1,6 +1,7 @@
 import Paragraph from "./components/paragraph";
 import Step from "./components/step";
 import Reveal from "./components/reveal";
+import Signup from "./components/signup";
 import { features } from "./content/features";
 import { workflow } from "./content/workflow";
 
@@ -50,9 +51,7 @@ export default function Home() {
       <div className="flex w-full h-100 md:h-125 justify-center items-center">
         <div>
           <Reveal/>
-          <p>
-            Sign up for updates.
-          </p>
+          <Signup/>
         </div>
       </div>
 
