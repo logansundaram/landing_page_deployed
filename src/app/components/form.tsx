@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 interface FormProps{
   placeholder : string;
@@ -6,11 +7,19 @@ interface FormProps{
 
 export default function Form({placeholder} : FormProps){
 
-    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault(); // ⬅️ stops page refresh
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [message, setMessage] = useState("");
 
-    // handle your submit logic here
-    // fetch("/api/contact", { ... })
+
+    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        // handle your submit logic here
+        // fetch("/api/contact", { ... })
+        setEmail("");
+        setMessage("");
+        setName("");
     }
 
     return (
@@ -20,11 +29,15 @@ export default function Form({placeholder} : FormProps){
                 <div className="gap-4 flex">
                 <input
                     type="text"
+                    value={email}
+                    onChange={(v) => setEmail(v.target.value)}
                     placeholder="Email"
                     className="border-b-2 border-zinc-900 outline-none focus:border-blue-900"
                 />
                 <input
                     type="text"
+                    value={name}
+                    onChange={(v) => setName(v.target.value)}
                     placeholder="Name"
                     className="border-b-2 border-zinc-900 outline-none focus:border-blue-900"
                 />
@@ -32,6 +45,8 @@ export default function Form({placeholder} : FormProps){
 
                 <input
                     type="text"
+                    value={message}
+                    onChange={(v) => setMessage(v.target.value)}
                     placeholder={placeholder}
                     className="border-b-2 h border-zinc-900 outline-none focus:border-blue-900"
                 />
