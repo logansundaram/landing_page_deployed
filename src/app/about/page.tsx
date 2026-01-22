@@ -7,10 +7,10 @@ export default function Home() {
 
         <div className="grid h-150 w-full justify-center items-center grid-cols-1 md:grid-cols-2">
           <div className="p-8 pt-25 md:p-12">
-            <h1 className="text-4xl md:text-6xl lg:text-9xl text-blue-900">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl text-blue-900">
               About 
             </h1>
-            <h1 className="text-4xl md:text-6xl lg:text-9xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
               Saturday.ai
             </h1>
           </div>      
