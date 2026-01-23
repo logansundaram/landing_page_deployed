@@ -1,14 +1,40 @@
 "use client";
 
 import React, { useState } from "react";
+import client from "../lib/client";
 
 export default function Signup() {
     const [open, setOpen] = useState(false);
     const [email, setEmail] = useState("");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [errorMsg, setErrorMsg] = useState("");
 
-    function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log("submitted:", email);
+        setStatus("loading");
+        setErrorMsg("");
+
+        const trimmed = email.trim().toLowerCase();
+        if (!trimmed) {
+          setStatus("error");
+          setErrorMsg("Please enter an email.");
+          return;
+        }
+        const { error } = await client.from("waitlist").insert([{ email: trimmed }]);
+
+        if (error) {
+          // dup email
+          if (error.code === "23505") {
+            setStatus("success");
+            setEmail("");
+            return;
+          }
+          setStatus("error");
+          setErrorMsg(error.message);
+          return;
+        }
+
+        setStatus("success");
         setEmail("");
     }
 
