@@ -43,7 +43,7 @@ export default function Signup() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="hover:text-blue-900"
+        className="text-zinc-50 p-2 bg-zinc-900 hover:bg-blue-900"
       >
         Sign up for updates.
       </button>
