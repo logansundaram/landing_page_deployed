@@ -4,14 +4,14 @@ export const features = [
     title: "Local-First by Design",
     subtitle: "Your AI runs where your data lives.",
     description:
-      "Saturday.ai is built to operate locally by default. Models, workflows, and knowledge stay on your machine, giving you direct control over privacy, performance, and persistence. There is no forced cloud dependency, no hidden data movement, and no unnecessary latency. When connectivity is optional, reliability becomes a feature rather than a risk.",
+      "Saturday.ai is built to operate locally by default. Models, workflows, and knowledge stay on your machine, giving you direct control over privacy, performance, and persistence. There is no forced cloud dependency, no hidden data movement, and no unnecessary latency. As AI workloads scale, centralized inference becomes expensive and opaque, local execution restores predictability and control."
   },
   {
     id: "agentic-workflows",
     title: "Agentic Workflows, Not Black Boxes",
     subtitle: "Built from explicit steps you can inspect and reason about.",
     description:
-      "Instead of relying on a single opaque agent, Saturday.ai is structured around agentic workflows composed of clear, traceable steps. Each decision, tool invocation, and state transition is explicit, making behavior understandable, debuggable, and reproducible. This architecture favors correctness and trust over unpredictability, especially as systems grow in complexity.",
+      "Instead of opaque autonomous agents, Saturday.ai uses explicit, inspectable workflows composed of well-defined steps. Each decision, tool invocation, and state transition is explicit, making behavior understandable, debuggable, and reproducible. This architecture favors correctness and trust over unpredictability, especially as systems grow in complexity.",
   },
   {
     id: "self-improving",

@@ -16,7 +16,7 @@ export default function Home() {
             Transparent AI Democratized.
           </h1>
           <p className="opacity-0 animate-[fadeUp_0.7s_ease-out_forwards] [animation-delay:500ms]">
-            AI designed for transparency, robustness, and flexibility.            
+            Local-first AI systems designed for transparency, robustness, and control.       
           </p>
         </div>
       </div>
