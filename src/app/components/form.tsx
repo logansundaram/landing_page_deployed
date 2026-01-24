@@ -2,11 +2,7 @@
 import React, { useState } from "react";
 import client from "../lib/client";
 
-interface FormProps {
-  placeholder: string;
-}
-
-export default function Form({ placeholder }: FormProps) {
+export default function Form() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
@@ -46,23 +42,26 @@ export default function Form({ placeholder }: FormProps) {
   }
 
   return (
-    <div className="">
-      <form onSubmit={onSubmit} className="p-8 md:p-12 w-fit">
-        <div className="grid grid-rows-2 gap-8">
-          <div className="gap-4 flex bg-zinc-50">
+    <div className="w-full">
+      <form
+        onSubmit={onSubmit}
+        className="w-full max-w-lg p-8 md:p-12"
+      >
+        <div className="grid gap-8">
+          <div className="flex flex-col sm:flex-row gap-4 bg-zinc-50">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
-              className="border-b-2 border-zinc-900 outline-none bg-zinc-50 focus:border-blue-900"
+              className="w-full sm:flex-1 min-w-0 border-b-2 border-zinc-900 outline-none bg-zinc-50 focus:border-blue-900"
             />
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Name"
-              className="border-b-2 border-zinc-900 outline-none focus:border-blue-900 bg-zinc-50"
+              className="w-full sm:flex-1 min-w-0 border-b-2 border-zinc-900 outline-none focus:border-blue-900 bg-zinc-50"
             />
           </div>
 
@@ -70,14 +69,14 @@ export default function Form({ placeholder }: FormProps) {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder={placeholder}
-            className="border-b-2 h-10 border-zinc-900 outline-none focus:border-blue-900 bg-zinc-50"
+            placeholder="Send us a message"
+            className="w-full min-w-0 border-b-2 h-10 border-zinc-900 outline-none focus:border-blue-900 bg-zinc-50"
           />
         </div>
 
         <button
           type="submit"
-          className="mt-4 px-3 py-1 hover:bg-blue-900 text-zinc-50 bg-zinc-900 focus:text-zinc-50 "
+          className="mt-4 px-3 py-1 hover:bg-blue-900 text-zinc-50 bg-zinc-900 focus:text-zinc-50"
         >
           Submit
         </button>
