@@ -22,11 +22,16 @@ export default function Home() {
         </div>
       </div>
 
+
       <div className="grid grid-cols-1 gap-8 p-4 md:p-8 lg:grid-cols-3">
         {features.map((feature) => (
           <Paragraph key={feature.id} header={feature.title} framer={feature.subtitle} body={feature.description}/>
         ))}
       </div>
+
+
+            <Blurb header="An extensible AI agent" subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
+
 
       
 
