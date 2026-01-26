@@ -2,6 +2,7 @@ import Paragraph from "./components/paragraph";
 import Step from "./components/step";
 import Reveal from "./components/reveal";
 import Signup from "./components/signup";
+import Blurb from "./components/blurb";
 import { features } from "./content/features";
 import { workflow } from "./content/workflow";
 
@@ -13,10 +14,10 @@ export default function Home() {
       <div className="flex w-full p-8 pt-26 pb-10 md:p-12 md:pt-40 md:pb-20">      
         <div>
           <h1 className="text-4xl md:text-6xl lg:text-9xl opacity-0 text-blue-900 animate-[fadeUp_0.5s_ease-out_forwards]">
-            Transparent AI Democratized.
+            AI Reimagined.
           </h1>
           <p className="opacity-0 animate-[fadeUp_0.7s_ease-out_forwards] [animation-delay:500ms]">
-            Local-first AI systems designed for transparency, robustness, and control.       
+            Local-first, transparent, and designed for user control.
           </p>
         </div>
       </div>
@@ -26,6 +27,8 @@ export default function Home() {
           <Paragraph key={feature.id} header={feature.title} framer={feature.subtitle} body={feature.description}/>
         ))}
       </div>
+
+      
 
       <div className="p-10 md:p-20 grid grid-cols-1 md:grid-cols-2 gap-x-12">
         <div className="flex items-center h-full">

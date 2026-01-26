@@ -20,6 +20,14 @@ export default function Signup() {
           setErrorMsg("Please enter an email.");
           return;
         }
+        const EMAIL_RE = /^(?!\.)(?!.*\.\.)[A-Z0-9._%+-]{1,64}(?<!\.)@[A-Z0-9-]{1,63}(?:\.[A-Z0-9-]{1,63})*\.[A-Z]{2,63}$/i;
+
+        if (!EMAIL_RE.test(trimmed)){
+          setStatus("error");
+          setErrorMsg("Invalid email.");
+          return;
+        }
+        
         const { error } = await client.from("waitlist").insert([{ email: trimmed }]);
 
         if (error) {
