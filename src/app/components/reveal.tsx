@@ -10,7 +10,7 @@ export default function Reveal(){
     return (
         <div ref={ref} className="md:flex md:gap-2">
             <p className="text-5xl">
-                Coming Soon.
+                In Development.
             </p>
 
             <p
