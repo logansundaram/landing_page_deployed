@@ -21,6 +21,6 @@ export const workflow = [
     id: "improve",
     step: "04",
     title: "Improve the workflow",
-    description: "See every decision the system makes.",
+    description: "Refine workflows without losing control.",
   },
 ];
