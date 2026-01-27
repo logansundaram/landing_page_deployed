@@ -30,7 +30,7 @@ export default function Home() {
       </div>
 
 
-            <Blurb header="An extensible AI agent" subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
+            <Blurb header="An extensible AI agent." subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
 
 
       
