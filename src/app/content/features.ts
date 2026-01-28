@@ -18,6 +18,6 @@ export const features = [
     title: "Self-Improving Capabilities",
     subtitle: "AI systems that can refine their own workflows.",
     description:
-      "Workflows and tools improve over time through supervised, autonomous refinement. Saturday.ai enables agentic systems to grow more capable over time while remaining controlled.”",
+      "Workflows and tools improve over time through supervised, autonomous refinement. Saturday.ai enables agentic systems to grow more capable over time while remaining controlled.",
   },
 ];

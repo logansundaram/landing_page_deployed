@@ -2,21 +2,25 @@ import Link from "next/link"
 
 export default function Navbar(){
     return (
-        <header className="flex w-full h-20 place-content-between fixed z-50">
-          <div>
-            <Link href="/" className="flex p-8 link">
+        <header className="text-lg flex w-full h-20 place-content-between fixed z-50">
+          <div className="">
+            <Link href="/" className="flex md:p-8 p-6 link">
                 Saturday.ai
             </Link>
           </div>
-            <div className="gap-5 flex p-8">
+            <div className="md:gap-8 gap-6 flex md:p-8 p-6">
               <Link href="/about" className="link">
                 About
               </Link>
-              <h1>
               <Link href="/contact" className="link">
                 Contact
               </Link>
-              </h1>
+              <Link href="/careers" className="link">
+                Careers
+              </Link>
+              <Link href="/install" className="link">
+                Install
+              </Link>
             </div>
         </header>
     )

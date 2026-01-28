@@ -17,7 +17,7 @@ export default function Home() {
             AI Reimagined.
           </h1>
           <p className="opacity-0 animate-[fadeUp_0.7s_ease-out_forwards] [animation-delay:500ms]">
-            Agentic AI that is local-first, transparent, and designed for user control. Currently in active development.
+            Agentic AI that is local-first, transparent, and designed for user control.
           </p>
         </div>
       </div>
