@@ -33,7 +33,7 @@ export default function Home() {
             <Step step="01" header="Opaque Behavior" body="Intermediate steps are often hidden from the user, making checking for hallucinations time consuming."/>
             <Step step="02" header="Limited Versatility" body="Agentic Applications built around a designated LLM or workflow face limited adaptiblity."/>
             <Step step="03" header="Cloud Dependence" body="Running LLM's in the cloud jeapordize data privacy, a major risk for data sensitive environments."/>
-            <Step step="04" header="Opaque Behavior" body="AI is powerful, but often intermediate steps are hidden form the user, making checking for hallucinations tedious to check for."/>
+            <Step step="04" header="Hardware Constrained" body="Expensive dedicated enterprise GPU's power the world's AI, making for an expensive upfront cost or recurring API costs."/>
           </div>
         </div>
 
