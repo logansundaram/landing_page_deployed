@@ -1,4 +1,7 @@
 import About from "../components/about";
+import Paragraph from "../components/paragraph";
+import Step from "../components/step";
+import Blurb from "../components/blurb";
 import { about } from "../content/about";
 
 export default function Home() {
@@ -14,31 +17,44 @@ export default function Home() {
               Saturday.ai
             </h1>
           </div>      
-          <div className="p-8">
-            <div className="pb-2">
-              <h1 className="font-bold text-l">
-                Our Approach
-              </h1>
-              <p className="text-blue-900">
-                How we think about building AI applications
-              </p>
-            </div>
-            <p className="pb-2">
-              We’re building AI systems that are understandable, auditable, and designed to work with you—not around you. In a world where AI is increasingly opaque and centralized, we believe powerful intelligence should be traceable, controllable, and locally deployable.
-            </p>
-            <p>
-              Our work focuses on creating modular AI workflows that users can inspect, customize, and trust, whether they’re running on a laptop, workstation, or private infrastructure.
-            </p>
+          <div className="p-4 md:p-8">
+            <Paragraph header="Our Approach" framer="How we think about building AI applications" body="Agentic AI has advanced rapidly, but key limitations still prevent it from working reliably in real-world systems. Saturday.ai is building an AI agent that addresses these flaws, enabling seamless integration into existing workflows."/>
           </div>
         </div>
 
+        <div className="md:p-12 p-8">
+            <h1 className="text-3xl md:text-6xl">
+              The Current Shortcomings of AI
+            </h1>
+            <p className="pb-4">
+              What we seek to solve.
+            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:gap-6 md:p-6 pl-0 md:pl-0">
+            <Step step="01" header="Opaque Behavior" body="Intermediate steps are often hidden from the user, making checking for hallucinations time consuming."/>
+            <Step step="02" header="Limited Versatility" body="Agentic Applications built around a designated LLM or workflow face limited adaptiblity."/>
+            <Step step="03" header="Cloud Dependence" body="Running LLM's in the cloud jeapordize data privacy, a major risk for data sensitive environments."/>
+            <Step step="04" header="Opaque Behavior" body="AI is powerful, but often intermediate steps are hidden form the user, making checking for hallucinations tedious to check for."/>
+          </div>
+        </div>
 
         <div className="pb-40 p-8 md:p-12">
-            <h1 className="text-4xl md:text-6xl">
+            <h1 className="text-3xl md:text-6xl">
+              Our Belief
+            </h1>
+            <p className="">
+              Built for real-world systems.
+            </p>
+
+            <Blurb header="AI is not one size fits all." subheader="Everything we build is designed to prioritize user's needs and giving them control over Agentic AI."/>
+
+        </div>
+
+        <div className="pb-40 p-8 md:p-12">
+            <h1 className="text-3xl md:text-6xl">
               The Team
             </h1>
             <p className="pb-4">
-              Built by engineers at Michigan and Berkeley
+              Designed by engineers at Michigan and Berkeley.
             </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

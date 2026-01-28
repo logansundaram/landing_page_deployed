@@ -2,7 +2,7 @@ export const features = [
   {
     id: "local-first",
     title: "Local-First by Design",
-    subtitle: "Your AI runs where your data lives.",
+    subtitle: "Your AI and your data stays local.",
     description:
       "Models, workflows, and data stay on your machine, giving you direct control over privacy, performance, and reliability. Saturday.ai is built for environments where privacy, low latency, and robustness are critical.",
   },
