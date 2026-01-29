@@ -28,14 +28,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-zinc-50">
+    <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-full bg-zinc-50`}>
 
         <Navbar/>
 
         {children}
+        
         <Analytics/>
         <SpeedInsights/>
+
         <Footer/>
       </body>
     </html>

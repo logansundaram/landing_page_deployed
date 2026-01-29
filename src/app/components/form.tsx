@@ -45,7 +45,7 @@ export default function Form() {
     <div className="w-full">
       <form
         onSubmit={onSubmit}
-        className="w-full max-w-lg p-8 md:p-12"
+        className="w-full max-w-lg pt-8 md:pt-12"
       >
         <div className="grid gap-8">
           <div className="flex flex-col sm:flex-row gap-4 bg-zinc-50">

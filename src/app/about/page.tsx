@@ -6,10 +6,10 @@ import { about } from "../content/about";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans">
+    <div className="base">
 
-        <div className="grid h-150 w-full justify-center items-center grid-cols-1 md:grid-cols-2">
-          <div className="p-8 pt-25 md:p-12">
+        <div className="grid md:h-150 w-full justify-center items-center grid-cols-1 md:grid-cols-2">
+          <div>
             <h1 className="text-4xl md:text-6xl lg:text-8xl text-blue-900">
               About 
             </h1>
@@ -17,12 +17,12 @@ export default function Home() {
               Saturday.ai
             </h1>
           </div>      
-          <div className="p-4 md:p-8">
+          <div>
             <Paragraph header="Our Approach" framer="How we think about building AI applications" body="Agentic AI has advanced rapidly, but key limitations still prevent it from working reliably in real-world systems. Saturday.ai is building an AI agent that addresses these flaws, enabling seamless integration into existing workflows."/>
           </div>
         </div>
 
-        <div className="md:p-12 p-8">
+        <div>
             <h1 className="text-3xl md:text-6xl">
               The Current Shortcomings of AI
             </h1>
@@ -37,7 +37,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="pb-40 p-8 md:p-12">
+        <div className="pt-8 md:pt-12">
             <h1 className="text-3xl md:text-6xl">
               Our Belief
             </h1>
@@ -49,7 +49,7 @@ export default function Home() {
 
         </div>
 
-        <div className="pb-40 p-8 md:p-12">
+        <div className="py-8 md:py-12">
             <h1 className="text-3xl md:text-6xl">
               The Team
             </h1>

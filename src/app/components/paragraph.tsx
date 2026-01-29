@@ -6,7 +6,7 @@ interface ParagraphProps {
 
 export default function Paragraph({header, framer, body}:ParagraphProps){
     return (
-        <div className="rounded-md justify-center p-4">
+        <div className="rounded-md justify-center">
           <div className="font-xl pb-2">
             <h1 className="font-bold">
               {header}

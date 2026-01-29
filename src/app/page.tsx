@@ -2,6 +2,7 @@ import Paragraph from "./components/paragraph";
 import Step from "./components/step";
 import Reveal from "./components/reveal";
 import Signup from "./components/signup";
+import Hero from "./components/hero";
 import Blurb from "./components/blurb";
 import { features } from "./content/features";
 import { workflow } from "./content/workflow";
@@ -9,28 +10,22 @@ import { workflow } from "./content/workflow";
 
 export default function Home() {
   return (
-    <div className = "bg-zinc-50 font-sans">
+    <div className = "base">
+      <Hero/>  
 
-      <div className="flex w-full p-8 pt-26 pb-10 md:p-12 md:pt-40 md:pb-20">      
-        <div>
-          <h1 className="text-4xl md:text-6xl lg:text-9xl opacity-0 text-blue-900 animate-[fadeUp_0.5s_ease-out_forwards]">
-            AI Reimagined.
-          </h1>
-          <p className="opacity-0 animate-[fadeUp_0.7s_ease-out_forwards] [animation-delay:500ms]">
-            Agentic AI that is local-first, transparent, and designed for user control.
-          </p>
-        </div>
-      </div>
-
-
-      <div className="grid grid-cols-1 gap-8 p-4 md:p-8 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {features.map((feature) => (
           <Paragraph key={feature.id} header={feature.title} framer={feature.subtitle} body={feature.description}/>
         ))}
       </div>
 
 
-            <Blurb header="An extensible AI agent." subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
+
+      <Blurb header="An extensible AI agent." subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
+
+
+
+
 
 
       

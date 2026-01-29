@@ -4,17 +4,13 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
-/*
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}*/
 
 @layer components {
   .link {
     @apply hover:text-blue-900 focus:text-blue-900;
+  }
+  .base{
+    @apply bg-zinc-50 font-sans px-8 md:px-24 lg:px-32 py-16 min-h-screen
   }
 }
 
@@ -31,6 +27,17 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px);
   }
 }
 
