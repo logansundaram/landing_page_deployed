@@ -11,7 +11,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="text-lg flex w-full h-20 place-content-between fixed z-50 px-8 md:px-24 lg:px-32 py-8">
+    <header className="text-lg flex w-full h-16 place-content-between fixed z-50 px-8 md:px-24 lg:px-32 py-8">
       <Link href="/" className="flex link">
         Saturday.ai
       </Link>

@@ -5,12 +5,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
+
+
 @layer components {
   .link {
     @apply hover:text-blue-900 focus:text-blue-900;
   }
   .base{
-    @apply bg-zinc-50 font-sans px-8 md:px-24 lg:px-32 py-16 min-h-screen
+    @apply bg-zinc-50 font-sans px-8 md:px-24 lg:px-32 py-16 min-h-screen text-zinc-900
+  }
+  .text-accent{
+    @apply text-blue-900
+  }
+  .text-light{
+    @apply text-zinc-50
   }
 }
 
