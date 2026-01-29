@@ -20,6 +20,13 @@
   .text-light{
     @apply text-zinc-50
   }
+  .bg-light{
+    @apply text-zinc-50
+  }
+  .bg-dark{
+    @apply bg-zinc-900
+  }
+
 }
 
 body {
