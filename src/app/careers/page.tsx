@@ -1,15 +1,18 @@
+import Blurb from "../components/blurb";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="base">
-        <div className="flex md:py-40 py-20">
-            <h1 className="md:text-6xl text-4xl text-zinc-900">
+        <div className="py-20">
+            <h1 className="text-3xl md:text-6xl">
                 Careers
             </h1>
+            <p className="">
+                Traits we look for in new hires
+            </p>
+            <Blurb header="Those who build real systems, not just prototypes." subheader="Saturday.ai is designed for end-to-end deployment: explicit workflows, local execution, and architectures that hold up under real constraints."/>
         </div>
-
-       
 
         <div className="text-2xl">
             <p>

@@ -4,6 +4,7 @@ import Reveal from "./components/reveal";
 import Signup from "./components/signup";
 import Hero from "./components/hero";
 import Blurb from "./components/blurb";
+import Point from "./components/point";
 import Link from "next/link";
 import { features } from "./content/features";
 import { workflow } from "./content/workflow";
@@ -27,17 +28,35 @@ export default function Home() {
 
       <Blurb header="An extensible AI agent." subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
 
+      <div className="py-40">
+        <div className="flex items-center h-full">
+          <div className="pb-6 w-max">
+            <h1 className="w-full text-2xl md:text-6xl">
+              Who Saturday.ai is for
+            </h1>
+            <p className="text-blue-900">
+              For those dissatisfied with agentic ai currently.
+            </p>
+          </div>
+        </div>
 
+        <div className="grid md:grid-cols-4 gap-y-6">
+          <Point header="Engineers who care about reliability" body="hello"/>
+          <Point header="Teams handling sensitive data" body="hello"/>
+          <Point header="Small teams moving fast" body="hello"/>
+          <Point header="Anyone betting on edge compute" body="hello"/>
+        </div>
+      </div>
 
 
 
 
       
 
-      <div className="grid grid-rows-1 md:grid-rows-2 gap-x-12 py-20">
+      <div className="grid grid-rows-1 md:grid-rows-2 gap-x-12 py-20 justify-stretch">
         <div className="flex items-center h-full">
-          <div className="pb-6">
-            <h1 className="w-full text-4xl md:text-6xl">
+          <div className="pb-6 w-max">
+            <h1 className="w-full text-2xl md:text-6xl">
               How Saturday.ai works
             </h1>
             <p className="text-blue-900">
@@ -46,9 +65,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 grid-rows-2 gap-y-4 justify-center">
+      <div className="grid md:grid-cols-2 gap-16 w-full max-w-4xl mx-auto">
           {workflow.map((step) => (
-            <Step key={step.id} step={step.step} header={step.title} body={step.description} />
+            <Step key={step.id} step={step.step} header={step.title} body={step.description}/>
           ))}
         </div>
       </div>

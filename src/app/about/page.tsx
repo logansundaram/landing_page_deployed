@@ -22,7 +22,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
+        <div className="py-20 md:py-40">
             <h1 className="text-3xl md:text-6xl">
               The Current Shortcomings of AI
             </h1>
@@ -37,7 +37,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="pt-8 md:pt-12">
+        <div className="py-20">
             <h1 className="text-3xl md:text-6xl">
               Our Belief
             </h1>
@@ -49,7 +49,7 @@ export default function Home() {
 
         </div>
 
-        <div className="py-8 md:py-12">
+        <div className="py-10 md:py-20">
             <h1 className="text-3xl md:text-6xl">
               The Team
             </h1>
