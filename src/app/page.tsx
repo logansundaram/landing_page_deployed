@@ -18,7 +18,7 @@ export default function Home() {
         {features.map((feature) => (
           <Paragraph key={feature.id} header={feature.title} framer={feature.subtitle} body={feature.description}/>
         ))}
-        <Link href="/about" className="bg-zinc-900 light w-fit p-2">
+        <Link href="/about" className="bg-zinc-900 text-light w-fit p-2">
           Find out what we stand for
         </Link>
       </div>
