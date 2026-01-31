@@ -7,15 +7,6 @@ import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Saturday.ai",
@@ -29,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-full bg-zinc-50`}>
+      <head>
+        <link href="https://api.fontshare.com" rel="stylesheet"></link>
+      </head>
+      <body className="antialiased w-full bg-zinc-50">
 
         <Navbar/>
 

@@ -11,7 +11,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="text-lg flex w-full h-16 place-content-between fixed z-50 px-8 md:px-24 lg:px-32 py-8">
+    <header className="text-lg flex w-full h-16 place-content-between fixed z-50 px-8 md:px-24 lg:px-32 py-8 overflow-x-hidden">
       <Link href="/" className="flex link">
         Saturday.ai
       </Link>
@@ -41,15 +41,8 @@ export default function Navbar() {
       <div
         className={[
           "md:hidden absolute left-0 top-full w-full bg-zinc-50",
-          // keep it non-interactive + visually hidden when closed
           open ? "pointer-events-auto" : "pointer-events-none",
           open ? "" : "opacity-0 translate-y-3",
-          // only animate AFTER first mount
-          mounted
-            ? open
-              ? "animate-[fadeUp_0.4s_ease-out_forwards]"
-              : "animate-[fadeDown_0.3s_ease-in_forwards]"
-            : "",
         ].join(" ")}
       >
         <nav className="flex flex-col gap-6 px-8 py-8">

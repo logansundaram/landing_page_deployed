@@ -40,7 +40,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-y-6">
+        <div className="grid md:grid-cols-4 gap-6">
           <Point header="Engineers who care about reliability" body="hello"/>
           <Point header="Teams handling sensitive data" body="hello"/>
           <Point header="Small teams moving fast" body="hello"/>

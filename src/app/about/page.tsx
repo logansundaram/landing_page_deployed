@@ -13,7 +13,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl lg:text-8xl text-blue-900">
               About 
             </h1>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
+            <h1 className="h-40 text-4xl md:text-6xl lg:text-8xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
               Saturday.ai
             </h1>
           </div>      
