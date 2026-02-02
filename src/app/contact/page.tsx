@@ -4,7 +4,7 @@ import Form from '../components/form'
 
 export default function Home() {
     return (
-        <div className="base">
+        <div className="base overflow-x-hidden relative">
             <div className="w-full h-full flex items-center absolute pointer-events-none mask-l-from-40% mask-l-to-70%">
                 <Threads 
                     amplitude={1.5}
