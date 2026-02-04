@@ -8,16 +8,18 @@ export default function Home() {
   return (
     <div className="base">
 
-        <div className="grid md:h-150 w-full justify-center items-center grid-cols-1 md:grid-cols-2">
-          <div>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl text-blue-900">
-              About 
-            </h1>
-            <h1 className="h-40 text-4xl md:text-6xl lg:text-8xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
-              Saturday.ai
-            </h1>
+        <div className="grid h-100 md:h-150 w-full justify-center items-center grid-cols-1 md:grid-cols-2">
+          <div className="h-20 justify-center flex">
+            <div>
+              <h1 className="text-4xl md:text-6xl lg:text-8xl text-blue-900">
+                About 
+              </h1>
+              <h1 className="h-40 text-4xl md:text-6xl lg:text-8xl text-blue-900 animate-[revealLeft_1s_ease-out_forwards] [animation-delay:150ms] opacity-0">
+                Saturday.ai
+              </h1>
+            </div>
           </div>      
-          <div>
+          <div className="flex justify-center">
             <Paragraph header="Our Approach" framer="How we think about building AI applications" body="Agentic AI has advanced rapidly, but key limitations still prevent it from working reliably in real-world systems. Saturday.ai is building an AI agent that addresses these flaws, enabling seamless integration into existing workflows."/>
           </div>
         </div>
