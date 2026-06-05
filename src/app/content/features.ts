@@ -11,7 +11,7 @@ export const features = [
     title: "Agentic Workflows, Not Black Boxes",
     subtitle: "Built from explicit steps you can trace.",
     description:
-      "Built from a foundation of agentic workflows, Saturday.ai avoids typical opaque agentic pitfalls. Transparent, debuggable, and reliable, a more controlled apporach is taken to agentic AI.",
+      "Built from a foundation of agentic workflows, Saturday.ai avoids typical opaque agentic pitfalls. Transparent, debuggable, and reliable, a more controlled approach is taken to agentic AI.",
   },
   {
     id: "self-improving",
