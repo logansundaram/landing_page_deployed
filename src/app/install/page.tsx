@@ -4,9 +4,19 @@ import PageHeader from "../components/page-header";
 import CodeBlock from "../components/code-block";
 
 export const metadata: Metadata = {
-  title: "Install — Saturday.ai",
+  title: "Install",
   description:
-    "Install Saturn, the local-first terminal AI agent, in under a minute.",
+    "Install Saturn, the local-first terminal AI agent, in under a minute. One command on macOS, Linux, or WSL2 — no account, no cloud dependency.",
+  alternates: {
+    canonical: "/install",
+  },
+  openGraph: {
+    title: "Install — Saturday.ai",
+    description:
+      "Install Saturn, the local-first terminal AI agent, in under a minute.",
+    url: "/install",
+    type: "article",
+  },
 };
 
 const requirements = [

@@ -4,9 +4,19 @@ import Container from "../components/container";
 import PageHeader from "../components/page-header";
 
 export const metadata: Metadata = {
-  title: "Docs — Saturday.ai",
+  title: "Docs",
   description:
-    "Documentation for Saturn, the local-first, transparent terminal AI agent.",
+    "Documentation for Saturn, the local-first, transparent terminal AI agent. Guides and references for plans, tools, approval gates, observability, and local models.",
+  alternates: {
+    canonical: "/docs",
+  },
+  openGraph: {
+    title: "Docs — Saturday.ai",
+    description:
+      "Documentation for Saturn, the local-first, transparent terminal AI agent.",
+    url: "/docs",
+    type: "article",
+  },
 };
 
 const sections = [
