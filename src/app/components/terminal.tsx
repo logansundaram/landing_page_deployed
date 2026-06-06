@@ -97,7 +97,7 @@ export default function Terminal() {
                 <span className="text-[#28c840]">✓</span>{" "}
                 <span className="text-fg">agent</span>{" "}
                 <span className="ml-12 text-muted">
-                  4.4s&nbsp;&nbsp; iter 1 · 3.3k ctx · 160 tok/s
+                  4.4s&nbsp;&nbsp; iter 0 · 3.3k ctx · 160 tok/s
                 </span>
               </Line>
               <Line>
@@ -106,6 +106,13 @@ export default function Terminal() {
                 <span className="text-faint">1</span>{" "}
                 <span className="text-muted">
                   Answer from knowledge about AI agents
+                </span>
+              </Line>
+              <Line>
+                <span className="text-[#28c840]">✓</span>{" "}
+                <span className="text-fg">synthesize </span>{" "}
+                <span className="ml-12 text-muted">
+                  2.3s&nbsp;&nbsp; iter 0 · 3.5k ctx · 245 tok/s
                 </span>
               </Line>
             </div>
@@ -120,7 +127,7 @@ export default function Terminal() {
               <span className="text-muted">0 tools</span>
               <span className="text-faint">|</span>
               <span className="text-muted">
-                ctx <span className="text-[#28c840]">0%</span>
+                ctx <span className="text-[#28c840]">2.6%</span>
               </span>
               <span className="text-muted">
                 cpu <span className="text-[#28c840]">11%</span>
