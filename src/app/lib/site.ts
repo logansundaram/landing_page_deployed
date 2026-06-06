@@ -4,7 +4,7 @@ export const site = {
   tagline: "Local-first AI agents you can see",
   description:
     "Saturday.ai is a local-first AI agent platform that exposes workflows, tools, metrics, and decisions instead of hiding them. The terminal is the product.",
-  github: "https://github.com/saturday-ai",
+  github: "https://github.com/logansundaram/saturn",
   nav: [
     { href: "/docs", label: "Docs" },
     { href: "/install", label: "Install" },
