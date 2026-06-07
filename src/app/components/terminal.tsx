@@ -65,7 +65,7 @@ export default function Terminal() {
             </pre>
 
             <div className="mb-1 flex flex-wrap gap-x-4 gap-y-1">
-              <span className="text-accent">saturday.ai</span>
+              <span className="text-accent">saturdayai.org</span>
               <span className="text-muted">workstation:qwen3.5:9b</span>
               <span className="text-faint">·</span>
               <span className="text-muted">ctx 33k</span>

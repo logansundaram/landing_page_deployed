@@ -75,7 +75,7 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <span style={{ color: "#00ffff", fontSize: "26px" }}>$</span>
           <span style={{ color: "#9a9aa6", fontSize: "26px" }}>
-            curl -fsSL saturday.ai/install | sh
+            curl -fsSL saturdayai.org/install.sh | sh
           </span>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function Hero() {
 
           <div className="animate-rise mt-8 flex items-center gap-3 font-mono text-sm text-faint [animation-delay:320ms]">
             <span className="text-accent">$</span>
-            <span className="text-muted">curl -fsSL saturday.ai/install | sh</span>
+            <span className="text-muted">curl -fsSL saturdayai.org/install.sh | sh</span>
           </div>
         </div>
       </Container>

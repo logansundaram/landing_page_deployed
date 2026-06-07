@@ -53,12 +53,12 @@ export default function InstallPage() {
               </p>
               <CodeBlock
                 label="macOS / Linux / WSL2"
-                command="curl -fsSL saturday.ai/install.sh | sh"
+                command="curl -fsSL saturdayai.org/install.sh | sh"
               />
               <div className="mt-3">
                 <CodeBlock
                   label="Windows (PowerShell)"
-                  command="irm saturday.ai/install.ps1 | iex"
+                  command="irm saturdayai.org/install.ps1 | iex"
                 />
               </div>
             </Step>
