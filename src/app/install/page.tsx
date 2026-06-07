@@ -6,7 +6,7 @@ import CodeBlock from "../components/code-block";
 export const metadata: Metadata = {
   title: "Install",
   description:
-    "Install Saturn, the local-first terminal AI agent, in under a minute. One command on macOS, Linux, or WSL2 — no account, no cloud dependency.",
+    "Install Saturn, the local-first terminal AI agent, in under a minute. One command on macOS, Linux, WSL2, or Windows — no account, no cloud dependency.",
   alternates: {
     canonical: "/install",
   },
@@ -20,9 +20,10 @@ export const metadata: Metadata = {
 };
 
 const requirements = [
-  "macOS 13+, Linux, or WSL2",
-  "8 GB RAM minimum (16 GB recommended for local models)",
-  "A POSIX shell",
+  "macOS 13+, Linux, WSL2, or Windows 10/11",
+  "Python 3.10+ and git",
+  "8 GB RAM minimum (16 GB recommended)",
+  "~6 GB free disk for the local models",
 ];
 
 export default function InstallPage() {
@@ -39,27 +40,40 @@ export default function InstallPage() {
           <div className="space-y-10">
             <Step n="1" title="Install the CLI">
               <p className="mb-4 text-sm leading-relaxed text-muted">
-                The install script detects your platform and drops the{" "}
-                <code className="font-mono text-fg">saturn</code> binary on your
-                PATH.
+                Run the one-liner for your platform. It installs{" "}
+                <a
+                  href="https://ollama.com"
+                  className="text-accent hover:underline"
+                >
+                  Ollama
+                </a>{" "}
+                if needed, sets Saturn up in an isolated environment, and puts
+                the <code className="font-mono text-fg">saturn</code> command on
+                your PATH.
               </p>
               <CodeBlock
-                label="macOS / Linux"
-                command="curl -fsSL saturday.ai/install | sh"
+                label="macOS / Linux / WSL2"
+                command="curl -fsSL saturday.ai/install.sh | sh"
               />
               <div className="mt-3">
-                <CodeBlock label="Homebrew" command="brew install saturday-ai/tap/saturn" />
+                <CodeBlock
+                  label="Windows (PowerShell)"
+                  command="irm saturday.ai/install.ps1 | iex"
+                />
               </div>
             </Step>
 
             <Step n="2" title="Verify the install">
+              <p className="mb-4 text-sm leading-relaxed text-muted">
+                Open a new terminal so the updated PATH takes effect, then:
+              </p>
               <CodeBlock command="saturn --version" />
             </Step>
 
             <Step n="3" title="Start a session">
               <p className="mb-4 text-sm leading-relaxed text-muted">
-                Launch the TUI in any project directory. Saturn will load local
-                models and wait for your first instruction.
+                Launch the TUI. The first run pulls a few GB of local models,
+                then Saturn waits for your first instruction.
               </p>
               <CodeBlock command="saturn" />
             </Step>
