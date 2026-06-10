@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
 /**
- * Consistent horizontal gutters + max width for every section.
- * Single source of truth for the page's measure.
+ * Horizontal gutters inside the page rails (the max-width lives on <main>
+ * in layout.tsx so the rails run continuously down the page).
  */
 export default function Container({
   children,
@@ -11,9 +11,5 @@ export default function Container({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <div className={`mx-auto w-full max-w-6xl px-6 md:px-8 ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`w-full px-6 md:px-10 ${className}`}>{children}</div>;
 }

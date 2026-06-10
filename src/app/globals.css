@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   Saturday.ai design system
-   Black base, dark-gray surfaces, single cyan accent. Typography-led.
+   Saturday.ai design system — "transparent schematic"
+   Black base, dark-gray surfaces, single cyan accent. Hairline rails run the
+   length of the page; crosshair ticks mark section intersections. Typography-
+   led: serif display, mono annotation, sans body.
 ---------------------------------------------------------------------------- */
 @theme {
   /* Fonts (wired to next/font CSS variables in layout.tsx) */
@@ -64,6 +66,21 @@
     opacity: 0;
     animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
+
+  /* Slow breathing used on "live" status dots */
+  .animate-pulse-soft {
+    animation: pulse-soft 2.4s ease-in-out infinite;
+  }
+
+  /* Fine dot-grid texture for the hero backdrop */
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      circle,
+      var(--color-edge-strong) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+  }
 }
 
 @keyframes rise {
@@ -74,6 +91,16 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
   }
 }
 

@@ -1,4 +1,6 @@
 import Container from "./container";
+import SectionHeading from "./section-heading";
+import Crosses from "./crosses";
 
 const values = [
   {
@@ -30,31 +32,32 @@ const values = [
 
 export default function Values() {
   return (
-    <section className="border-t border-edge">
+    <section className="relative border-t border-edge">
+      <Crosses />
       <Container className="py-20 md:py-28">
-        <div className="grid grid-cols-1 border-l border-t border-edge md:grid-cols-2 lg:grid-cols-3">
-          {/* Heading occupies the first cell */}
-          <div className="flex flex-col justify-center border-b border-r border-edge p-7">
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">
-              Philosophy
-            </p>
-            <h2 className="font-serif text-3xl leading-tight tracking-tight text-fg">
-              Built on five
-              <br />
-              non-negotiables.
-            </h2>
-          </div>
+        <SectionHeading
+          index="02"
+          eyebrow="Philosophy"
+          title="Five non-negotiables."
+          lead="Every design decision in Saturday.ai traces back to one of these."
+        />
 
+        {/* Ledger — numbered rows instead of cards */}
+        <div className="mt-12 border-t border-edge">
           {values.map((v, i) => (
             <div
               key={v.id}
-              className="group border-b border-r border-edge p-7 transition-colors hover:bg-panel"
+              className="group grid gap-x-6 gap-y-1 border-b border-edge py-7 md:grid-cols-[88px_280px_1fr] md:items-baseline"
             >
-              <p className="mb-4 font-mono text-xs text-faint">
+              <p className="font-mono text-sm text-faint transition-colors group-hover:text-accent">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h3 className="mb-2 text-base font-medium text-fg">{v.title}</h3>
-              <p className="text-sm leading-relaxed text-muted">{v.body}</p>
+              <h3 className="font-serif text-2xl tracking-tight text-fg">
+                {v.title}
+              </h3>
+              <p className="max-w-xl text-sm leading-relaxed text-muted">
+                {v.body}
+              </p>
             </div>
           ))}
         </div>

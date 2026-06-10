@@ -84,9 +84,9 @@ export default function DocsPage() {
 
           {/* Content */}
           <div>
-            <div className="rounded-lg border border-edge bg-panel p-6 md:p-8">
+            <div className="border border-edge bg-panel p-6 md:p-8">
               <p className="font-mono text-xs uppercase tracking-[0.16em] text-accent">
-                Work in progress
+                [work in progress]
               </p>
               <h2 className="mt-3 font-serif text-2xl text-fg">
                 The full documentation is on its way.
@@ -104,7 +104,7 @@ export default function DocsPage() {
               </Link>
             </div>
 
-            <div className="mt-8 grid gap-px overflow-hidden rounded-lg border border-edge bg-edge sm:grid-cols-2">
+            <div className="mt-8 grid gap-px border border-edge bg-edge sm:grid-cols-2">
               {intro.map((c) => (
                 <div key={c.title} className="bg-ink p-6">
                   <h3 className="text-base font-medium text-fg">{c.title}</h3>

@@ -80,7 +80,7 @@ export default function InstallPage() {
           </div>
 
           <aside className="space-y-8">
-            <div className="rounded-lg border border-edge bg-panel p-6">
+            <div className="border border-edge bg-panel p-6">
               <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-accent">
                 Requirements
               </h2>
@@ -94,7 +94,7 @@ export default function InstallPage() {
               </ul>
             </div>
 
-            <div className="rounded-lg border border-edge bg-panel p-6">
+            <div className="border border-edge bg-panel p-6">
               <h2 className="mb-2 text-sm font-medium text-fg">Need details?</h2>
               <p className="text-sm leading-relaxed text-muted">
                 The documentation covers model setup, tools, and configuration.
@@ -125,7 +125,7 @@ function Step({
   return (
     <section>
       <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-edge-strong font-mono text-xs text-accent">
+        <span className="flex h-7 w-7 items-center justify-center border border-edge-strong font-mono text-xs text-accent">
           {n}
         </span>
         <h2 className="text-lg font-medium text-fg">{title}</h2>

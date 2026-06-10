@@ -22,7 +22,7 @@ export default function CodeBlock({
   }
 
   return (
-    <div className="overflow-hidden rounded-lg border border-edge bg-panel">
+    <div className="overflow-hidden border border-edge bg-panel">
       {label && (
         <div className="border-b border-edge px-4 py-2 font-mono text-xs text-faint">
           {label}
@@ -36,7 +36,7 @@ export default function CodeBlock({
         <button
           type="button"
           onClick={copy}
-          className="shrink-0 rounded border border-edge-strong px-2 py-1 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+          className="shrink-0 border border-edge-strong px-2 py-1 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-accent"
           aria-label="Copy command"
         >
           {copied ? "copied" : "copy"}

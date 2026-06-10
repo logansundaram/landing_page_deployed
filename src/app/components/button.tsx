@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 
 type Variant = "primary" | "secondary";
 
+/* Sharp corners + mono uppercase — buttons read like schematic labels. */
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md px-5 h-11 text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2";
+  "inline-flex h-11 items-center justify-center gap-2 px-6 font-mono text-xs uppercase tracking-[0.14em] transition-colors duration-150";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-accent text-ink hover:bg-[#7bffff] focus-visible:outline-accent",
+  primary: "bg-accent text-ink hover:bg-[#7bffff]",
   secondary:
-    "border border-edge-strong text-fg hover:border-accent hover:text-accent focus-visible:outline-accent",
+    "border border-edge-strong text-fg hover:border-accent hover:text-accent",
 };
 
 export default function Button({

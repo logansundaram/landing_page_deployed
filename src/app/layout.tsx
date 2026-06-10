@@ -20,6 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument",
   weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
@@ -118,7 +119,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Nav />
-        <main>{children}</main>
+        {/* Hairline rails frame every page — the schematic's drawing area */}
+        <main className="mx-auto w-full max-w-6xl border-x border-edge">
+          {children}
+        </main>
         <Footer />
         <Analytics />
         <SpeedInsights />

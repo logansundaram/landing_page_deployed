@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { site } from "../lib/site";
 import GitHubIcon from "./github-icon";
+import LogoMark from "./logo-mark";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -13,32 +14,35 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50">
       <div className="border-b border-edge bg-ink/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:px-8">
+        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:px-10">
           <Link
             href="/"
-            className="font-serif text-2xl leading-none tracking-tight text-fg transition-colors hover:text-accent"
+            className="group inline-flex items-center gap-2.5 text-fg transition-colors hover:text-accent"
           >
-            Saturday<span className="text-accent">.ai</span>
+            <LogoMark className="h-6 w-6 shrink-0" />
+            <span className="font-serif text-2xl leading-none tracking-tight">
+              Saturday<span className="text-accent">.ai</span>
+            </span>
           </Link>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-7 md:flex">
             {site.nav.map((item) => (
               <NavItem
                 key={item.href}
                 href={item.href}
                 active={pathname === item.href}
               >
-                {item.label}
+                {item.label.toLowerCase()}
               </NavItem>
             ))}
             <a
               href={site.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg"
+              className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-fg"
             >
               <GitHubIcon className="h-4 w-4" />
-              GitHub
+              github
             </a>
           </nav>
 
@@ -87,9 +91,10 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="rounded-md px-2 py-3 text-sm text-muted transition-colors hover:bg-panel hover:text-fg"
+              className="px-2 py-3 font-mono text-sm text-muted transition-colors hover:bg-panel hover:text-fg"
             >
-              {item.label}
+              <span className="text-faint">/</span>
+              {item.label.toLowerCase()}
             </Link>
           ))}
           <a
@@ -97,10 +102,10 @@ export default function Nav() {
             target="_blank"
             rel="noreferrer"
             onClick={() => setOpen(false)}
-            className="inline-flex items-center gap-2 rounded-md px-2 py-3 text-sm text-muted transition-colors hover:bg-panel hover:text-fg"
+            className="inline-flex items-center gap-2 px-2 py-3 font-mono text-sm text-muted transition-colors hover:bg-panel hover:text-fg"
           >
             <GitHubIcon className="h-4 w-4" />
-            GitHub
+            github
           </a>
         </nav>
       </div>
@@ -120,10 +125,11 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`text-sm transition-colors ${
-        active ? "text-fg" : "text-muted hover:text-fg"
+      className={`font-mono text-sm transition-colors ${
+        active ? "text-accent" : "text-muted hover:text-fg"
       }`}
     >
+      <span className={active ? "text-accent" : "text-faint"}>/</span>
       {children}
     </Link>
   );

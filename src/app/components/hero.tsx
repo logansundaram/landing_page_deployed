@@ -1,53 +1,58 @@
 import Container from "./container";
 import Button from "./button";
+import CodeBlock from "./code-block";
+import Orbit from "./orbit";
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Faint grid backdrop — texture, not decoration */}
+      {/* Fine dot-grid backdrop, faded toward the edges */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        className="bg-dot-grid pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
-          backgroundImage:
-            "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
           maskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%)",
+            "radial-gradient(ellipse 75% 70% at 40% 30%, #000 30%, transparent 100%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%)",
+            "radial-gradient(ellipse 75% 70% at 40% 30%, #000 30%, transparent 100%)",
         }}
+      />
+
+      {/* The favicon mark, blown up into a slowly orbiting schematic */}
+      <Orbit
+        pathId="hero-orbit"
+        className="absolute -right-48 top-1/2 hidden h-[620px] w-[620px] -translate-y-1/2 lg:block xl:-right-36"
       />
 
       <Container className="relative py-24 md:py-36">
         <div className="max-w-3xl">
-          <p className="animate-rise mb-6 inline-flex items-center gap-2 rounded-full border border-edge bg-panel px-3 py-1 font-mono text-xs text-muted">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Local-first · Transparent by default
+          <p className="animate-rise mb-7 flex items-center gap-3 font-mono text-xs tracking-wide text-muted">
+            <span className="text-accent">{"//"}</span>
+            local-first · transparent by default
+            <span aria-hidden className="h-px w-10 bg-edge-strong" />
           </p>
 
-          <h1 className="animate-rise font-serif text-5xl leading-[1.05] tracking-tight text-fg md:text-7xl [animation-delay:80ms]">
-            AI agents should be
+          <h1 className="animate-rise font-serif text-6xl leading-[0.98] tracking-tight text-fg md:text-8xl [animation-delay:80ms]">
+            AI agents should
             <br />
-            <span className="text-accent">transparent.</span>
+            <em className="text-accent">show their work.</em>
           </h1>
 
-          <p className="animate-rise mt-6 max-w-xl text-lg leading-relaxed text-muted [animation-delay:160ms]">
-            Saturday.ai is a local-first AI agent platform that exposes
-            workflows, tools, metrics, and decisions instead of hiding them.
-            Everything runs on your hardware, in your terminal.
+          <p className="animate-rise mt-7 max-w-xl text-lg leading-relaxed text-muted [animation-delay:160ms]">
+            Saturday.ai is a local-first agent platform. Every plan, tool call,
+            metric, and decision is written to the screen as it happens — on
+            your hardware, in your terminal.
           </p>
 
           <div className="animate-rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:240ms]">
-            <Button href="/install">Install</Button>
+            <Button href="/install">Install Saturn</Button>
             <Button href="/docs" variant="secondary">
               Documentation
             </Button>
           </div>
 
-          <div className="animate-rise mt-8 flex items-center gap-3 font-mono text-sm text-faint [animation-delay:320ms]">
-            <span className="text-accent">$</span>
-            <span className="text-muted">curl -fsSL saturdayai.org/install.sh | sh</span>
+          <div className="animate-rise mt-9 max-w-md [animation-delay:320ms]">
+            <CodeBlock command="curl -fsSL saturdayai.org/install.sh | sh" />
           </div>
         </div>
       </Container>
