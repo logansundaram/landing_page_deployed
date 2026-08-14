@@ -1,13 +1,15 @@
 /**
  * Saturn as a full-width observatory sheet — a panoramic 1800×800 drawing
  * meant to span the whole viewport. The ring system is concentric hairline
- * ellipses (C ring, B ring, Cassini division, A ring, a lone cyan F ring,
- * and an outer dotted "approval boundary") with true occlusion: rings pass
- * behind the planet above the ring plane and in front of it below. All
- * strokes use non-scaling-stroke so the hairlines stay hairlines at any
- * viewport width. The linework draws itself on page load (`.ring-draw`);
- * callouts and the title block fade in after (`.ring-fade`). A square
- * satellite rides the F ring via SMIL.
+ * ellipses with true occlusion: rings pass behind the planet above the ring
+ * plane and in front of it below. All strokes use non-scaling-stroke so the
+ * hairlines stay hairlines at any viewport width. The linework draws itself
+ * on page load (`.ring-draw`); callouts and the title block fade in after
+ * (`.ring-fade`). A square satellite rides the F ring via SMIL.
+ *
+ * Color discipline: the drawing is luminance-only — grays carry everything —
+ * except the dotted approval boundary, which wears gate-ask amber because it
+ * is data: the gate around the machine.
  *
  * `pathId` must be unique per page — it namespaces the clip paths and the
  * satellite's motion path.
@@ -19,12 +21,12 @@ const CY = 400;
 const ASPECT = 0.26; // ry / rx for every ring — one viewing angle
 const PLANET_R = 160;
 
-type Tone = "edge" | "strong" | "accent";
+type Tone = "edge" | "strong" | "bright";
 
 const TONES: Record<Tone, string> = {
   edge: "var(--color-edge)",
   strong: "var(--color-edge-strong)",
-  accent: "var(--color-accent)",
+  bright: "var(--color-faint)",
 };
 
 /* [rx, tone, opacity, strokeWidth] — grouped like the real ring system */
@@ -34,24 +36,24 @@ const RINGS: [number, Tone, number, number][] = [
   [216, "edge", 0.9, 1],
   [232, "strong", 0.8, 1],
   [246, "strong", 0.9, 1],
-  // B ring — densest, carries the cyan
+  // B ring — densest band
   [262, "strong", 1, 1],
-  [274, "accent", 0.3, 1],
+  [274, "bright", 0.5, 1],
   [286, "strong", 1, 1.25],
-  [297, "accent", 0.22, 1],
+  [297, "bright", 0.4, 1],
   [308, "strong", 1, 1],
-  [320, "accent", 0.38, 1.25],
+  [320, "bright", 0.55, 1.25],
   [331, "strong", 1, 1],
   [343, "strong", 0.9, 1.5],
   // Cassini division, then the A ring
   [378, "strong", 1, 1.25],
-  [392, "accent", 0.22, 1],
+  [392, "bright", 0.4, 1],
   [406, "strong", 0.9, 1],
   [420, "strong", 0.8, 1],
-  [434, "accent", 0.26, 1],
+  [434, "bright", 0.45, 1],
   [448, "strong", 0.8, 1],
   // F ring — thin, bright, alone
-  [520, "accent", 0.6, 1.5],
+  [520, "bright", 0.8, 1.5],
 ];
 
 function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
@@ -73,13 +75,15 @@ function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
           style={{ animationDelay: `${delayOffset + i * 45}ms` }}
         />
       ))}
-      {/* Outer dotted orbit — the approval boundary */}
+      {/* Outer dotted orbit — the approval boundary. The one chromatic line
+          in the drawing: it is the gate. */}
       <ellipse
         cx={CX}
         cy={CY}
         rx={780}
         ry={780 * ASPECT}
-        stroke={TONES.strong}
+        stroke="var(--color-gate-ask)"
+        strokeOpacity={0.7}
         strokeWidth={1}
         strokeDasharray="2 8"
         vectorEffect="non-scaling-stroke"
@@ -111,7 +115,7 @@ function Label({
       x={x}
       y={y}
       textAnchor={anchor}
-      fontFamily="var(--font-mono)"
+      fontFamily="var(--font-commit), ui-monospace, monospace"
       fontSize={size}
       letterSpacing="0.06em"
       fill={fill}
@@ -209,7 +213,7 @@ export default function SaturnRings({
           d={`M ${CX + 520} ${CY} A 520 ${fRy} 0 1 0 ${CX - 520} ${CY} A 520 ${fRy} 0 1 0 ${CX + 520} ${CY}`}
         />
         <g className="ring-fade motion-reduce:hidden">
-          <rect x="-4" y="-4" width="8" height="8" fill="var(--color-accent)" />
+          <rect x="-4" y="-4" width="8" height="8" fill="var(--color-fg)" />
           <animateMotion dur="28s" repeatCount="indefinite">
             <mpath href={`#${pathId}`} />
           </animateMotion>
@@ -220,7 +224,7 @@ export default function SaturnRings({
           y={CY - 4}
           width="8"
           height="8"
-          fill="var(--color-accent)"
+          fill="var(--color-fg)"
         />
       </g>
 
@@ -233,9 +237,9 @@ export default function SaturnRings({
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
-        <rect x="1160" y="284" width="6" height="6" fill="var(--color-accent)" />
+        <rect x="1160" y="284" width="6" height="6" fill="var(--color-fg)" />
         <Label x={1240} y={176}>
-          <tspan fill="var(--color-accent)">01</tspan>
+          <tspan fill="var(--color-fg)">01</tspan>
           <tspan fill="var(--color-muted)"> — your machine</tspan>
         </Label>
         <Label x={1240} y={212} size={12} fill="var(--color-faint)">
@@ -249,25 +253,31 @@ export default function SaturnRings({
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
-        <rect x="1383" y="326" width="6" height="6" fill="var(--color-accent)" />
+        <rect x="1383" y="326" width="6" height="6" fill="var(--color-fg)" />
         <Label x={1450} y={246}>
-          <tspan fill="var(--color-accent)">02</tspan>
+          <tspan fill="var(--color-fg)">02</tspan>
           <tspan fill="var(--color-muted)"> — the loop</tspan>
         </Label>
         <Label x={1450} y={282} size={12} fill="var(--color-faint)">
           every step on screen
         </Label>
 
-        {/* 03 · the gate */}
+        {/* 03 · the gate — the amber boundary */}
         <polyline
           points="1092,599 1160,670 1300,670"
           stroke="var(--color-edge-strong)"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
-        <rect x="1089" y="596" width="6" height="6" fill="var(--color-accent)" />
+        <rect
+          x="1089"
+          y="596"
+          width="6"
+          height="6"
+          fill="var(--color-gate-ask)"
+        />
         <Label x={1160} y={658}>
-          <tspan fill="var(--color-accent)">03</tspan>
+          <tspan fill="var(--color-fg)">03</tspan>
           <tspan fill="var(--color-muted)"> — the gate</tspan>
         </Label>
         <Label x={1160} y={692} size={12} fill="var(--color-faint)">
@@ -292,7 +302,7 @@ export default function SaturnRings({
           vectorEffect="non-scaling-stroke"
         />
         <Label x={1570} y={658} size={11} fill="var(--color-muted)">
-          fig. 01 — saturn vi
+          fig. 00 — saturn vi
         </Label>
         <Label x={1570} y={682} size={11} fill="var(--color-faint)">
           ring span 282,000 km

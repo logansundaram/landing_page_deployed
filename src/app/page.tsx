@@ -1,17 +1,19 @@
 import Hero from "./components/hero";
-import Terminal from "./components/terminal";
-import Values from "./components/values";
-import Features from "./components/features";
-import CTA from "./components/cta";
+import RunChapter from "./components/run-chapter";
+import GateChapter from "./components/gate-chapter";
+import PolicyChapter from "./components/policy-chapter";
+import CapabilitiesChapter from "./components/capabilities-chapter";
+import GetStartedChapter from "./components/get-started-chapter";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Terminal />
-      <Values />
-      <Features />
-      <CTA />
+      <RunChapter />
+      <GateChapter />
+      <PolicyChapter />
+      <CapabilitiesChapter />
+      <GetStartedChapter />
     </>
   );
 }

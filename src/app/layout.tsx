@@ -1,28 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
 import { site } from "./lib/site";
 
-const geist = Geist({
-  variable: "--font-geist",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono-jb",
-  subsets: ["latin"],
-});
-
-/* Italic only — the emphasis voice. One emphasized phrase per page. */
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  style: ["italic"],
-  weight: ["400", "500"],
-  subsets: ["latin"],
+/* One family carries every register — display, spec, micro, captures.
+   Variable weight file, self-hosted; no third-party font requests. */
+const commitMono = localFont({
+  src: "./fonts/CommitMonoV143-VF.woff2",
+  variable: "--font-commit",
+  weight: "100 900",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -44,14 +33,15 @@ export const metadata: Metadata = {
     "open source AI agent",
     "private AI agent",
     "on-device AI",
+    "approval gates",
     "RAG",
     "developer tools",
     "Saturn",
     "Saturday.ai",
   ],
-  authors: [{ name: site.name, url: site.url }],
-  creator: site.name,
-  publisher: site.name,
+  authors: [{ name: site.org, url: site.url }],
+  creator: site.org,
+  publisher: site.org,
   category: "technology",
   alternates: {
     canonical: "/",
@@ -95,12 +85,12 @@ export default function RootLayout({
     "@type": "SoftwareApplication",
     name: "Saturn",
     applicationCategory: "DeveloperApplication",
-    operatingSystem: "macOS, Linux, WSL2",
+    operatingSystem: "macOS, Linux, WSL2, Windows",
     description: site.description,
     url: site.url,
     publisher: {
       "@type": "Organization",
-      name: site.name,
+      name: site.org,
       url: site.url,
     },
     offers: {
@@ -112,9 +102,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${geist.variable} ${jetbrainsMono.variable} ${newsreader.variable} min-h-screen antialiased`}
-      >
+      <body className={`${commitMono.variable} min-h-screen antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -123,8 +111,6 @@ export default function RootLayout({
         {/* Sections run full-bleed; each centers its own content */}
         <main>{children}</main>
         <Footer />
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

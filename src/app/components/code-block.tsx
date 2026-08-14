@@ -24,19 +24,19 @@ export default function CodeBlock({
   return (
     <div className="overflow-hidden border border-edge bg-panel">
       {label && (
-        <div className="border-b border-edge px-4 py-2 font-mono text-xs text-faint">
+        <div className="type-micro border-b border-edge px-4 py-2 lowercase text-faint">
           {label}
         </div>
       )}
       <div className="flex items-center justify-between gap-4 px-4 py-3">
-        <code className="overflow-x-auto font-mono text-sm text-fg">
-          <span className="select-none text-accent">$ </span>
+        <code className="overflow-x-auto text-sm text-fg">
+          <span className="select-none text-faint">$ </span>
           {command}
         </code>
         <button
           type="button"
           onClick={copy}
-          className="shrink-0 border border-edge-strong px-2 py-1 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+          className="type-micro shrink-0 border border-edge-strong px-2 py-1 lowercase text-muted t-colors hover:border-fg hover:text-fg"
           aria-label="Copy command"
         >
           {copied ? "copied" : "copy"}

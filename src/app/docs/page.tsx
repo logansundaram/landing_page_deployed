@@ -2,17 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "../components/container";
 import PageHeader from "../components/page-header";
-import Em from "../components/em";
 
 export const metadata: Metadata = {
-  title: "Docs",
+  title: "docs",
   description:
     "Documentation for Saturn, the local-first, transparent terminal AI agent. Guides and references for plans, tools, approval gates, observability, and local models.",
   alternates: {
     canonical: "/docs",
   },
   openGraph: {
-    title: "Docs — Saturday.ai",
+    title: "docs — Saturn",
     description:
       "Documentation for Saturn, the local-first, transparent terminal AI agent.",
     url: "/docs",
@@ -22,30 +21,30 @@ export const metadata: Metadata = {
 
 const sections = [
   {
-    group: "Getting started",
-    items: ["Introduction", "Installation", "Your first session"],
+    group: "getting started",
+    items: ["introduction", "installation", "your first session"],
   },
   {
-    group: "Concepts",
-    items: ["Plans & workflows", "Tools & approval gates", "Observability"],
+    group: "concepts",
+    items: ["plans & workflows", "tools & approval gates", "observability"],
   },
   {
-    group: "Reference",
-    items: ["CLI commands", "Configuration", "Local models"],
+    group: "reference",
+    items: ["cli commands", "configuration", "local models"],
   },
 ];
 
 const intro = [
   {
-    title: "Plans & workflows",
+    title: "plans & workflows",
     body: "How Saturn turns intent into an explicit, inspectable sequence of steps.",
   },
   {
-    title: "Tools & approval gates",
+    title: "tools & approval gates",
     body: "Register tools and gate every side effect behind an approval prompt.",
   },
   {
-    title: "Local models",
+    title: "local models",
     body: "Point Saturn at local weights and run the whole loop on your hardware.",
   },
 ];
@@ -54,12 +53,8 @@ export default function DocsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Documentation"
-        title={
-          <>
-            Learn how <Em>Saturn</Em> works.
-          </>
-        }
+        eyebrow="documentation"
+        title="docs."
         lead="Guides and references for running a transparent, local-first agent. We're actively writing these — the structure below is live."
       />
 
@@ -70,13 +65,13 @@ export default function DocsPage() {
             <nav className="space-y-7">
               {sections.map((s) => (
                 <div key={s.group}>
-                  <p className="mb-3 font-mono text-xs lowercase text-faint">
-                    <span className="text-accent">::</span> {s.group}
+                  <p className="type-micro mb-3 lowercase text-faint">
+                    {s.group}
                   </p>
                   <ul className="space-y-2">
                     {s.items.map((item) => (
                       <li key={item}>
-                        <span className="cursor-default text-sm text-muted transition-colors hover:text-fg">
+                        <span className="cursor-default text-sm lowercase text-muted t-colors hover:text-fg">
                           {item}
                         </span>
                       </li>
@@ -89,36 +84,36 @@ export default function DocsPage() {
 
           {/* Content */}
           <div>
-            <div className="border border-edge bg-panel p-6 md:p-8">
-              <p className="font-mono text-xs lowercase text-accent">
+            <div className="border-y border-edge py-6">
+              <p className="type-micro lowercase text-muted">
                 [ work in progress ]
               </p>
-              <h2 className="mt-3 text-xl font-semibold tracking-tight text-fg">
+              <h2 className="mt-3 text-sm font-bold text-fg">
                 The full documentation is on its way.
               </h2>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
                 In the meantime, install the CLI and explore the TUI directly —
                 every command is discoverable from inside the agent with{" "}
-                <code className="font-mono text-fg">?</code>.
+                <code className="text-fg">?</code>.
               </p>
               <Link
                 href="/install"
-                className="mt-5 inline-block font-mono text-sm text-accent hover:underline"
+                className="mt-4 inline-block text-sm lowercase text-fg hover:underline"
               >
-                Install Saturn →
+                install saturn →
               </Link>
             </div>
 
-            <div className="mt-8 grid gap-px border border-edge bg-edge sm:grid-cols-2">
-              {intro.map((c, i) => (
+            <div className="mt-8 border-y border-edge">
+              {intro.map((c) => (
                 <div
                   key={c.title}
-                  className={`bg-ink p-6 ${i === intro.length - 1 ? "sm:col-span-2" : ""}`}
+                  className="grid gap-x-8 gap-y-1 border-b border-edge py-5 last:border-b-0 md:grid-cols-[240px_1fr] md:items-baseline"
                 >
-                  <h3 className="text-base font-medium text-fg">{c.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {c.body}
-                  </p>
+                  <h3 className="text-sm font-bold lowercase text-fg">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted">{c.body}</p>
                 </div>
               ))}
             </div>

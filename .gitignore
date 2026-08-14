@@ -41,3 +41,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 CLAUDE.MD
+# raw saturn run exports (contain grounding context) - derived data is committed instead
+/runs-raw/

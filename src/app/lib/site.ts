@@ -1,12 +1,15 @@
 export const site = {
-  name: "Saturday.ai",
+  /* Saturn leads everywhere; the org name appears in the footer only. */
+  name: "Saturn",
+  org: "Saturday.ai",
   url: "https://saturdayai.org",
-  tagline: "Local-first AI agents you can see",
+  tagline: "the local-first agent that shows its work",
   description:
-    "Saturday.ai is a local-first AI agent platform that exposes workflows, tools, metrics, and decisions instead of hiding them. The terminal is the product.",
+    "Saturn is a local-first terminal AI agent. Every plan, tool call, metric, and decision is written to the screen as it happens — on your hardware, behind approval gates, with nothing hidden.",
   github: "https://github.com/logansundaram/saturn",
+  installCommand: "curl -fsSL saturdayai.org/install.sh | sh",
   nav: [
-    { href: "/docs", label: "Docs" },
-    { href: "/install", label: "Install" },
+    { href: "/docs", label: "docs" },
+    { href: "/install", label: "install" },
   ],
 } as const;

@@ -13,15 +13,16 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="border-b border-edge bg-ink/80 backdrop-blur-md">
+      {/* Solid ink — no glass, no blur */}
+      <div className="border-b border-edge bg-ink">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:px-10">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2.5 text-fg transition-colors hover:text-accent"
+            className="inline-flex items-center gap-2.5 text-fg t-colors hover:text-muted"
           >
-            <LogoMark className="h-5 w-5 shrink-0" />
-            <span className="font-mono text-lg lowercase leading-none tracking-tight">
-              saturday<span className="text-accent">.ai</span>
+            <LogoMark className="h-4 w-4 shrink-0" />
+            <span className="text-lg lowercase leading-none tracking-tight">
+              saturn
             </span>
           </Link>
 
@@ -32,14 +33,14 @@ export default function Nav() {
                 href={item.href}
                 active={pathname === item.href}
               >
-                {item.label.toLowerCase()}
+                {item.label}
               </NavItem>
             ))}
             <a
               href={site.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-fg"
+              className="inline-flex items-center gap-2 text-sm text-muted t-colors hover:text-fg"
             >
               <GitHubIcon className="h-4 w-4" />
               github
@@ -78,7 +79,7 @@ export default function Nav() {
       {/* Mobile menu */}
       <div
         id="mobile-nav"
-        className={`overflow-hidden border-b border-edge bg-ink/95 backdrop-blur-md transition-[max-height,opacity] duration-200 md:hidden ${
+        className={`overflow-hidden border-b border-edge bg-ink transition-[max-height,opacity] duration-200 md:hidden ${
           open ? "max-h-72 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -88,10 +89,10 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="px-2 py-3 font-mono text-sm text-muted transition-colors hover:bg-panel hover:text-fg"
+              className="px-2 py-3 text-sm text-muted t-colors hover:bg-panel hover:text-fg"
             >
               <span className="text-faint">/</span>
-              {item.label.toLowerCase()}
+              {item.label}
             </Link>
           ))}
           <a
@@ -99,7 +100,7 @@ export default function Nav() {
             target="_blank"
             rel="noreferrer"
             onClick={() => setOpen(false)}
-            className="inline-flex items-center gap-2 px-2 py-3 font-mono text-sm text-muted transition-colors hover:bg-panel hover:text-fg"
+            className="inline-flex items-center gap-2 px-2 py-3 text-sm text-muted t-colors hover:bg-panel hover:text-fg"
           >
             <GitHubIcon className="h-4 w-4" />
             github
@@ -122,11 +123,12 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`font-mono text-sm transition-colors ${
-        active ? "text-accent" : "text-muted hover:text-fg"
+      className={`text-sm t-colors ${
+        active ? "font-bold text-fg" : "text-muted hover:text-fg"
       }`}
     >
-      <span className={active ? "text-accent" : "text-faint"}>/</span>
+      {/* Active page wears a ramp-0 tick — position data, the motif's job */}
+      <span className={active ? "text-ramp-0" : "text-faint"}>/</span>
       {children}
     </Link>
   );
