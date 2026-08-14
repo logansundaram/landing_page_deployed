@@ -18,7 +18,10 @@
 const TILT = -12;
 const CX = 1050;
 const CY = 400;
-const ASPECT = 0.26; // ry / rx for every ring — one viewing angle
+/* ry / rx for every ring — one viewing angle. Open enough that the ring
+   loops clear the hero's text column top and bottom and visibly close:
+   the settled image must read as full rings, not arcs. */
+const ASPECT = 0.34;
 const PLANET_R = 160;
 
 type Tone = "edge" | "strong" | "accent";
@@ -42,7 +45,7 @@ const RINGS: [number, Tone, number, number][] = [
   [286, "strong", 1, 1.25],
   [297, "accent", 0.22, 1],
   [308, "strong", 1, 1],
-  [320, "accent", 0.38, 1.25],
+  [320, "accent", 0.5, 1.25],
   [331, "strong", 1, 1],
   [343, "strong", 0.9, 1.5],
   // Cassini division, then the A ring
@@ -52,8 +55,9 @@ const RINGS: [number, Tone, number, number][] = [
   [420, "strong", 0.8, 1],
   [434, "accent", 0.26, 1],
   [448, "strong", 0.8, 1],
-  // F ring — thin, bright, alone
-  [520, "accent", 0.6, 1.5],
+  // F ring — thin, bright, alone: the one ring that must read as a
+  // complete unbroken loop in the settled image
+  [520, "accent", 0.85, 2],
 ];
 
 function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
@@ -75,12 +79,14 @@ function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
           style={{ animationDelay: `${delayOffset + i * 45}ms` }}
         />
       ))}
-      {/* Outer dotted orbit — the approval boundary */}
+      {/* Outer dotted orbit — the approval boundary. rx is sized so the
+          tilted ellipse fits the viewBox whole: the settled image must
+          close into a complete ring, never an arc cut by the frame. */}
       <ellipse
         cx={CX}
         cy={CY}
-        rx={780}
-        ry={780 * ASPECT}
+        rx={716}
+        ry={716 * ASPECT}
         stroke={TONES.strong}
         strokeWidth={1}
         strokeDasharray="2 8"
@@ -260,25 +266,25 @@ export default function SaturnRings({
           every step on screen
         </Label>
 
-        {/* 03 · the gate — the amber boundary */}
+        {/* 03 · the gate — pinned to the approval boundary's lower arc */}
         <polyline
-          points="1092,599 1160,670 1300,670"
+          points="1173,617 1235,685 1375,685"
           stroke="var(--color-edge-strong)"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
         <rect
-          x="1089"
-          y="596"
+          x="1170"
+          y="614"
           width="6"
           height="6"
           fill="var(--color-accent)"
         />
-        <Label x={1160} y={658}>
+        <Label x={1235} y={673}>
           <tspan fill="var(--color-accent)">03</tspan>
           <tspan fill="var(--color-muted)"> — the gate</tspan>
         </Label>
-        <Label x={1160} y={692} size={12} fill="var(--color-faint)">
+        <Label x={1235} y={707} size={12} fill="var(--color-faint)">
           side effects wait for approval
         </Label>
 
