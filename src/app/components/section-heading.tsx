@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
 
-/** Index + eyebrow annotation, serif title, optional lead — shared across home sections. */
+/**
+ * Mono rule-label + sans display title, shared across home sections.
+ * Reads like a schematic sheet label: `01 :: eyebrow ────────`.
+ */
 export default function SectionHeading({
   index,
   eyebrow,
@@ -13,17 +16,20 @@ export default function SectionHeading({
   lead?: string;
 }) {
   return (
-    <div className="max-w-2xl">
-      <p className="mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em]">
+    <div>
+      <p className="flex items-center gap-3 font-mono text-xs">
         {index && <span className="text-faint">{index}</span>}
-        <span aria-hidden className="h-px w-8 bg-edge-strong" />
-        <span className="text-accent">{eyebrow}</span>
+        <span className="text-faint">::</span>
+        <span className="lowercase text-accent">{eyebrow}</span>
+        <span aria-hidden className="h-px min-w-8 flex-1 bg-edge" />
       </p>
-      <h2 className="font-serif text-4xl leading-tight tracking-tight text-fg md:text-5xl">
+      <h2 className="mt-6 max-w-2xl text-3xl font-semibold leading-[1.1] tracking-tight text-fg md:text-[2.75rem]">
         {title}
       </h2>
       {lead && (
-        <p className="mt-4 text-base leading-relaxed text-muted">{lead}</p>
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
+          {lead}
+        </p>
       )}
     </div>
   );

@@ -14,9 +14,9 @@ export default function Footer() {
             href="/"
             className="inline-flex items-center gap-2.5 text-fg transition-colors hover:text-accent"
           >
-            <LogoMark className="h-6 w-6 shrink-0" />
-            <span className="font-serif text-xl leading-none tracking-tight">
-              Saturday<span className="text-accent">.ai</span>
+            <LogoMark className="h-5 w-5 shrink-0" />
+            <span className="font-mono text-base lowercase leading-none tracking-tight">
+              saturday<span className="text-accent">.ai</span>
             </span>
           </Link>
           <p className="mt-3 text-sm leading-relaxed text-faint">
@@ -25,42 +25,42 @@ export default function Footer() {
         </div>
 
         <nav className="flex flex-col gap-3">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
-            Site
+          <p className="font-mono text-xs text-faint">
+            <span className="text-accent">::</span> site
           </p>
           <Link
             href="/docs"
-            className="text-sm text-muted transition-colors hover:text-fg"
+            className="font-mono text-sm lowercase text-muted transition-colors hover:text-fg"
           >
-            Docs
+            docs
           </Link>
           <Link
             href="/install"
-            className="text-sm text-muted transition-colors hover:text-fg"
+            className="font-mono text-sm lowercase text-muted transition-colors hover:text-fg"
           >
-            Install
+            install
           </Link>
           <a
             href={site.github}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg"
+            className="inline-flex items-center gap-2 font-mono text-sm lowercase text-muted transition-colors hover:text-fg"
           >
             <GitHubIcon className="h-4 w-4" />
-            GitHub
+            github
           </a>
         </nav>
 
         <div className="flex flex-col gap-3">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
-            Status
+          <p className="font-mono text-xs text-faint">
+            <span className="text-accent">::</span> status
           </p>
           {status.map((s) => (
             <p
               key={s}
               className="flex items-center gap-2.5 font-mono text-xs text-muted"
             >
-              <span className="animate-pulse-soft h-1.5 w-1.5 rounded-full bg-accent" />
+              <span className="animate-pulse-soft h-1.5 w-1.5 bg-accent" />
               {s}
             </p>
           ))}
@@ -69,7 +69,7 @@ export default function Footer() {
 
       <div className="border-t border-edge">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-6 py-5 font-mono text-xs text-faint md:flex-row md:items-center md:justify-between md:px-10">
-          <p>© {new Date().getFullYear()} Saturday.ai — All rights reserved.</p>
+          <p>© {new Date().getFullYear()} saturday.ai — all rights reserved</p>
           <p>
             <span className="text-accent">»</span> everything on screen, nothing
             off it

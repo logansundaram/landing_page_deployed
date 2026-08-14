@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -17,10 +17,11 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument",
-  weight: "400",
-  style: ["normal", "italic"],
+/* Italic only — the emphasis voice. One emphasized phrase per page. */
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  style: ["italic"],
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 
@@ -112,17 +113,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geist.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} min-h-screen antialiased`}
+        className={`${geist.variable} ${jetbrainsMono.variable} ${newsreader.variable} min-h-screen antialiased`}
       >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Nav />
-        {/* Hairline rails frame every page — the schematic's drawing area */}
-        <main className="mx-auto w-full max-w-6xl border-x border-edge">
-          {children}
-        </main>
+        {/* Sections run full-bleed; each centers its own content */}
+        <main>{children}</main>
         <Footer />
         <Analytics />
         <SpeedInsights />

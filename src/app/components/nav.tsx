@@ -19,9 +19,9 @@ export default function Nav() {
             href="/"
             className="group inline-flex items-center gap-2.5 text-fg transition-colors hover:text-accent"
           >
-            <LogoMark className="h-6 w-6 shrink-0" />
-            <span className="font-serif text-2xl leading-none tracking-tight">
-              Saturday<span className="text-accent">.ai</span>
+            <LogoMark className="h-5 w-5 shrink-0" />
+            <span className="font-mono text-lg lowercase leading-none tracking-tight">
+              saturday<span className="text-accent">.ai</span>
             </span>
           </Link>
 
@@ -74,9 +74,6 @@ export default function Nav() {
           </button>
         </div>
       </div>
-
-      {/* Thin cyan divider beneath the navigation */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
 
       {/* Mobile menu */}
       <div

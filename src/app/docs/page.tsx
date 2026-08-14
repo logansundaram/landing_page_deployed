@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "../components/container";
 import PageHeader from "../components/page-header";
+import Em from "../components/em";
 
 export const metadata: Metadata = {
   title: "Docs",
@@ -54,7 +55,11 @@ export default function DocsPage() {
     <>
       <PageHeader
         eyebrow="Documentation"
-        title="Learn how Saturn works."
+        title={
+          <>
+            Learn how <Em>Saturn</Em> works.
+          </>
+        }
         lead="Guides and references for running a transparent, local-first agent. We're actively writing these — the structure below is live."
       />
 
@@ -65,8 +70,8 @@ export default function DocsPage() {
             <nav className="space-y-7">
               {sections.map((s) => (
                 <div key={s.group}>
-                  <p className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-faint">
-                    {s.group}
+                  <p className="mb-3 font-mono text-xs lowercase text-faint">
+                    <span className="text-accent">::</span> {s.group}
                   </p>
                   <ul className="space-y-2">
                     {s.items.map((item) => (
@@ -85,10 +90,10 @@ export default function DocsPage() {
           {/* Content */}
           <div>
             <div className="border border-edge bg-panel p-6 md:p-8">
-              <p className="font-mono text-xs uppercase tracking-[0.16em] text-accent">
-                [work in progress]
+              <p className="font-mono text-xs lowercase text-accent">
+                [ work in progress ]
               </p>
-              <h2 className="mt-3 font-serif text-2xl text-fg">
+              <h2 className="mt-3 text-xl font-semibold tracking-tight text-fg">
                 The full documentation is on its way.
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
@@ -105,8 +110,11 @@ export default function DocsPage() {
             </div>
 
             <div className="mt-8 grid gap-px border border-edge bg-edge sm:grid-cols-2">
-              {intro.map((c) => (
-                <div key={c.title} className="bg-ink p-6">
+              {intro.map((c, i) => (
+                <div
+                  key={c.title}
+                  className={`bg-ink p-6 ${i === intro.length - 1 ? "sm:col-span-2" : ""}`}
+                >
                   <h3 className="text-base font-medium text-fg">{c.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">
                     {c.body}

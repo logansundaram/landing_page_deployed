@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Container from "../components/container";
 import PageHeader from "../components/page-header";
 import CodeBlock from "../components/code-block";
+import Em from "../components/em";
 
 export const metadata: Metadata = {
   title: "Install",
@@ -31,7 +32,11 @@ export default function InstallPage() {
     <>
       <PageHeader
         eyebrow="Install"
-        title="Get Saturn running locally."
+        title={
+          <>
+            Get <Em>Saturn</Em> running locally.
+          </>
+        }
         lead="One command to install the agent. Everything runs on your machine — no account, no cloud dependency."
       />
 
@@ -81,8 +86,8 @@ export default function InstallPage() {
 
           <aside className="space-y-8">
             <div className="border border-edge bg-panel p-6">
-              <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-accent">
-                Requirements
+              <h2 className="mb-4 font-mono text-xs lowercase text-accent">
+                <span className="text-faint">::</span> requirements
               </h2>
               <ul className="space-y-3 text-sm text-muted">
                 {requirements.map((r) => (
