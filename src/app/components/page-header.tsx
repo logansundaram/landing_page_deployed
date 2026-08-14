@@ -16,7 +16,8 @@ export default function PageHeader({
     <div className="border-b border-edge">
       <Container className="py-16 md:py-20">
         <p className="type-micro mb-5 flex items-center gap-3 lowercase">
-          <span className="text-muted">{eyebrow}</span>
+          <span className="text-faint">::</span>
+          <span className="text-accent">{eyebrow}</span>
           <span aria-hidden className="h-px w-16 bg-edge" />
         </p>
         <h1 className="type-display lowercase text-fg">{title}</h1>

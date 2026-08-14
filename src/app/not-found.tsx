@@ -16,8 +16,8 @@ export default function NotFound() {
       <Container className="relative z-10 flex items-center py-24 md:py-32">
         <div className="max-w-4xl">
           <p className="type-micro mb-8 lowercase text-muted">
-            <span className="text-faint">$</span> find page{" "}
-            <span className="text-gate-deny">— no match</span>
+            <span className="text-accent">$</span> find page{" "}
+            <span className="text-hot">— no match</span>
           </p>
 
           <h1 className="type-display lowercase">
@@ -33,7 +33,7 @@ export default function NotFound() {
           <div className="mt-9">
             <Link
               href="/"
-              className="group inline-flex h-11 items-center gap-2 px-3 text-sm lowercase text-fg t-colors hover:text-ramp-0"
+              className="group inline-flex h-11 items-center gap-2 px-3 text-sm lowercase text-fg t-colors hover:text-accent"
             >
               <span aria-hidden className="text-faint">
                 [

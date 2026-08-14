@@ -7,9 +7,9 @@
  * on page load (`.ring-draw`); callouts and the title block fade in after
  * (`.ring-fade`). A square satellite rides the F ring via SMIL.
  *
- * Color discipline: the drawing is luminance-only — grays carry everything —
- * except the dotted approval boundary, which wears gate-ask amber because it
- * is data: the gate around the machine.
+ * The drawing wears the product's palette: gray hairlines with terminal
+ * cyan carrying the bright rings, the satellite, and the callout markers —
+ * the same cyan-on-dark as the TUI itself.
  *
  * `pathId` must be unique per page — it namespaces the clip paths and the
  * satellite's motion path.
@@ -21,12 +21,12 @@ const CY = 400;
 const ASPECT = 0.26; // ry / rx for every ring — one viewing angle
 const PLANET_R = 160;
 
-type Tone = "edge" | "strong" | "bright";
+type Tone = "edge" | "strong" | "accent";
 
 const TONES: Record<Tone, string> = {
   edge: "var(--color-edge)",
   strong: "var(--color-edge-strong)",
-  bright: "var(--color-faint)",
+  accent: "var(--color-accent)",
 };
 
 /* [rx, tone, opacity, strokeWidth] — grouped like the real ring system */
@@ -36,24 +36,24 @@ const RINGS: [number, Tone, number, number][] = [
   [216, "edge", 0.9, 1],
   [232, "strong", 0.8, 1],
   [246, "strong", 0.9, 1],
-  // B ring — densest band
+  // B ring — densest, carries the cyan
   [262, "strong", 1, 1],
-  [274, "bright", 0.5, 1],
+  [274, "accent", 0.3, 1],
   [286, "strong", 1, 1.25],
-  [297, "bright", 0.4, 1],
+  [297, "accent", 0.22, 1],
   [308, "strong", 1, 1],
-  [320, "bright", 0.55, 1.25],
+  [320, "accent", 0.38, 1.25],
   [331, "strong", 1, 1],
   [343, "strong", 0.9, 1.5],
   // Cassini division, then the A ring
   [378, "strong", 1, 1.25],
-  [392, "bright", 0.4, 1],
+  [392, "accent", 0.22, 1],
   [406, "strong", 0.9, 1],
   [420, "strong", 0.8, 1],
-  [434, "bright", 0.45, 1],
+  [434, "accent", 0.26, 1],
   [448, "strong", 0.8, 1],
   // F ring — thin, bright, alone
-  [520, "bright", 0.8, 1.5],
+  [520, "accent", 0.6, 1.5],
 ];
 
 function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
@@ -75,15 +75,13 @@ function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
           style={{ animationDelay: `${delayOffset + i * 45}ms` }}
         />
       ))}
-      {/* Outer dotted orbit — the approval boundary. The one chromatic line
-          in the drawing: it is the gate. */}
+      {/* Outer dotted orbit — the approval boundary */}
       <ellipse
         cx={CX}
         cy={CY}
         rx={780}
         ry={780 * ASPECT}
-        stroke="var(--color-gate-ask)"
-        strokeOpacity={0.7}
+        stroke={TONES.strong}
         strokeWidth={1}
         strokeDasharray="2 8"
         vectorEffect="non-scaling-stroke"
@@ -213,7 +211,7 @@ export default function SaturnRings({
           d={`M ${CX + 520} ${CY} A 520 ${fRy} 0 1 0 ${CX - 520} ${CY} A 520 ${fRy} 0 1 0 ${CX + 520} ${CY}`}
         />
         <g className="ring-fade motion-reduce:hidden">
-          <rect x="-4" y="-4" width="8" height="8" fill="var(--color-fg)" />
+          <rect x="-4" y="-4" width="8" height="8" fill="var(--color-accent)" />
           <animateMotion dur="28s" repeatCount="indefinite">
             <mpath href={`#${pathId}`} />
           </animateMotion>
@@ -224,7 +222,7 @@ export default function SaturnRings({
           y={CY - 4}
           width="8"
           height="8"
-          fill="var(--color-fg)"
+          fill="var(--color-accent)"
         />
       </g>
 
@@ -237,9 +235,9 @@ export default function SaturnRings({
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
-        <rect x="1160" y="284" width="6" height="6" fill="var(--color-fg)" />
+        <rect x="1160" y="284" width="6" height="6" fill="var(--color-accent)" />
         <Label x={1240} y={176}>
-          <tspan fill="var(--color-fg)">01</tspan>
+          <tspan fill="var(--color-accent)">01</tspan>
           <tspan fill="var(--color-muted)"> — your machine</tspan>
         </Label>
         <Label x={1240} y={212} size={12} fill="var(--color-faint)">
@@ -253,9 +251,9 @@ export default function SaturnRings({
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
-        <rect x="1383" y="326" width="6" height="6" fill="var(--color-fg)" />
+        <rect x="1383" y="326" width="6" height="6" fill="var(--color-accent)" />
         <Label x={1450} y={246}>
-          <tspan fill="var(--color-fg)">02</tspan>
+          <tspan fill="var(--color-accent)">02</tspan>
           <tspan fill="var(--color-muted)"> — the loop</tspan>
         </Label>
         <Label x={1450} y={282} size={12} fill="var(--color-faint)">
@@ -274,10 +272,10 @@ export default function SaturnRings({
           y="596"
           width="6"
           height="6"
-          fill="var(--color-gate-ask)"
+          fill="var(--color-accent)"
         />
         <Label x={1160} y={658}>
-          <tspan fill="var(--color-fg)">03</tspan>
+          <tspan fill="var(--color-accent)">03</tspan>
           <tspan fill="var(--color-muted)"> — the gate</tspan>
         </Label>
         <Label x={1160} y={692} size={12} fill="var(--color-faint)">

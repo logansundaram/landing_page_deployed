@@ -18,9 +18,9 @@ export default function Nav() {
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:px-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2.5 text-fg t-colors hover:text-muted"
+            className="inline-flex items-center gap-2.5 text-fg t-colors hover:text-accent"
           >
-            <LogoMark className="h-4 w-4 shrink-0" />
+            <LogoMark className="h-5 w-5 shrink-0" />
             <span className="text-lg lowercase leading-none tracking-tight">
               saturn
             </span>
@@ -124,11 +124,10 @@ function NavItem({
     <Link
       href={href}
       className={`text-sm t-colors ${
-        active ? "font-bold text-fg" : "text-muted hover:text-fg"
+        active ? "text-accent" : "text-muted hover:text-fg"
       }`}
     >
-      {/* Active page wears a ramp-0 tick — position data, the motif's job */}
-      <span className={active ? "text-ramp-0" : "text-faint"}>/</span>
+      <span className={active ? "text-accent" : "text-faint"}>/</span>
       {children}
     </Link>
   );

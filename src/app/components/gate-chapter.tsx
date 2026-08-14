@@ -17,13 +17,13 @@ export default function GateChapter() {
       >
         <div className="text-[13px] leading-relaxed">
           <p className="whitespace-pre-wrap">
-            <span className="text-prompt">»</span>{" "}
+            <span className="text-accent">»</span>{" "}
             <span className="text-fg">{capture.query}</span>
           </p>
 
           <div className="my-6">
             <div className="whitespace-pre py-0.5">
-              <span className="text-gate-ok">✓</span>{" "}
+              <span className="text-ok">✓</span>{" "}
               <span className="text-fg">plan</span>
               <span className="text-muted">
                 {"        "}
@@ -34,13 +34,13 @@ export default function GateChapter() {
               </span>
             </div>
             <div className="whitespace-pre py-0.5">
-              <span className="text-gate-ask">■</span>{" "}
+              <span className="text-hot">■</span>{" "}
               <span className="text-fg">gate</span>
               <span className="text-muted">
                 {"        "}
                 {gate.calls[0].name} —{" "}
               </span>
-              <span className="font-bold text-gate-deny">denied</span>
+              <span className="font-bold text-hot">denied</span>
               <span className="text-faint"> (headless default)</span>
             </div>
             <div className="whitespace-pre py-0.5">
@@ -52,7 +52,7 @@ export default function GateChapter() {
               </span>
             </div>
             <div className="whitespace-pre py-0.5">
-              <span className="text-gate-ok">✓</span>{" "}
+              <span className="text-ok">✓</span>{" "}
               <span className="text-fg">synthesize</span>
               <span className="text-muted">
                 {"  "}

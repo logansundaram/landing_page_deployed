@@ -30,13 +30,13 @@ export default function CodeBlock({
       )}
       <div className="flex items-center justify-between gap-4 px-4 py-3">
         <code className="overflow-x-auto text-sm text-fg">
-          <span className="select-none text-faint">$ </span>
+          <span className="select-none text-accent">$ </span>
           {command}
         </code>
         <button
           type="button"
           onClick={copy}
-          className="type-micro shrink-0 border border-edge-strong px-2 py-1 lowercase text-muted t-colors hover:border-fg hover:text-fg"
+          className="type-micro shrink-0 border border-edge-strong px-2 py-1 lowercase text-muted t-colors hover:border-accent hover:text-accent"
           aria-label="Copy command"
         >
           {copied ? "copied" : "copy"}

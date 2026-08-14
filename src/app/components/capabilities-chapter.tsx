@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import Chapter from "./chapter";
 
 /* Each capability leads with a readout of what that feature actually prints
-   in the TUI — not an icon. Colors in the vignettes are semantic only:
-   gate states and the ramp for load. */
+   in the TUI — not an icon. Vignette colors are the TUI's own: cyan
+   prompt/hints, ok green, hot for gated calls and pegged gauges. */
 const capabilities: {
   tag: string;
   vignette: ReactNode;
@@ -15,8 +15,8 @@ const capabilities: {
     tag: "llm",
     vignette: (
       <>
-        qwen3.6:27b · <span className="text-gate-ok">loaded</span> · cloud{" "}
-        <span className="text-gate-ok">0</span>
+        qwen3.6:27b · <span className="text-ok">loaded</span> · cloud{" "}
+        <span className="text-ok">0</span>
       </>
     ),
     title: "local llm support",
@@ -26,11 +26,11 @@ const capabilities: {
     tag: "inspect",
     vignette: (
       <>
-        <span className="text-gate-ok">✓</span> plan{" "}
+        <span className="text-ok">✓</span> plan{" "}
         <span className="text-faint">→</span>{" "}
-        <span className="text-gate-ok">✓</span> execute{" "}
+        <span className="text-ok">✓</span> execute{" "}
         <span className="text-faint">→</span>{" "}
-        <span className="text-gate-ok">✓</span> synthesize
+        <span className="text-ok">✓</span> synthesize
       </>
     ),
     title: "workflow inspection",
@@ -41,7 +41,7 @@ const capabilities: {
     vignette: (
       <>
         write_file <span className="text-faint">→</span>{" "}
-        <span className="text-gate-deny">gated</span> · approve?{" "}
+        <span className="text-hot">gated</span> · approve?{" "}
         <span className="text-fg">[y/N]</span>
       </>
     ),
@@ -52,7 +52,7 @@ const capabilities: {
     tag: "metrics",
     vignette: (
       <>
-        cpu <span className="text-gate-ok">▮▮▯▯▯</span> · gpu{" "}
+        cpu <span className="text-ok">▮▮▯▯▯</span> · gpu{" "}
         <span className="text-ramp-3">▮▮▮▮▯</span> · 160 tok/s
       </>
     ),
@@ -64,7 +64,7 @@ const capabilities: {
     vignette: (
       <>
         indexed 128 files <span className="text-faint">→</span> 12.4k chunks ·{" "}
-        <span className="text-gate-ok">local</span>
+        <span className="text-ok">local</span>
       </>
     ),
     title: "rag document ingestion",
@@ -74,7 +74,7 @@ const capabilities: {
     tag: "extend",
     vignette: (
       <>
-        registry.add(my_tool) <span className="text-gate-ok">✓</span>
+        registry.add(my_tool) <span className="text-ok">✓</span>
       </>
     ),
     title: "extensible architecture",
@@ -84,9 +84,9 @@ const capabilities: {
     tag: "tui",
     vignette: (
       <>
-        <span className="text-fg">?</span> help ·{" "}
-        <span className="text-fg">:</span> command ·{" "}
-        <span className="text-fg">tab</span> complete
+        <span className="text-accent">?</span> help ·{" "}
+        <span className="text-accent">:</span> command ·{" "}
+        <span className="text-accent">tab</span> complete
       </>
     ),
     title: "terminal-first experience",

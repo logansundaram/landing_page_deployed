@@ -62,7 +62,7 @@ export default function RunChapter() {
       >
         <div className="text-[13px] leading-relaxed">
           <p className="whitespace-pre-wrap">
-            <span className="text-prompt">»</span>{" "}
+            <span className="text-accent">»</span>{" "}
             <span className="text-fg">{capture.query}</span>
           </p>
 

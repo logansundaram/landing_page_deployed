@@ -3,15 +3,15 @@ import type { ReactNode } from "react";
 
 type Variant = "primary" | "secondary";
 
-/* Sharp corners, lowercase, luminance-only — controls read like TUI soft
-   keys. Primary is inverse video (fg slab, ink text); secondary is
-   bracketed the way a terminal renders a soft key. */
+/* Sharp corners + lowercase — buttons read like TUI controls. Primary is
+   inverse video in the product's cyan; the secondary variant is bracketed
+   the way a terminal renders a soft key. */
 const base =
   "group inline-flex h-11 items-center justify-center gap-2 text-sm lowercase t-colors";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-fg px-6 font-bold text-ink hover:bg-ramp-0",
-  secondary: "px-3 text-fg hover:text-ramp-0",
+  primary: "bg-accent px-6 font-bold text-ink hover:bg-[#7bffff]",
+  secondary: "px-3 text-fg hover:text-accent",
 };
 
 export default function Button({
@@ -34,14 +34,14 @@ export default function Button({
       <>
         <span
           aria-hidden
-          className="text-faint t-colors group-hover:text-muted"
+          className="text-faint t-colors group-hover:text-accent"
         >
           [
         </span>
         {children}
         <span
           aria-hidden
-          className="text-faint t-colors group-hover:text-muted"
+          className="text-faint t-colors group-hover:text-accent"
         >
           ]
         </span>

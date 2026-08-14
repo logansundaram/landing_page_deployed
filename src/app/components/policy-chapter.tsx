@@ -46,7 +46,7 @@ export default function PolicyChapter() {
             <p className="text-sm">
               <span className="text-fg">{r.key}</span>
               <span className="text-faint"> = </span>
-              <span className="text-gate-ok">{r.value}</span>
+              <span className="text-ok">{r.value}</span>
             </p>
             <p className="max-w-xl text-sm leading-relaxed text-muted">
               {r.body}

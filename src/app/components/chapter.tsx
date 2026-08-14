@@ -23,7 +23,8 @@ export default function Chapter({
       <Container className="py-20 md:py-28">
         <p className="type-micro flex items-center gap-3 lowercase">
           <span className="text-faint">{n}</span>
-          <span className="text-muted">{label}</span>
+          <span className="text-faint">::</span>
+          <span className="text-accent">{label}</span>
           <span aria-hidden className="h-px min-w-8 flex-1 bg-edge" />
         </p>
         <div className="mt-10">{children}</div>

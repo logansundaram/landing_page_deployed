@@ -14,6 +14,8 @@ const receiptLines = [
   "every capture a real run",
 ];
 
+/* The footer is the company's slot: Saturn is the product everywhere
+   above; Saturday.ai signs the page here. */
 export default function Footer() {
   return (
     <footer className="border-t border-edge">
@@ -21,22 +23,23 @@ export default function Footer() {
         <div className="max-w-xs">
           <Link
             href="/"
-            className="inline-flex items-center gap-2.5 text-fg t-colors hover:text-muted"
+            className="inline-flex items-center gap-2.5 text-fg t-colors hover:text-accent"
           >
-            <LogoMark className="h-4 w-4 shrink-0" />
+            <LogoMark className="h-5 w-5 shrink-0" />
             <span className="lowercase leading-none tracking-tight">
-              saturn
+              saturday<span className="text-accent">.ai</span>
             </span>
           </Link>
-          {/* The only place the org name appears on the site */}
           <p className="type-micro mt-3 lowercase text-faint">
-            a {site.org.toLowerCase()} project · local-first · the terminal is
-            the product
+            the company behind saturn · local-first · the terminal is the
+            product
           </p>
         </div>
 
         <nav className="flex flex-col gap-3">
-          <p className="type-micro lowercase text-faint">site</p>
+          <p className="type-micro lowercase text-faint">
+            <span className="text-accent">::</span> site
+          </p>
           <Link
             href="/docs"
             className="text-sm lowercase text-muted t-colors hover:text-fg"
@@ -61,9 +64,15 @@ export default function Footer() {
         </nav>
 
         <div className="flex flex-col gap-3">
-          <p className="type-micro lowercase text-faint">receipts</p>
+          <p className="type-micro lowercase text-faint">
+            <span className="text-accent">::</span> receipts
+          </p>
           {receiptLines.map((s) => (
-            <p key={s} className="type-micro lowercase text-muted">
+            <p
+              key={s}
+              className="type-micro flex items-center gap-2.5 lowercase text-muted"
+            >
+              <span aria-hidden className="h-1.5 w-1.5 shrink-0 bg-accent" />
               {s}
             </p>
           ))}
@@ -77,7 +86,8 @@ export default function Footer() {
             reserved
           </p>
           <p className="type-micro lowercase text-faint">
-            everything on screen, nothing off it
+            <span className="text-accent">»</span> everything on screen,
+            nothing off it
           </p>
         </div>
       </div>

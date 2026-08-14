@@ -17,24 +17,23 @@ export default function Hero() {
         <div className="max-w-5xl">
           {/* The policy flags Saturn boots with — real config, real values */}
           <p className="type-micro mb-8 flex flex-wrap items-center gap-x-4 gap-y-1 lowercase text-muted">
-            <span className="text-faint">$</span>
+            <span className="text-accent">$</span>
             <span>
-              local_first=<span className="text-gate-ok">true</span>
+              local_first=<span className="text-ok">true</span>
             </span>
             <span>
-              cloud_calls=<span className="text-gate-ok">0</span>
+              cloud_calls=<span className="text-ok">0</span>
             </span>
             <span>
-              telemetry=<span className="text-gate-ok">off</span>
+              telemetry=<span className="text-ok">off</span>
             </span>
           </p>
 
-          {/* Whole-line emphasis by weight — never a colored word */}
+          {/* Whole-line emphasis — the entire second line in the product's
+              cyan, never a single highlighted word */}
           <h1 className="type-display lowercase">
-            <span className="block font-normal text-muted">
-              ai agents should
-            </span>
-            <span className="block text-fg">show their work.</span>
+            <span className="block font-normal text-fg">ai agents should</span>
+            <span className="block text-accent">show their work.</span>
           </h1>
 
           <p className="mt-8 max-w-xl leading-relaxed text-muted">

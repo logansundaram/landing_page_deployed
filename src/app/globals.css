@@ -30,29 +30,30 @@
   --color-edge: #1c1c22;
   --color-edge-strong: #2a2a33;
 
-  /* Text — warm off-white, never #fff; grays carry all hierarchy */
-  --color-fg: #e6e4e1;
-  --color-muted: #9b9891;
-  --color-faint: #6b6862;
+  /* Text — off-white and cool grays, matching the TUI's palette */
+  --color-fg: #ededf0;
+  --color-muted: #9a9aa6;
+  --color-faint: #6a6a76;
 
-  /* Confidence ramp — the one motif. Luminance falls monotonically
-     (oklch L .87→.47) so grayscale keeps the order; hue slides
-     neutral→amber→red as certainty drops. ramp-4 is 2.69:1 on ink:
-     marks only, never body-size text. */
+  /* Accent — terminal cyan, the product's own color. Saturn is cyan on
+     dark; the site wears the same skin. */
+  --color-accent: #00ffff;
+  --color-accent-dim: #00b3b3;
+
+  /* Terminal status colors — what the TUI actually prints */
+  --color-ok: #28c840;
+  --color-hot: #ff4d6d;
+
+  /* Confidence ramp — data only: colors real logprob spans inside
+     captures. Luminance falls monotonically (oklch L .87→.47) so
+     grayscale keeps the order; hue slides neutral→amber→red as
+     certainty drops. ramp-4 is 2.69:1 on ink: marks only, never
+     body-size text. */
   --color-ramp-0: #dcd4be;
   --color-ramp-1: #d5b36a;
   --color-ramp-2: #d28a21;
   --color-ramp-3: #c25518;
   --color-ramp-4: #ac040c;
-
-  /* Gate states — data, not decoration */
-  --color-gate-ok: #28c840;
-  --color-gate-ask: #d28a21; /* = ramp-2 */
-  --color-gate-deny: #ac040c; /* = ramp-4 */
-
-  /* The TUI's prompt cyan. One meaning: waiting on you. Appears only
-     inside captures and gate UI. */
-  --color-prompt: #00ffff;
 }
 
 @layer base {
@@ -77,13 +78,14 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Selection and focus are luminance, like everything else non-semantic */
   ::selection {
-    background-color: color-mix(in srgb, var(--color-fg) 24%, transparent);
+    background-color: color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: #fff;
   }
 
+  /* Square focus ring for keyboard users — corners stay sharp everywhere */
   :focus-visible {
-    outline: 2px solid var(--color-fg);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
 }

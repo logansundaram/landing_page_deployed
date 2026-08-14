@@ -170,6 +170,25 @@ lives in one file shared by capture rendering and the motif components.
    rendered components; metadata/JSON-LD publisher exempt by design).
 7. First-paint payload < 300 KB enforced by `receipts.mjs`.
 
+## Post-ship revision (2026-08-14, Logan)
+
+Two corrections after the first ship:
+
+1. **Naming**: Saturn is the product, Saturday.ai is the company. Nav and
+   titles stay Saturn-led; the footer is the company's slot and signs as
+   `saturday.ai` ("the company behind saturn"). Metadata description names
+   both.
+2. **Palette**: the site must match the actual product — terminal cyan on
+   dark grey. Decision 3's cyan demotion is reversed: `accent #00ffff` is
+   restored as the site accent (hero line 2, buttons, nav active, `::`
+   markers, ring linework, focus/selection), along with the TUI's `ok`/
+   `hot` status colors and the full-bleed cyan CTA slab. The `gate-ask`/
+   `gate-deny` tokens are gone (gate UI wears `hot`, as the TUI does).
+   The confidence ramp survives **as data only**: it colors real logprob
+   spans inside captures. Brand mark reverts to the planet-and-cyan-ring.
+   Everything else from v2 stands: all-mono Commit Mono, chapters, real
+   captures, receipts, no gradients/glass/scanlines.
+
 ## Implementation order
 
 fonts → tokens/globals → site.ts + layout (drop analytics) → capture

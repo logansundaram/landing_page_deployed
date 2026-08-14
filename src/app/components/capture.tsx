@@ -48,7 +48,7 @@ export function NodeTrace({ nodes }: { nodes: CaptureNode[] }) {
     <div>
       {nodes.map((n) => (
         <div key={n.node} className="whitespace-pre py-0.5">
-          <span className="text-gate-ok">✓</span>{" "}
+          <span className="text-ok">✓</span>{" "}
           <span className="text-fg">{n.node.padEnd(pad)}</span>
           <span className="text-muted">
             {`  ${n.durS.toFixed(1)}s`.padStart(8)}

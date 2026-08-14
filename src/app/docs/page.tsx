@@ -66,7 +66,7 @@ export default function DocsPage() {
               {sections.map((s) => (
                 <div key={s.group}>
                   <p className="type-micro mb-3 lowercase text-faint">
-                    {s.group}
+                    <span className="text-accent">::</span> {s.group}
                   </p>
                   <ul className="space-y-2">
                     {s.items.map((item) => (
@@ -85,7 +85,7 @@ export default function DocsPage() {
           {/* Content */}
           <div>
             <div className="border-y border-edge py-6">
-              <p className="type-micro lowercase text-muted">
+              <p className="type-micro lowercase text-accent">
                 [ work in progress ]
               </p>
               <h2 className="mt-3 text-sm font-bold text-fg">
@@ -98,7 +98,7 @@ export default function DocsPage() {
               </p>
               <Link
                 href="/install"
-                className="mt-4 inline-block text-sm lowercase text-fg hover:underline"
+                className="mt-4 inline-block text-sm lowercase text-accent hover:underline"
               >
                 install saturn →
               </Link>

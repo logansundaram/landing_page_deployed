@@ -43,7 +43,7 @@ export default function InstallPage() {
                 Run the one-liner for your platform. It installs{" "}
                 <a
                   href="https://ollama.com"
-                  className="text-fg hover:underline"
+                  className="text-accent hover:underline"
                 >
                   Ollama
                 </a>{" "}
@@ -103,7 +103,7 @@ export default function InstallPage() {
               </p>
               <a
                 href="/docs"
-                className="mt-3 inline-block text-sm lowercase text-fg hover:underline"
+                className="mt-3 inline-block text-sm lowercase text-accent hover:underline"
               >
                 read the docs →
               </a>
@@ -127,7 +127,7 @@ function Step({
   return (
     <section>
       <div className="mb-4 flex items-baseline gap-3">
-        <span className="type-micro text-faint">{n}</span>
+        <span className="type-micro text-accent">{n}</span>
         <h2 className="text-sm font-bold lowercase text-fg">{title}</h2>
       </div>
       <div className="pl-6">{children}</div>
