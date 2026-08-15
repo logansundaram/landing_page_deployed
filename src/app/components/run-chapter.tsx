@@ -56,7 +56,7 @@ const rows = [
 export default function RunChapter() {
   const m = capture.metrics;
   return (
-    <Chapter n="01" label="a real run">
+    <Chapter n="01" label="a real run" title="watch it work.">
       <CaptureFigure
         caption={`fig. 01 — run #${capture.id}, ${capture.model}, ${capture.date}. rendered from the run's export record, unedited. amber marks the spans the model was less sure of: ${hedged}.`}
       >

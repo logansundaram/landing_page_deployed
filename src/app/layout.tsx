@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     "Saturn",
     "Saturday.ai",
   ],
-  authors: [{ name: site.org, url: site.url }],
-  creator: site.org,
-  publisher: site.org,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
   category: "technology",
   alternates: {
     canonical: "/",
@@ -83,14 +83,14 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Saturn",
+    name: site.product,
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS, Linux, WSL2, Windows",
     description: site.description,
     url: site.url,
     publisher: {
       "@type": "Organization",
-      name: site.org,
+      name: site.name,
       url: site.url,
     },
     offers: {

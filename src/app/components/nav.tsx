@@ -22,7 +22,7 @@ export default function Nav() {
           >
             <LogoMark className="h-5 w-5 shrink-0" />
             <span className="text-lg lowercase leading-none tracking-tight">
-              saturn
+              saturday<span className="text-accent">.ai</span>
             </span>
           </Link>
 

@@ -31,7 +31,16 @@ const policy = [
 
 export default function PolicyChapter() {
   return (
-    <Chapter n="03" label="policy, not promises">
+    <Chapter
+      n="03"
+      label="the policy file"
+      title={
+        <>
+          <span className="block font-normal">policy,</span>
+          <span className="block">not promises.</span>
+        </>
+      }
+    >
       <div className="border-y border-edge">
         <div className="type-micro flex items-center justify-between border-b border-edge py-2.5 lowercase text-faint">
           <p># saturn.policy</p>

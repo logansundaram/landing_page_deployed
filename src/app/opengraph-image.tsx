@@ -41,7 +41,10 @@ export default function OpengraphImage() {
               strokeWidth="3.5"
             />
           </svg>
-          <div style={{ fontSize: "30px", color: "#ededf0" }}>saturn</div>
+          <div style={{ display: "flex", fontSize: "30px" }}>
+            <span style={{ color: "#ededf0" }}>saturday</span>
+            <span style={{ color: "#00ffff" }}>.ai</span>
+          </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>

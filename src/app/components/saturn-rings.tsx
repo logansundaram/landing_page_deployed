@@ -2,10 +2,16 @@
  * Saturn as a full-width observatory sheet — a panoramic 1800×800 drawing
  * meant to span the whole viewport. The ring system is concentric hairline
  * ellipses with true occlusion: rings pass behind the planet above the ring
- * plane and in front of it below. All strokes use non-scaling-stroke so the
- * hairlines stay hairlines at any viewport width. The linework draws itself
- * on page load (`.ring-draw`); callouts and the title block fade in after
- * (`.ring-fade`). A square satellite rides the F ring via SMIL.
+ * plane and in front of it below. The linework draws itself on page load
+ * (`.ring-draw`); callouts and the title block fade in after (`.ring-fade`).
+ * A square satellite rides the F ring via SMIL.
+ *
+ * Static strokes use non-scaling-stroke so the hairlines stay hairlines at
+ * any viewport width — but the dash-drawn ring ellipses must NOT: Chrome
+ * computes dashes on the screen-space outline when non-scaling-stroke is
+ * set, which breaks pathLength="1" normalization, so the settled dash stops
+ * partway around and the rings never close. Ring strokes scale with the
+ * viewport instead; that's the price of the draw-in ending as full loops.
  *
  * The drawing wears the product's palette: gray hairlines with terminal
  * cyan carrying the bright rings, the satellite, and the callout markers —
@@ -73,7 +79,6 @@ function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
           stroke={TONES[tone]}
           strokeOpacity={opacity}
           strokeWidth={width}
-          vectorEffect="non-scaling-stroke"
           pathLength={1}
           className="ring-draw"
           style={{ animationDelay: `${delayOffset + i * 45}ms` }}
@@ -90,7 +95,6 @@ function RingSet({ delayOffset = 0 }: { delayOffset?: number }) {
         stroke={TONES.strong}
         strokeWidth={1}
         strokeDasharray="2 8"
-        vectorEffect="non-scaling-stroke"
         pathLength={1}
         className="ring-draw"
         style={{ animationDelay: `${delayOffset + RINGS.length * 45}ms` }}
@@ -214,7 +218,7 @@ export default function SaturnRings({
         {/* Motion path for the satellite — the F ring */}
         <path
           id={pathId}
-          d={`M ${CX + 520} ${CY} A 520 ${fRy} 0 1 0 ${CX - 520} ${CY} A 520 ${fRy} 0 1 0 ${CX + 520} ${CY}`}
+          d={`M ${CX + 520} ${CY} A 520 ${fRy} 0 1 1 ${CX - 520} ${CY} A 520 ${fRy} 0 1 1 ${CX + 520} ${CY}`}
         />
         <g className="ring-fade motion-reduce:hidden">
           <rect x="-4" y="-4" width="8" height="8" fill="var(--color-accent)" />

@@ -82,7 +82,7 @@ export default function Footer() {
       <div className="border-t border-edge">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-6 py-5 md:flex-row md:items-center md:justify-between md:px-10">
           <p className="type-micro lowercase text-faint">
-            © {new Date().getFullYear()} {site.org.toLowerCase()} — all rights
+            © {new Date().getFullYear()} {site.name.toLowerCase()} — all rights
             reserved
           </p>
           <p className="type-micro lowercase text-faint">

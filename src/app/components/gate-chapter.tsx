@@ -11,7 +11,7 @@ export default function GateChapter() {
   const synthNode = capture.nodes.find((n) => n.node === "synthesize");
 
   return (
-    <Chapter n="02" label="the gate">
+    <Chapter n="02" label="the gate" title="it asks first.">
       <CaptureFigure
         caption={`fig. 02 — run #${capture.id}, ${capture.date}. the gate denied ${gate.calls[0].name}; hello.txt was never written. headless runs deny by default.`}
       >

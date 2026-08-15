@@ -96,7 +96,7 @@ const capabilities: {
 
 export default function CapabilitiesChapter() {
   return (
-    <Chapter n="04" label="capabilities">
+    <Chapter n="04" label="capabilities" title="what it does.">
       {/* Dense spec table — hairline rows, no cards */}
       <div className="border-y border-edge">
         {capabilities.map((c) => (

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: "/install",
   },
   openGraph: {
-    title: "install — Saturn",
+    title: "install — Saturday.ai",
     description:
       "Install Saturn, the local-first terminal AI agent, in under a minute.",
     url: "/install",
