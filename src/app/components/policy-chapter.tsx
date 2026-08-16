@@ -1,31 +1,36 @@
 import Chapter from "./chapter";
 
-/* The five values rendered as the config file they actually are. */
+/* The six values rendered as the config file they actually are. */
 const policy = [
   {
     key: "local_first",
     value: "true",
-    body: "Models, context, and data stay on your machine. No round-trips to a vendor, no telemetry you didn't opt into.",
+    body: "Models, context, and data stay on your machine. No API key anywhere, no telemetry, and the only exits are a search query, a page fetch, and the MCP servers you configured.",
   },
   {
     key: "show_work",
     value: "always",
-    body: "Plans, tool calls, and reasoning are written to the screen as they happen — not summarized after the fact.",
-  },
-  {
-    key: "metrics",
-    value: "exposed",
-    body: "Token usage, latency, memory, and execution traces are first-class, inspectable system state.",
-  },
-  {
-    key: "tools",
-    value: "extensible",
-    body: "Add tools, integrations, and workflows over time. The agent grows with your stack instead of boxing you in.",
+    body: "Plans, tool calls, and reasoning are written to the screen as they happen — not summarized after the fact — and every run replays offline from its export record.",
   },
   {
     key: "side_effects",
     value: "gated",
-    body: "Approval gates sit in front of every side effect. The agent proposes; you decide what runs.",
+    body: "Approval gates sit in front of every write, command, and remote call, showing the real diff or the full command. Enter rejects. Grants expire with the turn.",
+  },
+  {
+    key: "answers",
+    value: "traced",
+    body: "Every cited source resolves to the tool call or document behind it; every figure is traced back to a gathered result or disclosed as untraceable. Uncertain spans wear their probability.",
+  },
+  {
+    key: "egress",
+    value: "recorded",
+    body: "Every byte that leaves is logged by host and channel and printed under the answer. Air-gap the whole thing with one command; untrusted content is quarantined against injection.",
+  },
+  {
+    key: "trust_settings",
+    value: "explicit",
+    body: "A loosened posture — an open gate, a lifted air gap, a relaxed tier — is session-only unless you say --save. Nothing weaker is ever written to disk silently.",
   },
 ];
 
@@ -44,7 +49,7 @@ export default function PolicyChapter() {
       <div className="border-y border-edge">
         <div className="type-micro flex items-center justify-between border-b border-edge py-2.5 lowercase text-faint">
           <p># saturn.policy</p>
-          <p>5 rules · read-only</p>
+          <p>6 rules · read-only</p>
         </div>
         {policy.map((r, i) => (
           <div

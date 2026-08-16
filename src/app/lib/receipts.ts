@@ -5,6 +5,6 @@
    silently rot. Update it by running: npm run build (postbuild prints the
    measured figure). */
 export const receipts = {
-  firstPaintKB: 240,
+  firstPaintKB: 245,
   thirdPartyRequests: 0,
 } as const;

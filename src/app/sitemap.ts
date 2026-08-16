@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "./lib/site";
+import { docPages } from "./lib/docs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -23,5 +24,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    ...docPages.map((d) => ({
+      url: `${site.url}/docs/${d.slug}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    })),
   ];
 }

@@ -73,7 +73,8 @@ export default function GateChapter() {
 
       <p className="mt-10 max-w-2xl leading-relaxed text-muted">
         Every side-effecting tool call stops at the gate. In the TUI you
-        approve, deny, or read the diff first. Headless runs deny by default —{" "}
+        approve, deny, or read the diff first — and an always-allow answer
+        lasts for the turn, not forever. Headless runs deny by default —{" "}
         <code className="text-fg">--yolo</code> opens the gate, and that choice
         is on the record too.
       </p>

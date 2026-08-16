@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Container from "../components/container";
 import PageHeader from "../components/page-header";
 import CodeBlock from "../components/code-block";
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
 
 const requirements = [
   ["os", "macOS 13+, Linux, WSL2, or Windows 10/11"],
-  ["runtime", "Python 3.10+ and git"],
-  ["memory", "8 GB RAM minimum (16 GB recommended)"],
+  ["runtime", "Python 3.11+ and git (the installer handles both)"],
+  ["memory", "8 GB RAM for the laptop tier (16 GB+ recommended)"],
   ["disk", "~6 GB free for the local models"],
 ];
 
@@ -73,7 +74,10 @@ export default function InstallPage() {
             <Step n="3" title="start a session">
               <p className="mb-4 text-sm leading-relaxed text-muted">
                 Launch the TUI. The first run pulls a few GB of local models,
-                then Saturn waits for your first instruction.
+                then Saturn waits for your first instruction. Type{" "}
+                <code className="text-fg">/config setup</code> for the health
+                check, or <code className="text-fg">/help</code> for the
+                command list.
               </p>
               <CodeBlock command="saturn" />
             </Step>
@@ -96,17 +100,36 @@ export default function InstallPage() {
 
             <div className="border-y border-edge py-5">
               <h2 className="text-sm font-bold lowercase text-fg">
+                already use pipx or uv?
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                Saturn ships on PyPI as{" "}
+                <code className="text-fg">saturn-agent</code>. Install it with
+                your tool manager, keep Ollama running, and let{" "}
+                <code className="text-fg">/config setup</code> pull the models.
+              </p>
+              <Link
+                href="/docs/installation"
+                className="mt-3 inline-block text-sm lowercase text-accent hover:underline"
+              >
+                all install paths →
+              </Link>
+            </div>
+
+            <div className="border-y border-edge py-5">
+              <h2 className="text-sm font-bold lowercase text-fg">
                 need details?
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                The documentation covers model setup, tools, and configuration.
+                The documentation covers the plan rail, the approval gate,
+                the trust stack, tools, and configuration.
               </p>
-              <a
+              <Link
                 href="/docs"
                 className="mt-3 inline-block text-sm lowercase text-accent hover:underline"
               >
                 read the docs →
-              </a>
+              </Link>
             </div>
           </aside>
         </div>
