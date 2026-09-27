@@ -26,6 +26,31 @@ export default function Home() {
 
 
 
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 py-20 md:py-32 border-t border-zinc-200">
+        <div>
+          <p className="text-blue-900">In development</p>
+          <h1 className="text-4xl md:text-6xl lg:text-8xl">Eris</h1>
+          <p className="text-xl md:text-2xl text-blue-900">
+            A local-first investigation engine with a defensible record.
+          </p>
+        </div>
+        <div className="text-lg leading-relaxed">
+          <p className="pb-6">
+            Our first product. Give Eris a subject and it builds a graph of what public sources say,
+            with every claim tied to the source that produced it and every outbound request written
+            to a ledger. Inference runs on your machine. Every run can be replayed.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/eris" className="bg-zinc-900 text-light w-fit p-2 hover:bg-blue-900">
+              What Eris is
+            </Link>
+            <Link href="/blog/introducing-eris" className="link p-2">
+              Read the announcement
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <Blurb header="An extensible AI agent." subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
 
       <div className="py-40">

@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const links = [
+  { href: "/eris", label: "Eris" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/careers", label: "Careers" },

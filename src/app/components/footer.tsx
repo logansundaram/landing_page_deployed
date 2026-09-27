@@ -15,6 +15,12 @@ export default function Footer(){
             </Link>
           </div>
 
+          <div>
+            <Link href="/blog">
+                Blog
+            </Link>
+          </div>
+
            <div>
             <h1>
               ©2026 Saturday AI
