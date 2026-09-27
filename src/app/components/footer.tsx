@@ -1,36 +1,108 @@
-import Link from "next/link"
+import Link from "next/link";
+import { site } from "../lib/site";
+import { receipts } from "../lib/receipts";
+import GitHubIcon from "./github-icon";
+import LogoMark from "./logo-mark";
 
-export default function Footer(){
-    return (
-        <footer className="flex h-16 text-xs justify-center w-full p-4 gap-4 md:gap-16 bg-zinc-50 ">
-          <div>
-            <Link href="/contact">
-                Contact
-            </Link>
-          </div>
+/* The receipts row states what the page does, measurably. Values are
+   enforced at build time by scripts/receipts.mjs. */
+const receiptLines = [
+  `first paint ≤ ${receipts.firstPaintKB} kB`,
+  `requests to third parties: ${receipts.thirdPartyRequests}`,
+  "no analytics",
+  "fonts self-hosted",
+  "every capture a real run",
+];
 
-          <div>
-            <Link href="/about">
-                About
-            </Link>
-          </div>
+/* The footer is the company's slot: Saturn is the product everywhere
+   above; Saturday.ai signs the page here. */
+export default function Footer() {
+  return (
+    <footer className="border-t border-edge">
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1fr_auto_auto] md:gap-20 md:px-10">
+        <div className="max-w-xs">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2.5 text-fg t-colors hover:text-accent"
+          >
+            <LogoMark className="h-5 w-5 shrink-0" />
+            <span className="lowercase leading-none tracking-tight">
+              saturday<span className="text-accent">.ai</span>
+            </span>
+          </Link>
+          <p className="type-micro mt-3 lowercase text-faint">
+            the company behind saturn · local-first · the terminal is the
+            product
+          </p>
+        </div>
 
-          <div>
-            <Link href="/blog">
-                Blog
-            </Link>
-          </div>
+        <nav className="flex flex-col gap-3">
+          <p className="type-micro lowercase text-faint">
+            <span className="text-accent">::</span> site
+          </p>
+          <Link
+            href="/docs"
+            className="text-sm lowercase text-muted t-colors hover:text-fg"
+          >
+            docs
+          </Link>
+          <Link
+            href="/install"
+            className="text-sm lowercase text-muted t-colors hover:text-fg"
+          >
+            install
+          </Link>
+          <Link
+            href="/eris"
+            className="text-sm lowercase text-muted t-colors hover:text-fg"
+          >
+            eris
+          </Link>
+          <Link
+            href="/blog"
+            className="text-sm lowercase text-muted t-colors hover:text-fg"
+          >
+            blog
+          </Link>
+          <a
+            href={site.github}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm lowercase text-muted t-colors hover:text-fg"
+          >
+            <GitHubIcon className="h-4 w-4" />
+            github
+          </a>
+        </nav>
 
-           <div>
-            <h1>
-              ©2026 Saturday AI
-            </h1>
-            
-          </div>
+        <div className="flex flex-col gap-3">
+          <p className="type-micro lowercase text-faint">
+            <span className="text-accent">::</span> receipts
+          </p>
+          {receiptLines.map((s) => (
+            <p
+              key={s}
+              className="type-micro flex items-center gap-2.5 lowercase text-muted"
+            >
+              <span aria-hidden className="h-1.5 w-1.5 shrink-0 bg-accent" />
+              {s}
+            </p>
+          ))}
+        </div>
+      </div>
 
-          <h1>
-              All rights reserved
-          </h1>
-        </footer>
-    )
+      <div className="border-t border-edge">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-6 py-5 md:flex-row md:items-center md:justify-between md:px-10">
+          <p className="type-micro lowercase text-faint">
+            © {new Date().getFullYear()} {site.name.toLowerCase()} — all rights
+            reserved
+          </p>
+          <p className="type-micro lowercase text-faint">
+            <span className="text-accent">»</span> everything on screen,
+            nothing off it
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
 }

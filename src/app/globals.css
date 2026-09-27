@@ -1,68 +1,170 @@
 @import "tailwindcss";
 
+/* ----------------------------------------------------------------------------
+   Saturn — design tokens. One file; everything derives from here.
 
-@layer components {
-  .link {
-    @apply hover:text-blue-900 focus:text-blue-900;
-  }
-  .base{
-    @apply bg-zinc-50 font-sans px-8 md:px-24 lg:px-32 py-16 min-h-screen text-zinc-900
-  }
-  .text-accent{
-    @apply text-blue-900
-  }
-  .text-light{
-    @apply text-zinc-50
-  }
-  .bg-light{
-    @apply text-zinc-50
-  }
-  .bg-dark{
-    @apply bg-zinc-900
-  }
-
+   The system in one line: the terminal is the object, type is the brand,
+   color is data. One mono family carries every register. All hierarchy is
+   luminance (grays). Chromatic color exists only as semantics: the
+   confidence ramp (amber→red at the uncertain end), the gate states, and
+   the TUI's prompt cyan — never decoration. No gradients, no glow, no
+   glass, no rounded corners.
+---------------------------------------------------------------------------- */
+/* Font token (wired to the next/font variable set on <body> in layout.tsx).
+   `inline` is required: it makes utilities embed the var() reference at the
+   point of use, where the body-scoped next/font variable actually resolves —
+   a plain @theme emits it at :root, where it doesn't exist. */
+@theme inline {
+  --font-mono: var(--font-commit), ui-monospace, "Cascadia Mono", monospace;
+  /* Everything is mono — alias the default stacks so nothing falls back to
+     a sans or serif by accident. */
+  --font-sans: var(--font-commit), ui-monospace, monospace;
+  --font-serif: var(--font-commit), ui-monospace, monospace;
 }
 
-body {
-  font-family: 'Satoshi', sans-serif;
+@theme {
+  /* Surfaces — near-black base, layered dark grays */
+  --color-ink: #050507;
+  --color-panel: #0b0b0e;
+  --color-panel-2: #101015;
+  --color-edge: #1c1c22;
+  --color-edge-strong: #2a2a33;
+
+  /* Text — off-white and cool grays, matching the TUI's palette */
+  --color-fg: #ededf0;
+  --color-muted: #9a9aa6;
+  --color-faint: #6a6a76;
+
+  /* Accent — terminal cyan, the product's own color. Saturn is cyan on
+     dark; the site wears the same skin. */
+  --color-accent: #00ffff;
+  --color-accent-dim: #00b3b3;
+
+  /* Terminal status colors — what the TUI actually prints */
+  --color-ok: #28c840;
+  --color-hot: #ff4d6d;
+
+  /* Confidence ramp — data only: colors real logprob spans inside
+     captures. Luminance falls monotonically (oklch L .87→.47) so
+     grayscale keeps the order; hue slides neutral→amber→red as
+     certainty drops. ramp-4 is 2.69:1 on ink: marks only, never
+     body-size text. */
+  --color-ramp-0: #dcd4be;
+  --color-ramp-1: #d5b36a;
+  --color-ramp-2: #d28a21;
+  --color-ramp-3: #c25518;
+  --color-ramp-4: #ac040c;
 }
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Always show the vertical scrollbar track so centered content keeps a
+       constant width between long and short pages. */
+    overflow-y: scroll;
+  }
 
-@keyframes fadeUp {
-  from {
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-fg);
+    /* Reference the next/font variable directly — the @theme inline tokens
+       are utility-time aliases, not runtime custom properties. */
+    font-family: var(--font-commit), ui-monospace, "Cascadia Mono", monospace;
+    /* The spec-sheet base register: 14px mono. The only other sizes are
+       display (huge) and micro (11px) — no middle register. */
+    font-size: 0.875rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 28%, transparent);
+    color: #fff;
+  }
+
+  /* Square focus ring for keyboard users — corners stay sharp everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Color transition without Tailwind's transition-colors — that utility's
+     property list name-drops gradient stops, and shipped CSS must grep
+     clean for "gradient". */
+  .t-colors {
+    transition-property: color, background-color, border-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
+  }
+
+  /* Display register — the violent jump. Lowercase, tight, heavy. Mono
+     glyphs are wide: sized so a ~16-character line stays one line. */
+  .type-display {
+    font-size: clamp(2.25rem, 6.2vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  /* Micro register — deadpan lowercase captions and receipts. */
+  .type-micro {
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  /* Ring-system linework draws itself on page load (paired with
+     pathLength="1" on the SVG ellipses) */
+  .ring-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: ring-draw 1.2s cubic-bezier(0.33, 0, 0.2, 1) forwards;
+  }
+
+  /* Callouts and satellite fade in after the rings finish drawing */
+  .ring-fade {
     opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    animation: fade-in 0.7s ease-out 1s forwards;
   }
 }
 
-@keyframes fadeDown {
-  from {
+/* Terminal caret blink — used inside captures only */
+@keyframes caret {
+  0%,
+  49% {
     opacity: 1;
-    transform: translateY(0);
   }
-  to {
+  50%,
+  100% {
     opacity: 0;
-    transform: translateY(12px);
   }
 }
 
-@keyframes revealLeft {
-  from {
-    clip-path: inset(0 92% 0 0);
-    opacity: 0.9;
-  }
+@keyframes ring-draw {
   to {
-    clip-path: inset(0 0 0 0);
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  to {
     opacity: 1;
   }
 }
 
-.threads-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ring-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .ring-fade {
+    animation: none;
+    opacity: 1;
+  }
 }

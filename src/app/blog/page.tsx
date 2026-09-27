@@ -1,41 +1,62 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { posts, formatDate } from "../content/posts";
+import Container from "../components/container";
+import PageHeader from "../components/page-header";
+import { posts } from "../lib/blog";
+import { site } from "../lib/site";
 
 export const metadata: Metadata = {
-  title: "Blog | Saturday.ai",
-  description: "Notes on what Saturday.ai is building and why.",
+  title: "blog",
+  description: `Notes from ${site.name} on what is being built and why: Saturn, Eris, and the trust harness underneath both.`,
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "blog — Saturday.ai",
+    description: "Notes on what is being built and why.",
+    url: "/blog",
+    type: "website",
+  },
 };
 
-export default function Blog() {
-  const sorted = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
-
+export default function BlogPage() {
   return (
-    <div className="base">
-      <div className="w-full pt-18">
-        <h1 className="text-4xl md:pt-10 md:text-6xl lg:text-9xl text-blue-900">
-          Blog
-        </h1>
-        <p>Notes on what we are building and why.</p>
-      </div>
+    <>
+      <PageHeader
+        eyebrow="blog"
+        title="blog."
+        lead="Notes on what we are building and why. Dated, unedited after posting, and honest about what is and is not shipped."
+      />
 
-      <div className="py-20 md:py-32 max-w-3xl">
-        {sorted.map((post) => (
-          <article key={post.slug} className="py-10 border-t border-zinc-200">
-            <p className="text-sm text-blue-900 pb-2">{formatDate(post.date)}</p>
-            <h2 className="text-2xl md:text-4xl">
-              <Link href={`/blog/${post.slug}`} className="link">
-                {post.title}
-              </Link>
-            </h2>
-            <p className="text-blue-900 pb-4">{post.subtitle}</p>
-            <p className="pb-6">{post.summary}</p>
-            <Link href={`/blog/${post.slug}`} className="bg-zinc-900 text-light w-fit p-2 hover:bg-blue-900">
-              Read the post
+      <Container className="py-16 md:py-20">
+        <div className="type-micro flex items-center justify-between border-b border-edge py-2.5 lowercase text-faint">
+          <p># posts</p>
+          <p>
+            {posts.length} {posts.length === 1 ? "entry" : "entries"} · newest
+            first
+          </p>
+        </div>
+
+        <div className="border-b border-edge">
+          {posts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group grid gap-x-8 gap-y-1 border-b border-edge py-5 t-colors last:border-b-0 hover:bg-panel md:grid-cols-[120px_1fr] md:items-baseline"
+            >
+              <p className="type-micro text-faint">{post.date}</p>
+              <div>
+                <p className="text-sm font-bold lowercase text-fg t-colors group-hover:text-accent">
+                  {post.title}
+                </p>
+                <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
+                  {post.summary}
+                </p>
+              </div>
             </Link>
-          </article>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </Container>
+    </>
   );
 }

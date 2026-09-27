@@ -1,115 +1,21 @@
-import Paragraph from "./components/paragraph";
-import Step from "./components/step";
-import Reveal from "./components/reveal";
-import Signup from "./components/signup";
 import Hero from "./components/hero";
-import Blurb from "./components/blurb";
-import Point from "./components/point";
-import Link from "next/link";
-import { features } from "./content/features";
-import { workflow } from "./content/workflow";
-
+import RunChapter from "./components/run-chapter";
+import GateChapter from "./components/gate-chapter";
+import PolicyChapter from "./components/policy-chapter";
+import CapabilitiesChapter from "./components/capabilities-chapter";
+import ErisChapter from "./components/eris-chapter";
+import GetStartedChapter from "./components/get-started-chapter";
 
 export default function Home() {
   return (
-    <div className = "base">
-      <Hero/>  
-
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 py-20">
-        {features.map((feature) => (
-          <Paragraph key={feature.id} header={feature.title} framer={feature.subtitle} body={feature.description}/>
-        ))}
-        <Link href="/about" className="bg-zinc-900 text-light w-fit p-2">
-          Find out what we stand for
-        </Link>
-      </div>
-
-
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 py-20 md:py-32 border-t border-zinc-200">
-        <div>
-          <p className="text-blue-900">In development</p>
-          <h1 className="text-4xl md:text-6xl lg:text-8xl">Eris</h1>
-          <p className="text-xl md:text-2xl text-blue-900">
-            A local-first investigation engine with a defensible record.
-          </p>
-        </div>
-        <div className="text-lg leading-relaxed">
-          <p className="pb-6">
-            Our first product. Give Eris a subject and it builds a graph of what public sources say,
-            with every claim tied to the source that produced it and every outbound request written
-            to a ledger. Inference runs on your machine. Every run can be replayed.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/eris" className="bg-zinc-900 text-light w-fit p-2 hover:bg-blue-900">
-              What Eris is
-            </Link>
-            <Link href="/blog/introducing-eris" className="link p-2">
-              Read the announcement
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <Blurb header="An extensible AI agent." subheader="Swap in custom models, workflows, and tools on an already robust foundation."/>
-
-      <div className="py-40">
-        <div className="flex items-center h-full">
-          <div className="pb-6 w-max">
-            <h1 className="w-full text-2xl md:text-6xl">
-              Who Saturday.ai is for
-            </h1>
-            <p className="text-blue-900">
-              For those dissatisfied with agentic ai currently.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-4 gap-6">
-          <Point header="Engineers who care about reliability" body="hello"/>
-          <Point header="Teams handling sensitive data" body="hello"/>
-          <Point header="Small teams moving fast" body="hello"/>
-          <Point header="Anyone betting on edge compute" body="hello"/>
-        </div>
-      </div>
-
-
-
-
-      
-
-      <div className="grid grid-rows-1 md:grid-rows-2 gap-x-12 py-20 justify-stretch">
-        <div className="flex items-center h-full">
-          <div className="pb-6 w-max">
-            <h1 className="w-full text-2xl md:text-6xl">
-              How Saturday.ai works
-            </h1>
-            <p className="text-blue-900">
-              Explicit structure at every stage of the process.
-            </p>
-          </div>
-        </div>
-
-      <div className="grid md:grid-cols-2 gap-16 w-full max-w-4xl mx-auto">
-          {workflow.map((step) => (
-            <Step key={step.id} step={step.step} header={step.title} body={step.description}/>
-          ))}
-        </div>
-      </div>
-
-      
-
-      <div className="flex w-full py-30 md:py-60 justify-center items-center">
-        <div className="">
-          <div className="pb-2">
-            <Reveal/>
-          </div>
-          <Signup/>
-        </div>
-      </div>
-
-        
-      
-    </div>
+    <>
+      <Hero />
+      <RunChapter />
+      <GateChapter />
+      <PolicyChapter />
+      <CapabilitiesChapter />
+      <ErisChapter />
+      <GetStartedChapter />
+    </>
   );
 }
