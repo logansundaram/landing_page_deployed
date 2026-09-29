@@ -1,9 +1,10 @@
 import type { Post } from "./types";
 import { introducingEris } from "./posts/introducing-eris";
+import { saturnV2 } from "./posts/saturn-v2";
 
 /* Newest first. The index page, the sitemap, and static params derive from
    this one list. */
-export const posts: Post[] = [introducingEris].sort((a, b) =>
+export const posts: Post[] = [introducingEris, saturnV2].sort((a, b) =>
   a.date < b.date ? 1 : -1,
 );
 
