@@ -4,11 +4,11 @@
  *   node scripts/run-to-capture.mjs
  *
  * Reads every runs-raw/<name>.json (git-ignored — raw exports embed the
- * grounding-context manifest, which can contain private workspace data) and
- * writes src/app/lib/runs/<name>.ts holding only what the site renders:
- * query, pipeline node timings, plan steps, gate events, metrics, and the
- * answer as confidence spans bucketed to ramp levels. Never the grounding
- * context, never LLM inputs.
+ * grounding context, which can contain private workspace data) and writes
+ * src/app/lib/runs/<name>.ts holding only what the site renders: the query,
+ * the loop's rows (agent passes, tool calls with clipped results, gate
+ * decisions), metrics, and the recorded answer. Never the grounding context,
+ * never LLM inputs.
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, basename, dirname } from "node:path";
@@ -18,75 +18,79 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rawDir = join(root, "runs-raw");
 const outDir = join(root, "src", "app", "lib", "runs");
 
-/* Mean logprob -> ramp level. 0 = certain (default text voice, no color);
-   4 = uncertain. Shared contract with the ramp tokens in globals.css. */
-function rampLevel(logprob) {
-  if (logprob >= -0.05) return 0;
-  if (logprob >= -0.5) return 1;
-  if (logprob >= -1.5) return 2;
-  if (logprob >= -2.5) return 3;
-  return 4;
+const RESULT_CLIP = 96;
+
+const round = (n, places) => {
+  const f = 10 ** places;
+  return Math.round(n * f) / f;
+};
+
+/* A tool call the way saturn prints it: name(key='value', …). */
+function callText(name, args = {}) {
+  const parts = Object.entries(args).map(([k, v]) =>
+    typeof v === "string" ? `${k}='${v}'` : `${k}=${JSON.stringify(v)}`,
+  );
+  return `${name}(${parts.join(", ")})`;
 }
 
-function toSpans(answerBuffer) {
-  if (!answerBuffer?.text || !answerBuffer.confidence) return null;
-  const { text, confidence } = answerBuffer;
-  const spans = [];
-  for (const c of confidence) {
-    const level = rampLevel(c.logprob);
-    const chunk = text.slice(c.start, c.end);
-    const last = spans[spans.length - 1];
-    if (last && last.level === level) last.text += chunk;
-    else spans.push({ text: chunk, level });
-  }
-  // Anything past the last confidence span (shouldn't happen, but be safe)
-  const covered = confidence.length
-    ? confidence[confidence.length - 1].end
-    : 0;
-  if (covered < text.length) spans.push({ text: text.slice(covered), level: 0 });
-  return spans;
+function clip(s, n) {
+  const flat = String(s ?? "").replace(/\s+/g, " ").replace(/…$/, "").trim();
+  return flat.length > n ? `${flat.slice(0, n).trimEnd()}…` : flat;
+}
+
+/* "AIMessage: [tool_calls: read_file, calculate]" -> ["read_file", "calculate"];
+   any other agent message is the answer -> null. */
+function agentCalls(messages = []) {
+  const m = String(messages[0] ?? "").match(/\[tool_calls: ([^\]]+)\]/);
+  return m ? m[1].split(",").map((s) => s.trim()) : null;
 }
 
 function convert(raw) {
   const { run, events = [], llm_calls: llmCalls = [] } = raw;
+  const agentDurs = llmCalls
+    .filter((c) => c.node === "agent")
+    .map((c) => round(Number(c.dur), 2));
 
-  const nodes = llmCalls.map((c) => ({
-    node: c.node,
-    model: c.model,
-    durS: Math.round(c.dur * 100) / 100,
-    promptTokens: c.prompt_tokens,
-    outputTokens: c.output_tokens,
-  }));
-
-  let plan = [];
-  let gates = [];
+  const rows = [];
+  let pass = 0;
   let contextTokens = null;
   let tokPerSec = null;
-  let answer = null;
   for (const e of events) {
-    if (e.data?.plan) plan = e.data.plan; // last state wins
-    if (e.data?.gate_events) {
-      gates = gates.concat(
-        e.data.gate_events.map((g) => ({
-          step: g.step,
+    const d = e.data ?? {};
+    if (e.node === "agent") {
+      contextTokens = Number(d.context_tokens);
+      tokPerSec = round(Number(d.tok_per_sec), 1);
+      rows.push({
+        kind: "agent",
+        iter: Number(d.iteration),
+        durS: agentDurs[pass++] ?? null,
+        contextTokens,
+        tokPerSec,
+        calls: agentCalls(d.messages),
+      });
+    } else if (e.node === "tools") {
+      for (const t of d.tool_events ?? []) {
+        rows.push({
+          kind: "tool",
+          call: callText(t.name, t.args),
+          result: clip(t.result, RESULT_CLIP),
+          ok: t.ok !== false,
+        });
+      }
+    } else if (e.node === "approval" && d.gate_events) {
+      for (const g of d.gate_events) {
+        rows.push({
+          kind: "gate",
           decision: g.decision,
           calls: g.calls.map((c) => ({ name: c.name, approved: c.approved })),
-        })),
-      );
+        });
+      }
     }
-    if (typeof e.data?.context_tokens === "number")
-      contextTokens = e.data.context_tokens;
-    if (typeof e.data?.tok_per_sec === "number")
-      tokPerSec = Math.round(e.data.tok_per_sec * 10) / 10;
-    if (e.node === "synthesize" && e.data?.answer_buffer)
-      answer = toSpans(e.data.answer_buffer);
   }
 
   const durationS =
     run.started_at && run.ended_at
-      ? Math.round(
-          (new Date(run.ended_at) - new Date(run.started_at)) / 10,
-        ) / 100
+      ? round((new Date(run.ended_at) - new Date(run.started_at)) / 1000, 1)
       : null;
 
   return {
@@ -96,15 +100,8 @@ function convert(raw) {
     saturnVersion: raw.saturn_version ?? null,
     query: run.query,
     status: run.status,
-    nodes,
-    plan: plan.map((s) => ({
-      label: s.label,
-      status: s.status,
-      intendedTool: s.intended_tool,
-    })),
-    gates,
+    rows,
     metrics: { contextTokens, tokPerSec, durationS },
-    answer,
     response: run.response,
   };
 }

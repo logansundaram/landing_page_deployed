@@ -3,11 +3,12 @@ import Link from "next/link";
 import Container from "../components/container";
 import PageHeader from "../components/page-header";
 import CodeBlock from "../components/code-block";
+import PrereleaseNote from "../components/prerelease-note";
 
 export const metadata: Metadata = {
   title: "install",
   description:
-    "Install Saturn, the local-first terminal AI agent, in under a minute. One command on macOS, Linux, WSL2, or Windows — no account, no cloud dependency.",
+    "Install Saturn, the local-first terminal AI agent, in under a minute. One command on macOS or Linux — no account, no cloud dependency.",
   alternates: {
     canonical: "/install",
   },
@@ -21,10 +22,10 @@ export const metadata: Metadata = {
 };
 
 const requirements = [
-  ["os", "macOS 13+, Linux, WSL2, or Windows 10/11"],
-  ["runtime", "Python 3.11+ and git (the installer handles both)"],
-  ["memory", "8 GB RAM for the laptop tier (16 GB+ recommended)"],
-  ["disk", "~6 GB free for the local models"],
+  ["os", "macOS for the app integrations; Linux runs files, shell, web, and documents"],
+  ["runtime", "Python 3.11+ and git"],
+  ["model", "the default 4b is a 3.4 GB download; /models sizes up to fit your machine"],
+  ["disk", "~4 GB free for the default model, more for bigger sizes"],
 ];
 
 export default function InstallPage() {
@@ -37,31 +38,26 @@ export default function InstallPage() {
       />
 
       <Container className="py-16 md:py-20">
+        <PrereleaseNote className="mb-10" />
         <div className="grid gap-12 lg:grid-cols-[1fr_280px]">
           <div className="space-y-10">
             <Step n="1" title="install the cli">
               <p className="mb-4 text-sm leading-relaxed text-muted">
-                Run the one-liner for your platform. It installs{" "}
+                Run the one-liner. It installs{" "}
                 <a
                   href="https://ollama.com"
                   className="text-accent hover:underline"
                 >
                   Ollama
                 </a>{" "}
-                if needed, sets Saturn up in an isolated environment, and puts
-                the <code className="text-fg">saturn</code> command on your
-                PATH.
+                if needed, sets Saturn up in an isolated environment, pulls
+                the small local model, and puts the{" "}
+                <code className="text-fg">saturn</code> command on your PATH.
               </p>
               <CodeBlock
-                label="macos / linux / wsl2"
+                label="macos / linux"
                 command="curl -fsSL saturdayai.org/install.sh | sh"
               />
-              <div className="mt-3">
-                <CodeBlock
-                  label="windows (powershell)"
-                  command="irm saturdayai.org/install.ps1 | iex"
-                />
-              </div>
             </Step>
 
             <Step n="2" title="verify the install">
@@ -73,13 +69,19 @@ export default function InstallPage() {
 
             <Step n="3" title="start a session">
               <p className="mb-4 text-sm leading-relaxed text-muted">
-                Launch the TUI. The first run pulls a few GB of local models,
-                then Saturn waits for your first instruction. Type{" "}
-                <code className="text-fg">/config setup</code> for the health
-                check, or <code className="text-fg">/help</code> for the
-                command list.
+                Launch it from the folder you want it to work in. The first
+                run opens <code className="text-fg">/models</code>: it reads
+                your hardware, recommends a model size that fits and runs at a
+                usable speed, and pulls it if you say yes. Then type{" "}
+                <code className="text-fg">/help</code> for the everyday
+                commands.
               </p>
               <CodeBlock command="saturn" />
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                On macOS, the first time Saturn reaches an app, macOS asks
+                whether your terminal may control it. Reading your Messages
+                history also needs Full Disk Access for that terminal.
+              </p>
             </Step>
           </div>
 
@@ -105,8 +107,9 @@ export default function InstallPage() {
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 Saturn ships on PyPI as{" "}
                 <code className="text-fg">saturn-agent</code>. Install it with
-                your tool manager, keep Ollama running, and let{" "}
-                <code className="text-fg">/config setup</code> pull the models.
+                your tool manager, keep Ollama running, and let the first
+                launch&apos;s <code className="text-fg">/models</code> pull the
+                model.
               </p>
               <Link
                 href="/docs/installation"
@@ -121,8 +124,8 @@ export default function InstallPage() {
                 need details?
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                The documentation covers the plan rail, the approval gate,
-                the trust stack, tools, and configuration.
+                The documentation covers the loop, the approval gate, the
+                trust stack, your Mac&apos;s apps, tools, and configuration.
               </p>
               <Link
                 href="/docs"

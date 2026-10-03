@@ -85,7 +85,7 @@ export default function RootLayout({
     "@type": "SoftwareApplication",
     name: site.product,
     applicationCategory: "DeveloperApplication",
-    operatingSystem: "macOS, Linux, WSL2, Windows",
+    operatingSystem: "macOS, Linux",
     description: site.description,
     url: site.url,
     publisher: {

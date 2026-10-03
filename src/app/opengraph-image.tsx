@@ -79,7 +79,7 @@ export default function OpengraphImage() {
               lineHeight: 1.4,
             }}
           >
-            a local-first terminal agent — every plan, tool call, and decision
+            a local-first terminal agent for your life admin — every tool call
             on screen, behind approval gates.
           </div>
         </div>

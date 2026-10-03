@@ -1,51 +1,21 @@
 import Chapter from "./chapter";
-import {
-  AnswerSpans,
-  CaptureFigure,
-  NodeTrace,
-  fmtTokens,
-} from "./capture";
+import { CaptureFigure, LoopRail, RecordedAnswer, fmtTokens } from "./capture";
 import { capture } from "../lib/runs/run-hero";
 
-/* The words the model hedged on, straight from the data — quoted in the
-   caption so the reader can find them. Confidence spans are token
-   fragments ("probabil"), so each is expanded to word boundaries using
-   its neighbors before quoting. */
-const spans = capture.answer ?? [];
-const fullText = spans.map((s) => s.text).join("");
-const hedgedWords: string[] = [];
-{
-  let offset = 0;
-  for (const s of spans) {
-    if (s.level > 0) {
-      // First word character inside this span, expanded to word boundaries
-      const inner = s.text.search(/\S/);
-      if (inner >= 0) {
-        let a = offset + inner;
-        let b = a;
-        while (a > 0 && /\S/.test(fullText[a - 1])) a--;
-        while (b < fullText.length && /\S/.test(fullText[b])) b++;
-        const word = fullText.slice(a, b).replace(/[.,;:!?]+$/, "");
-        if (!hedgedWords.includes(word)) hedgedWords.push(word);
-      }
-    }
-    offset += s.text.length;
-  }
-}
-const hedged = hedgedWords.map((w) => `"${w}"`).join(", ");
+const passes = capture.rows.filter((r) => r.kind === "agent").length;
 
 const rows = [
   {
-    k: "declared up front",
-    v: "model, tools, and context are stated before the first token.",
+    k: "one loop",
+    v: "each pass is one model call: it calls tools or it answers. a chat question is one pass, a lookup is two.",
   },
   {
-    k: "execution trace",
-    v: "every pipeline node is timed as it runs — plan, execute, rectify, synthesize.",
+    k: "every call on screen",
+    v: "each tool call prints with its arguments and what came back, as it runs.",
   },
   {
-    k: "confidence on screen",
-    v: "the answer carries its own token probabilities; hedged spans wear the ramp.",
+    k: "sourced answers",
+    v: "the answer ends with the exact calls behind it, and arithmetic is computed, never guessed.",
   },
   {
     k: "your move",
@@ -58,7 +28,7 @@ export default function RunChapter() {
   return (
     <Chapter n="01" label="a real run" title="watch it work.">
       <CaptureFigure
-        caption={`fig. 01 — run #${capture.id}, ${capture.model}, ${capture.date}. rendered from the run's export record, unedited. amber marks the spans the model was less sure of: ${hedged}.`}
+        caption={`fig. 01 — run #${capture.id}, ${capture.model}, ${capture.date}. rendered from the run's export record, unedited. ${passes} model passes: read the file, add it up, answer.`}
       >
         <div className="text-[13px] leading-relaxed">
           <p className="whitespace-pre-wrap">
@@ -67,17 +37,15 @@ export default function RunChapter() {
           </p>
 
           <div className="my-6">
-            <NodeTrace nodes={capture.nodes} />
+            <LoopRail rows={capture.rows} />
           </div>
 
-          <p className="max-w-2xl whitespace-pre-wrap text-muted">
-            {capture.answer && <AnswerSpans spans={capture.answer} />}
-          </p>
+          <RecordedAnswer text={capture.response} />
 
           <p className="type-micro mt-6 lowercase text-faint">
             ctx {fmtTokens(m.contextTokens ?? 0)} · {m.tokPerSec} tok/s ·{" "}
-            {m.durationS}s total · run #{capture.id} · {capture.model} · saturn{" "}
-            {capture.saturnVersion}
+            {m.durationS}s total · run #{capture.id} · {capture.model} · saturn
+            v2
           </p>
         </div>
       </CaptureFigure>

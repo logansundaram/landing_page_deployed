@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "./container";
 import CodeBlock from "./code-block";
 import { site } from "../lib/site";
+import PrereleaseNote from "./prerelease-note";
 
 /**
  * The closing chapter is inverse video at page scale: a full-bleed cyan
@@ -31,6 +32,7 @@ export default function GetStartedChapter() {
 
         <div className="mt-10 max-w-lg">
           <CodeBlock command={site.installCommand} />
+          <PrereleaseNote inverse className="mt-3" />
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -55,7 +57,7 @@ export default function GetStartedChapter() {
         </div>
 
         <p className="type-micro mt-8 lowercase text-ink/60">
-          works on macos · linux · wsl2 · windows — no account, no cloud
+          made for macos · runs on linux — no account, no cloud
         </p>
       </Container>
     </section>

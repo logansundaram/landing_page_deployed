@@ -3,6 +3,7 @@ import Button from "./button";
 import CodeBlock from "./code-block";
 import SaturnRings from "./saturn-rings";
 import { site } from "../lib/site";
+import PrereleaseNote from "./prerelease-note";
 
 export default function Hero() {
   return (
@@ -37,9 +38,10 @@ export default function Hero() {
           </h1>
 
           <p className="mt-8 max-w-xl leading-relaxed text-muted">
-            Saturn is a terminal agent that runs on your hardware. Every plan,
-            tool call, and decision is written to the screen as it happens —
-            and when it wants to touch your system, it asks first.
+            Saturn is a terminal agent for the admin of your life: your files,
+            notes, calendar, mail, and messages. It runs on your hardware,
+            every tool call is written to the screen as it happens, and when
+            it wants to change or send something, it asks first.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -51,6 +53,7 @@ export default function Hero() {
 
           <div className="mt-9 max-w-lg">
             <CodeBlock command={site.installCommand} />
+            <PrereleaseNote className="mt-3" />
           </div>
         </div>
       </Container>

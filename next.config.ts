@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   // Serve the install scripts under clean, branded URLs (saturdayai.org/install.sh,
   // saturdayai.org/install.ps1) by proxying to the raw files on the default branch.
   // These resolve once the scripts are on origin/main.
+  // The v1 "plans & steering" page became "the loop & steering" in v2.
+  async redirects() {
+    return [{ source: "/docs/plans", destination: "/docs/loop", permanent: true }];
+  },
   async rewrites() {
     return [
       { source: "/install.sh", destination: `${SATURN_RAW}/install.sh` },

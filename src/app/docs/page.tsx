@@ -8,7 +8,7 @@ import { site } from "../lib/site";
 export const metadata: Metadata = {
   title: "docs",
   description:
-    "Documentation for Saturn, the local-first, transparent terminal AI agent: installation, the plan rail, the approval gate, the trust stack, tools, MCP, observability, headless mode, commands, and configuration.",
+    "Documentation for Saturn, the local-first, transparent terminal AI agent: installation, the loop, the approval gate, the trust stack, tools, your Mac's apps, MCP, memory, observability, headless mode, commands, and configuration.",
   alternates: {
     canonical: "/docs",
   },
@@ -26,12 +26,12 @@ const start = [
   {
     href: "/docs/installation",
     k: "install",
-    v: "one command; ollama, the models, and the saturn cli on your path.",
+    v: "one command: ollama, the local model, and the saturn cli on your path.",
   },
   {
     href: "/docs/first-session",
     k: "first session",
-    v: "the prompt, the plan rail, the status bar, and the keys during a turn.",
+    v: "the working folder, the rail, the status bar, and the keys during a turn.",
   },
   {
     href: "/docs/approval-gate",

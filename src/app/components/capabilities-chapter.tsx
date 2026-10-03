@@ -15,48 +15,62 @@ const capabilities: {
     tag: "llm",
     vignette: (
       <>
-        qwen3.6:27b · <span className="text-ok">loaded</span> · cloud{" "}
+        qwen3.5:9b · <span className="text-ok">loaded</span> · cloud{" "}
         <span className="text-ok">0</span>
       </>
     ),
-    title: "local llm support",
-    body: "Open models through Ollama on your own hardware. Five roles, one tier line to swap them all; no API key anywhere in the product.",
+    title: "local models, sized to your mac",
+    body: "Open models through Ollama on your own hardware. /models reads your chip, its memory, and its bandwidth, then recommends the largest model that fits and still runs at a usable speed. No API key anywhere in the product.",
   },
   {
-    tag: "plan",
+    tag: "mac",
     vignette: (
       <>
-        <span className="text-ok">✓</span> 1 web_search{" "}
-        <span className="text-faint">·</span>{" "}
-        <span className="text-accent">▸</span> 2 web_extract{" "}
-        <span className="text-faint">· 3 calculate</span>
+        create_reminder <span className="text-faint">·</span> tomorrow 9:00{" "}
+        <span className="text-faint">→</span>{" "}
+        <span className="text-ok">your phone</span>
       </>
     ),
-    title: "plans you can edit",
-    body: "Press Esc to pause at a step boundary and drop, reorder, or retarget steps — or type a correction and steer the running turn. A step you remove has its effect revoked, not just its wording. /draft runs a plan you wrote yourself.",
+    title: "your mac, through its own apps",
+    body: "Notes, Calendar, Mail, Contacts, Reminders, Messages, and Shortcuts, plus the page in your browser and the files selected in Finder. Everything goes through the app itself, so what Saturn does shows up where you'd look. Mail is drafted, never sent.",
+  },
+  {
+    tag: "loop",
+    vignette: (
+      <>
+        <span className="text-ok">✓</span> read_file{" "}
+        <span className="text-faint">·</span>{" "}
+        <span className="text-ok">✓</span> calculate{" "}
+        <span className="text-faint">·</span>{" "}
+        <span className="text-accent">▸</span> answer
+      </>
+    ),
+    title: "pause and steer",
+    body: "One loop, every pass on screen. Press Esc to pause a running turn: continue, type a correction to steer it, or abort. On a multi-step errand the agent keeps a checklist you can watch in the rail.",
   },
   {
     tag: "gates",
     vignette: (
       <>
-        write_file <span className="text-faint">→</span>{" "}
-        <span className="text-hot">gated</span> ·{" "}
-        <span className="text-fg">y / N / s / a / e</span>
+        send_message <span className="text-faint">→</span>{" "}
+        <span className="text-hot">always asks</span> ·{" "}
+        <span className="text-fg">y / N</span>
       </>
     ),
     title: "tool approval gates",
-    body: "Every side effect stops with the real diff or the full command on screen. Enter rejects. An always-allow answer lasts for the turn, not forever, and shell prefix grants screen their argument tail every time.",
+    body: "Every write, command, and send stops with the real diff, the full command, or the recipient and exact text on screen. Enter rejects. A text message asks every time, and a number the model made up is refused before you're asked.",
   },
   {
     tag: "answers",
     vignette: (
       <>
-        figures <span className="text-ok">4/4 traced</span> · [1][2] ·{" "}
-        <span className="text-ok">0</span> uncertain
+        [1] read_file <span className="text-faint">·</span> [2] calculate{" "}
+        <span className="text-faint">·</span> <span className="text-ok">0</span>{" "}
+        failed
       </>
     ),
     title: "answers you can check",
-    body: "Inline citations that resolve to the exact tool call or document, per-token confidence marks calibrated per model, and every figure traced back to a gathered result — or disclosed as untraceable.",
+    body: "An answer that used tools ends with the exact calls and documents behind it, and /trace source shows the full material. Failed and declined calls are listed under the answer. Arithmetic and dates are computed, never guessed.",
   },
   {
     tag: "trust",
@@ -67,18 +81,18 @@ const capabilities: {
       </>
     ),
     title: "egress ledger & air gap",
-    body: "Every byte that leaves is recorded by host and channel and printed under the answer; /privacy airgap seals the boundary. Web pages and remote results are quarantined against prompt injection.",
+    body: "Every byte that leaves is recorded by host and channel and printed under the answer; /policy airgap seals the boundary. Web pages, mail, and files are quarantined against prompt injection, and a web address the model composed after reading outside content waits for your OK.",
   },
   {
-    tag: "rag",
+    tag: "files",
     vignette: (
       <>
-        indexed 128 files <span className="text-faint">→</span> 12.4k chunks ·{" "}
-        <span className="text-ok">local</span>
+        delete_file <span className="text-faint">→</span> trash ·{" "}
+        <span className="text-ok">/undo</span>
       </>
     ),
-    title: "documents & memory",
-    body: "Ingest PDFs, markdown, HTML, CSV, and docx into a local knowledge base; durable facts persist across sessions; SATURDAY.md carries your standing instructions.",
+    title: "files, documents & memory",
+    body: "Saturn works in the folder you launch it from and reads PDF, Word, and Excel. Every write is snapshotted for /undo, and a delete goes to the Trash. A local knowledge base, memory you review before it's kept, and SATURN.md for your standing instructions.",
   },
   {
     tag: "mcp",
@@ -95,12 +109,12 @@ const capabilities: {
     tag: "trace",
     vignette: (
       <>
-        run_156.json <span className="text-faint">→</span> --replay ·{" "}
+        run_6.json <span className="text-faint">→</span> --replay ·{" "}
         <span className="text-ok">offline</span>
       </>
     ),
     title: "replayable runs",
-    body: "Every run drills down to its plan, reasoning, tool I/O, model inputs, and gate decisions. Export it as JSON and replay it anywhere with saturn --replay — no database needed.",
+    body: "Every run drills down to its model passes, tool I/O, and gate decisions. Export it as JSON and replay it anywhere with saturn --replay — no database needed.",
   },
   {
     tag: "cli",
@@ -112,7 +126,7 @@ const capabilities: {
       </>
     ),
     title: "headless & pipes",
-    body: "-p and -q run one turn for scripts and pipes; gated tools deny by default; --json for machines; the run auto-exports so the receipt names a command that replays it.",
+    body: "-p and -q run one turn for scripts and pipes; gated tools deny by default and a send is refused outright; --json for machines; the run auto-exports so the receipt names a command that replays it.",
   },
 ];
 

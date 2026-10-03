@@ -1,6 +1,6 @@
 import type { DocPage } from "./types";
 import { firstSession, installation, introduction } from "./pages/getting-started";
-import { answers, approvalGate, plans, trust } from "./pages/control";
+import { answers, approvalGate, loop, trust } from "./pages/control";
 import {
   commands,
   configuration,
@@ -9,6 +9,7 @@ import {
   mcp,
   observability,
   tools,
+  yourMac,
 } from "./pages/reference";
 
 /* Reading order — the sidebar, prev/next links, and the sitemap all derive
@@ -17,11 +18,12 @@ export const docPages: DocPage[] = [
   introduction,
   installation,
   firstSession,
-  plans,
+  loop,
   approvalGate,
   trust,
   answers,
   tools,
+  yourMac,
   mcp,
   knowledge,
   observability,

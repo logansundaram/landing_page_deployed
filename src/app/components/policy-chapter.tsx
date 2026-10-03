@@ -5,27 +5,27 @@ const policy = [
   {
     key: "local_first",
     value: "true",
-    body: "Models, context, and data stay on your machine. No API key anywhere, no telemetry, and the only exits are a search query, a page fetch, and the MCP servers you configured.",
+    body: "Models, context, and data stay on your machine. No API key anywhere, no telemetry. What can leave is a short list: a search query, a page fetch, a message you approved, and the MCP servers you configured.",
   },
   {
     key: "show_work",
     value: "always",
-    body: "Plans, tool calls, and reasoning are written to the screen as they happen — not summarized after the fact — and every run replays offline from its export record.",
+    body: "Every model pass and tool call is written to the screen as it happens — not summarized after the fact — and every run replays offline from its export record.",
   },
   {
     key: "side_effects",
     value: "gated",
-    body: "Approval gates sit in front of every write, command, and remote call, showing the real diff or the full command. Enter rejects. Grants expire with the turn.",
+    body: "Approval gates sit in front of every write, command, send, and remote call, showing the real diff, the full command, or the recipient and the exact text. Enter rejects. Grants expire with the turn.",
   },
   {
     key: "answers",
     value: "traced",
-    body: "Every cited source resolves to the tool call or document behind it; every figure is traced back to a gathered result or disclosed as untraceable. Uncertain spans wear their probability.",
+    body: "Every answer that used a tool ends with the exact calls and documents behind it. What failed or was declined is listed under the answer, never papered over.",
   },
   {
     key: "egress",
     value: "recorded",
-    body: "Every byte that leaves is logged by host and channel and printed under the answer. Air-gap the whole thing with one command; untrusted content is quarantined against injection.",
+    body: "Every byte that leaves is logged by host and channel and printed under the answer. Air-gap the whole thing with one command; web pages, mail, and files are quarantined against injection.",
   },
   {
     key: "trust_settings",

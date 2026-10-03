@@ -1,4 +1,4 @@
-import type { CaptureNode, CaptureSpan } from "../lib/runs/types";
+import type { CaptureRow } from "../lib/runs/types";
 
 /**
  * Shared pieces for rendering a real saturn run as text. The capture sits on
@@ -6,59 +6,94 @@ import type { CaptureNode, CaptureSpan } from "../lib/runs/types";
  * rules; the seam between page and terminal is meant to vanish.
  */
 
-/* Confidence level -> text treatment. Level 0 is the default voice —
-   certainty is not decorated. Levels 3-4 sit below body-text contrast on
-   ink, so they also carry weight (the dataviz secondary-encoding rule);
-   every colored span exposes its probability on hover. */
-const SPAN_CLASS: Record<CaptureSpan["level"], string> = {
-  0: "",
-  1: "text-ramp-1",
-  2: "text-ramp-2",
-  3: "text-ramp-3 font-bold",
-  4: "text-ramp-4 font-bold",
-};
-
-export function AnswerSpans({ spans }: { spans: CaptureSpan[] }) {
-  return (
-    <>
-      {spans.map((s, i) =>
-        s.level === 0 ? (
-          <span key={i}>{s.text}</span>
-        ) : (
-          <span
-            key={i}
-            className={SPAN_CLASS[s.level]}
-            title={`confidence level ${s.level} of 4 — the model was less sure of this span`}
-          >
-            {s.text}
-          </span>
-        ),
-      )}
-    </>
-  );
-}
-
 export function fmtTokens(n: number): string {
   return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : `${n}`;
 }
 
-export function NodeTrace({ nodes }: { nodes: CaptureNode[] }) {
-  const pad = Math.max(...nodes.map((n) => n.node.length));
+/* The loop as the rail prints it: each agent pass with its timing, the tool
+   calls it made with their (clipped) results, and every gate decision. */
+export function LoopRail({ rows }: { rows: CaptureRow[] }) {
   return (
     <div>
-      {nodes.map((n) => (
-        <div key={n.node} className="whitespace-pre py-0.5">
-          <span className="text-ok">✓</span>{" "}
-          <span className="text-fg">{n.node.padEnd(pad)}</span>
-          <span className="text-muted">
-            {`  ${n.durS.toFixed(1)}s`.padStart(8)}
-          </span>
-          <span className="text-faint">
-            {"   "}
-            {fmtTokens(n.promptTokens)} in · {fmtTokens(n.outputTokens)} out
-          </span>
-        </div>
-      ))}
+      {rows.map((r, i) => {
+        if (r.kind === "agent")
+          return (
+            <div key={i} className="whitespace-pre py-0.5">
+              <span className="text-ok">✓</span>{" "}
+              <span className="text-fg">agent</span>
+              <span className="text-muted">
+                {`${r.durS?.toFixed(1) ?? "–"}s`.padStart(8)}
+              </span>
+              <span className="text-faint">
+                {"   "}iter {r.iter} · {fmtTokens(r.contextTokens)} ctx ·{" "}
+                {Math.round(r.tokPerSec)} tok/s{"   "}
+              </span>
+              {r.calls ? (
+                <span className="text-accent">→ {r.calls.join(", ")}</span>
+              ) : (
+                <span className="text-ok">→ answer</span>
+              )}
+            </div>
+          );
+        if (r.kind === "tool")
+          return (
+            <div key={i} className="py-0.5">
+              <div className="whitespace-pre">
+                <span className="text-faint">{"  └─ "}</span>
+                <span className={r.ok ? "text-fg" : "text-hot"}>{r.call}</span>
+              </div>
+              <div className="whitespace-pre text-faint">
+                {"     └ "}
+                {r.result}
+              </div>
+            </div>
+          );
+        return (
+          <div key={i} className="whitespace-pre py-0.5">
+            <span className="text-hot">■</span>{" "}
+            <span className="text-fg">gate </span>
+            <span className="text-muted">
+              {"    "}
+              {r.calls.map((c) => c.name).join(", ")} —{" "}
+            </span>
+            {r.calls.every((c) => c.approved) ? (
+              <span className="font-bold text-ok">approved</span>
+            ) : (
+              <span className="font-bold text-hot">denied</span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* The recorded answer, verbatim. Saturn's markdown is light — **bold** and
+   "> " quotes — so only those two are styled; everything else is the text. */
+export function RecordedAnswer({ text }: { text: string }) {
+  return (
+    <div className="max-w-2xl whitespace-pre-wrap text-muted">
+      {text.split("\n").map((line, i) => {
+        const quote = line.startsWith("> ");
+        const body = quote ? line.slice(2) : line;
+        return (
+          <p
+            key={i}
+            className={quote ? "border-l border-edge pl-3 text-fg" : undefined}
+          >
+            {body.split(/(\*\*[^*]+\*\*)/).map((part, j) =>
+              part.startsWith("**") && part.endsWith("**") ? (
+                <strong key={j} className="text-fg">
+                  {part.slice(2, -2)}
+                </strong>
+              ) : (
+                part
+              ),
+            )}
+            {body === "" && " "}
+          </p>
+        );
+      })}
     </div>
   );
 }
