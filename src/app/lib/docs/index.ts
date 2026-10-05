@@ -8,6 +8,7 @@ import {
   knowledge,
   mcp,
   observability,
+  skills,
   tools,
   yourMac,
 } from "./pages/reference";
@@ -26,6 +27,7 @@ export const docPages: DocPage[] = [
   yourMac,
   mcp,
   knowledge,
+  skills,
   observability,
   headless,
   commands,

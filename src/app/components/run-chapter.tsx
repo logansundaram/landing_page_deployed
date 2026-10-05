@@ -7,7 +7,7 @@ const passes = capture.rows.filter((r) => r.kind === "agent").length;
 const rows = [
   {
     k: "one loop",
-    v: "each pass is one model call: it calls tools or it answers. a chat question is one pass, a lookup is two.",
+    v: "each pass calls tools or answers. a chat question is one pass and one model call; a lookup is two passes, and a pass that calls a tool thinks it through first.",
   },
   {
     k: "every call on screen",

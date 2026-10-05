@@ -45,8 +45,8 @@ const capabilities: {
         <span className="text-accent">▸</span> answer
       </>
     ),
-    title: "pause and steer",
-    body: "One loop, every pass on screen. Press Esc to pause a running turn: continue, type a correction to steer it, or abort. On a multi-step errand the agent keeps a checklist you can watch in the rail.",
+    title: "pause, steer & think",
+    body: "One loop, every pass on screen. Press Esc to pause a running turn: continue, type a correction to steer it, or abort. On a multi-step errand the agent keeps a checklist you can watch in the rail. Saturn thinks before it calls a tool and never before a plain answer; the status bar times each thought, Esc stops it, and /think sets fast, auto, or deep.",
   },
   {
     tag: "gates",
@@ -91,8 +91,31 @@ const capabilities: {
         <span className="text-ok">/undo</span>
       </>
     ),
-    title: "files, documents & memory",
-    body: "Saturn works in the folder you launch it from and reads PDF, Word, and Excel. Every write is snapshotted for /undo, and a delete goes to the Trash. A local knowledge base, memory you review before it's kept, and SATURN.md for your standing instructions.",
+    title: "files & documents",
+    body: "Saturn works in the folder you launch it from and reads PDF, Word, and Excel. Every write is snapshotted for /undo, and a delete goes to the Trash. A local knowledge base and SATURN.md hold your documents and standing instructions.",
+  },
+  {
+    tag: "memory",
+    vignette: (
+      <>
+        remembered #12 <span className="text-faint">·</span> you said it ·{" "}
+        <span className="text-ok">/memory forget 12</span>
+      </>
+    ),
+    title: "memory that only takes your word",
+    body: "Say \"I'm vegetarian\" and Saturn keeps it without a prompt, with one line after the answer and the command that undoes it. That happens only when the fact's words come from a sentence you typed and nothing from a web page, mail, or file has entered the conversation; anything else asks first. Secrets are refused, and a fact that may contradict an older one says so.",
+  },
+  {
+    tag: "skills",
+    vignette: (
+      <>
+        /weekly-review <span className="text-faint">·</span> create_skill{" "}
+        <span className="text-faint">→</span>{" "}
+        <span className="text-hot">always asks</span>
+      </>
+    ),
+    title: "skills",
+    body: "Write a procedure once as a markdown file and run it by typing its name. Saturn can draft one for you, and it shows you every line before it saves. That prompt appears whatever your policy says.",
   },
   {
     tag: "mcp",

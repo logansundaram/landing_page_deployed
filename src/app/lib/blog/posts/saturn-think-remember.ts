@@ -75,7 +75,7 @@ export const saturnThinkRemember: Post = {
       'Saturn already had a memory file, but every fact the model wanted to keep went through an approval prompt. The big assistants all save silently or tell you afterwards, and where a product asked before every save, people complained about the friction. So now, when you say "I\'m vegetarian", "Petra is my manager", or "never book anything before 10am", Saturn keeps it without a prompt and prints one line after the answer:',
     ),
     code(
-      "remembered #12: I'm vegetarian · /memory forget 12 undoes it",
+      "remembered #12: I'm vegetarian — you said it · /memory forget 12 undoes it",
     ),
     p(
       "A rule like \"never…\" or \"from now on…\" goes into the layer that loads on every request, because the research is blunt about this: ten turns after you state a preference, models follow it less than 10% of the time unless it's put in front of them again.",

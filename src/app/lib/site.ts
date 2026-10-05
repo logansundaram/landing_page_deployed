@@ -17,8 +17,7 @@ export const site = {
   ],
 } as const;
 
-/* The v2 pre-release notice. The site describes v2 while the installer
-   still ships v1; every <PrereleaseNote /> renders this line. The day v2
-   ships, set it to null and every notice disappears. */
-export const prerelease: string | null =
-  "saturn v2, the version this site describes, ships in a few days. until then the installer gives you v1.";
+/* A pre-release notice: every <PrereleaseNote /> renders this line, and
+   null hides them all. v2 shipped on 2026-10-05 and the installer clones
+   it, so it is off. */
+export const prerelease: string | null = null;

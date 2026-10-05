@@ -105,11 +105,13 @@ export default function InstallPage() {
                 already use pipx or uv?
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                Saturn ships on PyPI as{" "}
-                <code className="text-fg">saturn-agent</code>. Install it with
-                your tool manager, keep Ollama running, and let the first
-                launch&apos;s <code className="text-fg">/models</code> pull the
-                model.
+                Saturn isn&apos;t on PyPI yet. Install it from GitHub with{" "}
+                <code className="break-all text-fg">
+                  pipx install git+https://github.com/logansundaram/saturn
+                </code>{" "}
+                (or <code className="text-fg">uv tool install</code>), keep
+                Ollama running, and let the first launch&apos;s{" "}
+                <code className="text-fg">/models</code> pull the model.
               </p>
               <Link
                 href="/docs/installation"
