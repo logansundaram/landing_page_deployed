@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
@@ -111,6 +112,7 @@ export default function RootLayout({
         {/* Sections run full-bleed; each centers its own content */}
         <main>{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

@@ -9,7 +9,7 @@ import LogoMark from "./logo-mark";
 const receiptLines = [
   `first paint ≤ ${receipts.firstPaintKB} kB`,
   `requests to third parties: ${receipts.thirdPartyRequests}`,
-  "no analytics",
+  "cookieless first-party analytics",
   "fonts self-hosted",
   "every capture a real run",
 ];
