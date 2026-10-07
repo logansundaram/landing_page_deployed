@@ -72,9 +72,11 @@ export default function InstallPage() {
                 Launch it from the folder you want it to work in. The first
                 run opens <code className="text-fg">/models</code>: it reads
                 your hardware, recommends a model size that fits and runs at a
-                usable speed, and pulls it if you say yes. Then type{" "}
-                <code className="text-fg">/help</code> for the everyday
-                commands.
+                usable speed, and pulls it if you say yes. Then it offers
+                three quick questions (what to call you, what you do, and
+                anything it should never do) so it knows you from the first
+                request. Type <code className="text-fg">/help</code> for every
+                command.
               </p>
               <CodeBlock command="saturn" />
               <p className="mt-4 text-sm leading-relaxed text-muted">

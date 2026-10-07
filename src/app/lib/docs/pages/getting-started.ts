@@ -21,7 +21,7 @@ export const introduction: DocPage = {
       ],
       [
         "nothing happens without you",
-        "Every side effect stops at an approval gate that shows the real artifact of the decision: the full shell command, a colored diff of the file write, the number and exact text of a message. Press `Esc` at any moment to pause the turn and continue, steer, or abort. Every run can be replayed afterward (`/trace`), and file changes reversed (`/undo`). Out of the box, the one write that skips the gate is a fact you state yourself (\"I'm vegetarian\"): it's remembered without asking, the answer ends with a `remembered #N` line, and `/memory forget N` undoes it. Turn that off with `memory.auto_learn: false`.",
+        "Every side effect stops at an approval gate that shows the real artifact of the decision: the full shell command, a colored diff of the file write, the number and exact text of a message. Press `Esc` at any moment to pause the turn and continue, steer, or abort. Every run can be replayed afterward (`/trace`), and file changes reversed (`/undo`). Out of the box, the one write that skips the gate is a fact you state yourself (\"I'm vegetarian\"): it's remembered without asking, the answer ends with a `remembered #N` line, and `/memory remove N` undoes it. Turn that off with `memory.auto_learn: false`.",
       ],
     ),
     h2("how a turn works"),
@@ -70,6 +70,9 @@ export const installation: DocPage = {
     ),
     p(
       "The installer defaults to the `4b` tier (`qwen3.5:4b`). The first launch opens `/models`, which reads your hardware, prices every tier against it for fit and speed, lists any other models you've pulled, and asks which tier and embedder to run. Enter takes the recommendation, and anything not pulled yet is pulled once you agree. Re-run `/models` any time.",
+    ),
+    p(
+      "Right after the model pick, Saturn offers three quick questions: what to call you, what you do, and anything it should never do. Enter starts them, `n` skips, and any one can be skipped. Each answer is saved to memory in your words, so your first real request already knows who you are, and a \"never…\" answer becomes a rule loaded on every turn. The offer is made once. `/memory setup` asks them again later, with two more about the people you mention most and what you want help with. See [memory](/docs/knowledge#first-run).",
     ),
     table(
       ["variable", "default", "what it does"],
@@ -135,7 +138,7 @@ export const firstSession: DocPage = {
       "**The gate** stops the turn when a call wants to change or send something, and shows you the exact diff, command, or message. Bare Enter rejects.",
     ),
     p(
-      "A fact you state in your own words (\"remember that I prefer concise answers\") is kept without a gate, and the answer ends with `remembered #N: …`. `/memory forget N` undoes it. Once a web page, an email, a file, or an attachment has entered the conversation, every later fact asks first, until `/clear`.",
+      "A fact you state in your own words (\"remember that I prefer concise answers\") is kept without a gate, and the answer ends with `remembered #N: …`. `/memory remove N` undoes it. Once a web page, an email, a file, or an attachment has entered the conversation, every later fact asks first, until `/clear`.",
     ),
     h2("keys"),
     table(
@@ -159,9 +162,9 @@ export const firstSession: DocPage = {
     ),
     h2("first things to try"),
     ol(
-      "`/help` lists the everyday commands: `/memory`, `/skills`, `/policy`, `/think`, `/trace`, `/help`, `/quit`. `/help --all` lists every command. Every command takes `--help`.",
+      "`/help` lists every command, grouped by theme. Every command takes `--help`.",
       "`/policy` shows your trust posture: what runs without asking, and what can leave the machine.",
-      "`/tools` lists the registered tools and their risk tiers.",
+      "`/tools` shows the toolkits: Saturn's tools in groups (files, web, mail, calendar, messages, …). `/tools off messages` turns one off so the model never sees it.",
       "`/init` surveys the working folder and drafts `SATURN.md`, standing instructions loaded every turn.",
       "`/trace`, after a turn, shows the full drill-down of what just happened.",
       "`/skills create weekly-review` writes a template to `~/.saturn/skills/weekly-review/SKILL.md`. Fill in the steps, then type `/weekly-review` to run it. Every action it leads to still asks as usual.",

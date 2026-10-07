@@ -32,7 +32,7 @@ const capabilities: {
       </>
     ),
     title: "your mac, through its own apps",
-    body: "Notes, Calendar, Mail, Contacts, Reminders, Messages, and Shortcuts, plus the page in your browser and the files selected in Finder. Everything goes through the app itself, so what Saturn does shows up where you'd look. Mail is drafted, never sent.",
+    body: "Notes, Calendar, Mail, Contacts, Reminders, Messages, and Shortcuts, plus the page in your browser and the files selected in Finder. Everything goes through the app itself, so what Saturn does shows up where you'd look. Mail is drafted, never sent, and /tools off turns off any app you don't want it near.",
   },
   {
     tag: "loop",
@@ -92,18 +92,18 @@ const capabilities: {
       </>
     ),
     title: "files & documents",
-    body: "Saturn works in the folder you launch it from and reads PDF, Word, and Excel. Every write is snapshotted for /undo, and a delete goes to the Trash. A local knowledge base and SATURN.md hold your documents and standing instructions.",
+    body: "Saturn works in the folder you launch it from and reads PDF, Word, and Excel. Every write is snapshotted for /undo, and a delete goes to the Trash. Ask it to add a file to your local knowledge base and it asks first, every time. SATURN.md holds your standing instructions.",
   },
   {
     tag: "memory",
     vignette: (
       <>
         remembered #12 <span className="text-faint">·</span> you said it ·{" "}
-        <span className="text-ok">/memory forget 12</span>
+        <span className="text-ok">/memory remove 12</span>
       </>
     ),
     title: "memory that only takes your word",
-    body: "Say \"I'm vegetarian\" and Saturn keeps it without a prompt, with one line after the answer and the command that undoes it. That happens only when the fact's words come from a sentence you typed and nothing from a web page, mail, or file has entered the conversation; anything else asks first. Secrets are refused, and a fact that may contradict an older one says so.",
+    body: "Say \"I'm vegetarian\" and Saturn keeps it without a prompt, with one line after the answer and the command that undoes it. That happens only when the fact's words come from a sentence you typed and nothing from a web page, mail, or file has entered the conversation; anything else asks first. The first launch offers three quick questions so it knows who you are from the start. Secrets are refused, and a fact that may contradict an older one says so.",
   },
   {
     tag: "skills",

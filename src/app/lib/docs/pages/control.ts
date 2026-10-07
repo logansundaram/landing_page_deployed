@@ -50,6 +50,7 @@ export const loop: DocPage = {
     ul(
       "`runtime.max_iterations` (default 16) caps the passes that may run tools. From that pass on, no tool call runs: the model answers from what it has and says what was not done.",
       "A call identical to one already made twice this turn, with nothing changed in between, is refused as a loop. A legitimate re-read still runs.",
+      "A refused call issued again unchanged ends the tool phase: no further call runs, and Saturn answers with what it has. A different call after a refusal still runs. A small model can no longer spin on the same refused call until the pass budget runs out.",
       "A call you declined at the gate is never re-issued this turn.",
       "An unknown tool, missing or malformed arguments, or arguments that belong to a different tool are sent back to the model with the right shape, with no gate and no extra model call. A malformed reply is retried once.",
       "A messaging call naming a phone number or email address that appears in nothing you typed and nothing a tool returned is refused before it reaches you. So is a recipient given as a name, or a group chat no tool found. See [the trust stack](/docs/trust#invented-recipients).",
@@ -124,12 +125,13 @@ export const approvalGate: DocPage = {
     p(
       "By default (`runtime.grant_scope: task`), answering `a` relaxes those tools for the rest of the current turn only. `session` keeps the grant until Saturn exits; `persist` writes it to `permissions.json`. The scope is a trust setting, so it's session-only unless you pass `--save`.",
     ),
-    p("Four tools never take a blanket grant:"),
+    p("Six tools never take a blanket grant:"),
     ul(
       "`run_shell`: `a` offers a **prefix grant** covering the full command you just reviewed, or a shorter prefix you type deliberately.",
       "`run_shortcut`: it keeps asking. Allow one shortcut by its exact name with `/policy shortcut <name>`.",
       "`send_message`: it always asks. No tier, open gate, risk override, always-allow, or `--yolo` lets a send through, and headless mode refuses it.",
       "`create_skill`: it always asks, on the same terms as a send. A saved skill is followed as your own instructions every time it runs, and headless mode never saves one.",
+      "`add_document` and `remove_document`: they always ask, on the same terms. A document's text reaches the model on every search that matches it, so what the knowledge base holds is yours to approve, and headless mode refuses both.",
     ),
     h2("shell prefix allowlist"),
     p(
@@ -150,7 +152,7 @@ export const approvalGate: DocPage = {
       "usage",
     ),
     p(
-      "`/policy risk` refuses to change `run_shell`, `run_shortcut`, `send_message`, or `create_skill`. A hand-edited override for one of them in `permissions.json` is ignored on load. Saved state is one JSON file, `database/permissions.json`. A file with a garbled or wrong-shaped field fails closed: Saturn runs on strict defaults, says so at startup, and keeps the bad file as `permissions.json.corrupt`.",
+      "`/policy risk` refuses to change `run_shell`, `run_shortcut`, `send_message`, `create_skill`, `add_document`, or `remove_document`. A hand-edited override for one of them in `permissions.json` is ignored on load. Saved state is one JSON file, `database/permissions.json`. A file with a garbled or wrong-shaped field fails closed: Saturn runs on strict defaults, says so at startup, and keeps the bad file as `permissions.json.corrupt`.",
     ),
     note(
       "The `⚠ GATE OFF` indicator in the status bar is read live from the threshold, so there is no separate flag to drift out of sync. `/policy open off` restores the tier you had before opening the gate. On a gate that isn't open it changes nothing.",
@@ -226,7 +228,7 @@ export const trust: DocPage = {
     ),
     h2("what the benchmark measures"),
     p(
-      "`python benchmark.py` (from a source checkout, with Ollama running) runs the trust benchmark. It checks approval-gate coverage (every non-read-only call must have faced the gate), the injection-quarantine flag rate (a planted instruction-shaped document must be fenced), and the memory tasks (recall across runs, supersession, and a planted memory that must face the gate). `--strict` exits 1 on any graded failure. `--loop` runs the loop benchmark instead, grading everyday requests on passes, tool choice, and actions described but never performed. `--think <mode>`, `--tier <tier>`, and (with `--loop`) `--runs N` change the run in memory only; `config.yaml` isn't written. A benchmark run never acts on your real Mac: it declines every gated call into the apps.",
+      "`python benchmark.py` (from a source checkout, with Ollama running) runs the trust benchmark. It checks approval-gate coverage (every non-read-only call must have faced the gate), the injection-quarantine flag rate (a planted instruction-shaped document must be fenced), and the memory tasks (recall across runs, supersession, and a planted memory that must face the gate). `--strict` exits 1 on any graded failure. `--loop` runs the loop benchmark instead, grading everyday requests on passes, tool choice, and actions described but never performed. `--think <mode>`, `--tier <tier>`, `--off <toolkits>` (to measure a smaller catalog; a loop task that needs a toolkit that is off is skipped and counted apart), and (with `--loop`) `--runs N` change the run in memory only; `config.yaml` isn't written. A benchmark run never acts on your real Mac: it declines every gated call into the apps.",
     ),
   ],
 };

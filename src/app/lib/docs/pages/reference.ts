@@ -4,11 +4,22 @@ export const tools: DocPage = {
   slug: "tools",
   title: "tools",
   summary:
-    "All 45 built-in tools and their risk tiers: files, shell, web, knowledge, memory and skills, the loop's own tools, and the macOS apps.",
+    "All 47 built-in tools and their risk tiers, the toolkits you can turn off, and what each tool does: files, shell, web, knowledge, memory and skills, the loop's own tools, and the macOS apps.",
   group: "reference",
   blocks: [
     p(
-      "Every capability is a tool call you can watch in the rail. Each one faces the same approval gate, runs locally where it can, and lands in a trace you can replay. Reading runs without asking; anything that changes or sends something asks first. `/tools` prints the live registry with each tool's tier, and `/policy risk <tool> <tier> [--save]` overrides a tier, except for `run_shell`, `run_shortcut`, `send_message`, and `create_skill`, which always keep theirs. **untrusted** marks a tool whose output is outside content: it passes through the injection quarantine.",
+      "Every capability is a tool call you can watch in the rail. Each one faces the same approval gate, runs locally where it can, and lands in a trace you can replay. Reading runs without asking; anything that changes or sends something asks first. `/tools --all` prints the live registry with each tool's tier, and `/policy risk <tool> <tier> [--save]` overrides a tier, except for `run_shell`, `run_shortcut`, `send_message`, `create_skill`, `add_document`, and `remove_document`, which always keep theirs. **untrusted** marks a tool whose output is outside content: it passes through the injection quarantine.",
+    ),
+    h2("toolkits"),
+    p(
+      "Tools come in toolkits, and any toolkit you don't use can be turned off. A toolkit that is off is unbound: the model isn't shown its tools and can't call them, the prompt is smaller, and Saturn can never reach that app. Ask for something it would do (\"what's on my calendar tomorrow?\") and Saturn says the toolkit is off and names the command that turns it back on. Everything starts on.",
+    ),
+    code(
+      "/tools                      the toolkits: how many tools, on or off, what each is for\n/tools mail                 one toolkit's tools, each with its risk tier\n/tools off messages mail    turn toolkits off (saved to config.yaml)\n/tools on messages          turn one back on\n/tools off shell --session  for this session only\n/tools --all                every tool in one list, with its toolkit",
+      "commands",
+    ),
+    p(
+      "The toolkits are `files`, `web`, `shell`, `knowledge`, `notes`, `calendar`, `mail`, `contacts`, `reminders`, `messages`, `shortcuts`, `desktop` (the browser tab and the Finder selection), `notifications`, and `skills`. The core (the checklist, `ask_user`, memory, the calculator, and the clock) is always on. The choice is saved under `toolkits:` in `config.yaml`, and a change applies to your next request. Turning a toolkit on never changes what the gate asks about: its tools keep their tiers. An MCP server is listed as a toolkit too, and turned on and off from `/mcp`.",
     ),
     h2("files"),
     table(
@@ -34,7 +45,8 @@ export const tools: DocPage = {
     h2("knowledge, memory, skills"),
     table(
       ["tool", "tier", "does"],
-      ["`search_knowledge_base`", "read_only · untrusted", "retrieve passages from your ingested documents"],
+      ["`search_knowledge_base`", "read_only · untrusted", "retrieve passages from your ingested documents; with no query, list the documents it holds"],
+      ["`add_document` · `remove_document`", "side_effecting", "add a file to the [knowledge base](/docs/knowledge#documents-rag), or move one of its documents to the Trash. Both always ask, and headless runs refuse them."],
       ["`remember`", "side_effecting", "store a durable fact in a memory layer. It asks first, unless you typed the fact yourself (see [memory](/docs/knowledge))."],
       ["`recall`", "read_only", "read durable facts back"],
       ["`create_skill`", "side_effecting", "save a procedure as one of your [skills](/docs/skills). You read the whole skill first, and it always asks."],
@@ -51,7 +63,7 @@ export const tools: DocPage = {
       ["`search_notes` · `read_note`", "read_only · untrusted", "find and read Apple Notes"],
       ["`create_note` · `append_note`", "side_effecting", "start a note, or add to the one with exactly that title"],
       ["`list_calendar_events`", "read_only · untrusted", "events in a window, optionally narrowed to named calendars"],
-      ["`create_calendar_event` · `update_calendar_event`", "side_effecting", "add an event; move or rename one"],
+      ["`create_calendar_event` · `update_calendar_event`", "side_effecting", "add an event; move, rename, relocate, or rewrite the notes of one"],
       ["`delete_calendar_event`", "destructive", "remove an event"],
       ["`list_mail` · `search_mail` · `read_mail`", "read_only · untrusted", "list, search, and read Apple Mail"],
       ["`draft_mail` · `reply_mail`", "side_effecting", "open an unsent draft or threaded reply. You press Send."],
@@ -105,7 +117,7 @@ export const yourMac: DocPage = {
     h2("the apps"),
     kv(
       ["Notes", "search and read notes; create one; append to an existing note. An append writes only to the note with exactly that title (or its id), never a near match, and leaves a locked note or one with attachments alone."],
-      ["Calendar", "list events (`today`, `tomorrow`, `next monday`, and `in 1 week` work); create, move, rename, or delete one. A repeating event changes only as a whole series, and you're told when attendees may be notified. A bare time like \"3pm\" keeps an event on its own day. Reading every calendar takes several seconds, so narrowing to named calendars is faster."],
+      ["Calendar", "list events (`today`, `tomorrow`, `next monday`, and `in 1 week` work); create one; move, rename, or delete one, or replace its notes. A repeating event changes only as a whole series, and you're told when attendees may be notified. A bare time like \"3pm\" keeps an event on its own day. Reading every calendar takes several seconds, so narrowing to named calendars is faster."],
       ["Mail", "list, search, and read; `draft_mail` opens an **unsent** new message, and `reply_mail` an **unsent** reply in the right thread with the original quoted (`reply_all` addresses everyone on it). You press Send. `update_mail` marks read/unread, flags, moves, or trashes a whole list of messages in one approval. Listings say whether you've replied."],
       ["Contacts", "a name becomes the addresses, numbers, and birthday on the card, so a reply or a text goes to a real address. An exact name ranks first, and a typo gets the closest names back."],
       ["Reminders", "\"remind me to call the dentist tomorrow at 9\" creates a reminder that reaches your phone. List what's open or overdue, tick one off. Reminders can't be made to repeat or trigger at a place from here, and Saturn says so when you ask."],
@@ -184,7 +196,7 @@ export const knowledge: DocPage = {
   slug: "knowledge",
   title: "workspace, memory & documents",
   summary:
-    "The working folder and /add-dir, SATURN.md standing instructions, hooks, layered memory (what you tell it, and the review queue), the local knowledge base, /undo, and sessions.",
+    "The working folder and /add-dir, SATURN.md standing instructions, hooks, layered memory (what you tell it, the first-run questions, and the review queue), the local knowledge base, /undo, and sessions.",
   group: "reference",
   blocks: [
     h2("the working folder"),
@@ -227,19 +239,26 @@ export const knowledge: DocPage = {
     ),
     h3("what you tell it"),
     p(
-      "Say \"I'm vegetarian\", \"Petra is my manager\", or \"never book anything before 10am\" and Saturn keeps it with no approval prompt, then says so after the answer: `remembered #12: … — you said it · /memory forget 12 undoes it`. That happens only when the fact's words come from one sentence you typed and stated (a question doesn't count, and a \"not\" has to stay where you put it), and nothing from outside (a web page, mail, a file, an attachment) has entered the conversation. Once something has, every later fact asks, until `/clear`. Otherwise the prompt appears and says why. The check proves you typed the words, not that the fact means what you meant, so read the line after the answer. `/memory` marks these facts `said`. `memory.auto_learn: false` turns it off, and `saturn -p` / `-q` never do it.",
+      "Say \"I'm vegetarian\", \"Petra is my manager\", or \"never book anything before 10am\" and Saturn keeps it with no approval prompt, then says so after the answer: `remembered #12: … — you said it · /memory remove 12 undoes it`. That happens only when the fact's words come from one sentence you typed and stated (a question doesn't count, and a \"not\" has to stay where you put it), and nothing from outside (a web page, mail, a file, an attachment) has entered the conversation. Once something has, every later fact asks, until `/clear`. Otherwise the prompt appears and says why. The check proves you typed the words, not that the fact means what you meant, so read the line after the answer. `/memory` marks these facts `said`. `memory.auto_learn: false` turns it off, and `saturn -p` / `-q` never do it.",
     ),
     ul(
       "A rule you give (\"never…\", \"from now on…\") is filed where it loads every turn.",
-      "A new fact names the stored one it may contradict, after the answer, at the prompt, and on `/memory add`: `similar: #3 \"I live in Paris\" — /memory forget 3 if that is no longer true`. Nothing is removed for you.",
+      "A new fact names the stored one it may contradict, after the answer, at the prompt, and on `/memory add`: `similar: #3 \"I live in Paris\" — /memory remove 3 if that is no longer true`. Nothing is removed for you.",
       "A recognisable secret (a card number, a Social Security number, a password, a PIN, an API key, a private key) is refused wherever a fact is written, and Saturn says why. It's a net for the common shapes, not a guarantee.",
+    ),
+    h3("first run"),
+    p(
+      "Right after the first launch picks your model, Saturn offers three quick questions: what to call you, what you do, and anything it should never do. Enter starts them, `n` skips, and the offer is made once. Each answer is saved straight to memory in your words, with no model call, so the next answer already knows you. A \"never…\" answer becomes one rule per `;`, filed where rules load every turn. An answer that looks like a password or a card number is refused and asked again.",
+    ),
+    p(
+      "`/memory setup` asks those three and two more: the people you mention most, and what you want help with. It shows your current answers: Enter keeps one, a new answer replaces it, and people and rules are added to. `/memory` marks these facts `setup`. An install that already has memories gets one line about `/memory setup` instead of the offer.",
     ),
     h3("learning goes through review"),
     p(
       "Everything else Saturn learns waits for your accept. During a session it queues candidates: your mid-task corrections, gate denials, the compaction summary, and the model's own proposals from your words and its answers (never a tool result directly; `memory.review_llm: false` turns these off). A proposal from a conversation outside content entered says so. `/memory review` shows each one as a diff line and keeps it only on your `y`. The review also runs at `/quit` when anything is pending.",
     ),
     code(
-      "/memory                     every fact, grouped by layer, with its #id\n/memory list <layer>        one layer\n/memory add <fact>          save a fact (--layer, --replaces <n>, --sens <mark>)\n/memory edit <n> <text>     rewrite fact n in place\n/memory forget <n>          delete fact n\n/memory why <n>             provenance: who said it, the run it came from, last use\n/memory review              accept or skip the queued candidates (--no-llm skips the model's proposals)\n/memory stale               facts unmatched for memory.stale_days (flagged, never auto-deleted)",
+      "/memory                     every fact, grouped by layer, with its #id\n/memory list <layer>        one layer\n/memory add <fact>          save a fact (--layer, --replaces <n>, --sens <mark>)\n/memory edit <n> <text>     rewrite fact n in place\n/memory remove <n>          delete fact n\n/memory setup               the first-run questions, plus two more\n/memory why <n>             provenance: who said it, the run it came from, last use\n/memory review              accept or skip the queued candidates (--no-llm skips the model's proposals)\n/memory stale               facts unmatched for memory.stale_days (flagged, never auto-deleted)",
       "commands",
     ),
     p(
@@ -248,6 +267,9 @@ export const knowledge: DocPage = {
     h2("documents (rag)"),
     p(
       "Ingest PDF, text, markdown, HTML, CSV, and Word (`.docx`) files into a local knowledge base the agent searches with `search_knowledge_base`. Every launch syncs the documents folder on its own. Embeddings come from the tier's embedder (`qwen3-embedding:8b`), which the first `/docs add` offers to pull. Retrieved passages pass through the injection quarantine.",
+    ),
+    p(
+      "You can also just ask. \"Add notes.md to my knowledge base\" copies the file in and embeds it, searchable straight away; \"remove notes.md from my knowledge base\" moves the knowledge base's copy to the Trash. Both always ask first, whatever `/policy` says, because a document's text reaches the model on every later search that matches it. The prompt warns when the file holds text that reads like instructions. Only a file in a folder Saturn can reach can be added, and headless runs refuse both. \"What's in my knowledge base?\" lists the documents.",
     ),
     code(
       "/docs                  list the ingested documents\n/docs add <path>       copy a file into the knowledge base and embed it\n/docs remove <name>\n/docs rebuild          re-embed everything",
@@ -373,11 +395,12 @@ export const headless: DocPage = {
     ),
     h2("the gate with no human present"),
     p(
-      "Read-only tools run freely. Gated calls are denied by default, because nobody is at the gate to say yes, and the answer says what was denied. `--yolo` opens the gate for the run, with four exceptions it never covers:",
+      "Read-only tools run freely. Gated calls are denied by default, because nobody is at the gate to say yes, and the answer says what was denied. `--yolo` opens the gate for the run, with five exceptions it never covers:",
     ),
     ul(
       "`send_message`: a send to another person always needs a human to read it first;",
       "`create_skill`: saving a skill always shows you the whole skill first;",
+      "`add_document` and `remove_document`: changing what the knowledge base holds is refused headless;",
       "under the air-gap, a shell command, a shortcut, or an MCP call, since nobody is there to check whether it touches the network;",
       "a `web_extract` URL the gate held: one the model composed after reading outside content, or a private address you didn't type.",
     ),
@@ -396,16 +419,16 @@ export const headless: DocPage = {
 export const commands: DocPage = {
   slug: "commands",
   title: "slash commands",
-  summary: "Every command. /help shows the everyday seven, /help --all shows the rest, and every command takes --help.",
+  summary: "Every command. /help lists them all by theme, and every command takes --help.",
   group: "reference",
   blocks: [
     p(
-      "`/help` lists the everyday seven: `/memory`, `/skills`, `/policy`, `/think`, `/trace`, `/help`, `/quit`. `/help --all` opens with the trust map (posture `/policy` · activity: the receipt and `/trace` · record: `/trace export` and replay) and lists every command by theme. `/<command> --help` details any one. `--help` works as the first or last argument; in the middle it's ordinary data, so `/memory add …` can store a fact that mentions it. Removal verbs are interchangeable everywhere: `remove` / `rm` / `delete` / `del` / `forget` / `drop`.",
+      "`/help` opens with the trust map (posture `/policy` · activity: the receipt and `/trace` · record: `/trace export` and replay) and lists every command by theme. `/help --all` still works and prints the same thing. `/<command> --help` details any one. `--help` works as the first or last argument; in the middle it's ordinary data, so `/memory add …` can store a fact that mentions it. Removal verbs are interchangeable everywhere: `remove` / `rm` / `delete` / `del` / `forget` / `drop`.",
     ),
     table(
       ["command", "does"],
-      ["`/help [--all | cmd]`  (`/?`, `/h`)", "the everyday commands, every command, or one in detail"],
-      ["`/memory`  (`/mem`)", "see, add, edit, forget, and review layered memory; `why <n>`, `stale`"],
+      ["`/help [cmd]`  (`/?`, `/h`)", "every command by theme, or one in detail"],
+      ["`/memory`  (`/mem`)", "see, add, edit, remove, and review layered memory; `why <n>`, `stale`, `setup` (the first-run questions)"],
       ["`/skills`", "your own procedures: list them; `show <name>`, `create <name>`, `delete <name>` (to the Trash, asks first)"],
       ["`/policy`", "your trust settings: `risk`, `allow`, `shortcut`, `open`, `egress`, `airgap`"],
       ["`/think [fast | auto | deep]`", "how much Saturn reasons before it answers: bare shows the level and what the last turn's passes did; a level sets it (`--session` for this session only)"],
@@ -419,7 +442,7 @@ export const commands: DocPage = {
       ["`/init [--force]`", "survey the working folder and draft `SATURN.md`"],
       ["`/undo [list]`", "revert the last turn's file changes"],
       ["`/models`  (`/model`)", "the model page: your hardware, the tiers priced against it, every other model you've pulled; `use <id>`, `embedder <id>`, `list`"],
-      ["`/tools`", "the registered tools and their risk tiers"],
+      ["`/tools`", "the toolkits: `on|off <toolkit>` (`--session`), `<toolkit>` lists its tools and tiers, `--all` every tool"],
       ["`/mcp [list | reload]`", "MCP server status and the tools they add"],
       ["`/config`", "view or edit `config.yaml`; `/config <key> [value] [--session]`; `/config reload`"],
       ["`/notify`", "scheduled notifications: list, `cancel <id>`, `test`, `icon [start|stop]`"],
@@ -439,7 +462,7 @@ export const configuration: DocPage = {
   slug: "configuration",
   title: "configuration & models",
   summary:
-    "config.yaml: the four model tiers, /models, runtime and trust knobs, the memory, web, RAG, MCP, and shell sections, and which settings persist.",
+    "config.yaml: the four model tiers, /models, runtime and trust knobs, the memory, web, RAG, MCP, toolkits, and shell sections, and which settings persist.",
   group: "reference",
   blocks: [
     p(
@@ -499,13 +522,14 @@ export const configuration: DocPage = {
       ["`web.max_results`", "results per `web_search` (default 5); the backend is fixed and keyless"],
       ["`rag.chunk_size` / `chunk_overlap` / `k`", "1000 / 150 / 6; chunking changes force a re-embed"],
       ["`mcp.servers` / `connect_timeout` / `call_timeout`", "see [mcp servers](/docs/mcp)"],
+      ["`toolkits.<name>`", "true for every toolkit: `false` unbinds that group of tools. `/tools on|off` edits these lines; see [toolkits](/docs/tools#toolkits)"],
       ["`shell.timeout` / `shell.env_scrub`", "60 s per command; secret-shaped variable names stripped from children (trust key)"],
       ["`notify.menubar`", "false: start the menu bar icon with each launch (macOS)"],
       ["`paths.*`", "database, documents, workspace (a fallback only), cache, memory, db_sqlite, sessions, snapshots, permissions, exports"],
     ),
     h2("what persists"),
     ul(
-      "Ordinary keys set with `/config` persist to `config.yaml` by default; `--session` keeps the change for this session. A save rewrites the key's existing line in place, comments kept; a key your `config.yaml` has no line for stays session-only, the file is left untouched, and the command says it wasn't saved.",
+      "Ordinary keys set with `/config` persist to `config.yaml` by default; `--session` keeps the change for this session. A save rewrites the key's existing line in place, comments kept. A setting added to Saturn after your `config.yaml` was written gets its line appended to the end of its section, and nothing else in the file changes. A key Saturn doesn't know is never written.",
       "Trust keys (`runtime.auto_approve`, `runtime.airgap`, `runtime.quarantine`, `runtime.grant_scope`, and `shell.env_scrub`) and the `/policy` toggles are session-only unless you pass `--save`. A loosened posture is never written to disk silently.",
       "`/policy risk --save` overrides, the shell prefix allowlist, and the Shortcuts allowlist persist in `database/permissions.json`. `/policy allow <prefix>` always persists; a gate `a` grant follows `grant_scope`.",
       "The live `config.yaml` is user data that git doesn't track, so saved settings never dirty the repo or break `/update`.",
